@@ -1,0 +1,15 @@
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\obj\Debug\net6.0\HelloWorld.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\obj\Debug\net6.0\HelloWorld.AssemblyInfoInputs.cache
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\obj\Debug\net6.0\HelloWorld.AssemblyInfo.cs
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\obj\Debug\net6.0\HelloWorld.csproj.CoreCompileInputs.cache
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\obj\Debug\net6.0\HelloWorld.sourcelink.json
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\HelloWorld.exe
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\obj\Debug\net6.0\HelloWorld.dll
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\obj\Debug\net6.0\refint\HelloWorld.dll
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\obj\Debug\net6.0\HelloWorld.pdb
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\HelloWorld.deps.json
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\obj\Debug\net6.0\HelloWorld.genruntimeconfig.cache
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\HelloWorld.runtimeconfig.json
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\HelloWorld.dll
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\obj\Debug\net6.0\ref\HelloWorld.dll
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Project 0\HelloWorld.pdb
