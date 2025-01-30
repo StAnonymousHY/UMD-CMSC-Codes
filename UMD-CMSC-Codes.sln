@@ -4,6 +4,10 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CMSC433_Project", "CMSC433_Project", "{45AF85B2-378A-24E3-2894-DCF63437DFDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "code", "CMSC433_Project\Class 1\code.csproj", "{9943DC04-1CBD-1ABD-0D35-DD174CBE63F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "binarySearch", "CMSC433_Project\Class 2\binarySearch.csproj", "{0B2B03F3-AA7B-CBF7-FB1A-1E1A286F61B9}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "CMSC433_Project\Project 0\HelloWorld.csproj", "{E48AEB4E-5155-EA42-E5D9-1F09B0E66EBF}"
 EndProject
 Global
@@ -12,6 +16,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9943DC04-1CBD-1ABD-0D35-DD174CBE63F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9943DC04-1CBD-1ABD-0D35-DD174CBE63F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9943DC04-1CBD-1ABD-0D35-DD174CBE63F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9943DC04-1CBD-1ABD-0D35-DD174CBE63F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B2B03F3-AA7B-CBF7-FB1A-1E1A286F61B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B2B03F3-AA7B-CBF7-FB1A-1E1A286F61B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B2B03F3-AA7B-CBF7-FB1A-1E1A286F61B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B2B03F3-AA7B-CBF7-FB1A-1E1A286F61B9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E48AEB4E-5155-EA42-E5D9-1F09B0E66EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E48AEB4E-5155-EA42-E5D9-1F09B0E66EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E48AEB4E-5155-EA42-E5D9-1F09B0E66EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -21,9 +33,11 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{9943DC04-1CBD-1ABD-0D35-DD174CBE63F7} = {45AF85B2-378A-24E3-2894-DCF63437DFDB}
+		{0B2B03F3-AA7B-CBF7-FB1A-1E1A286F61B9} = {45AF85B2-378A-24E3-2894-DCF63437DFDB}
 		{E48AEB4E-5155-EA42-E5D9-1F09B0E66EBF} = {45AF85B2-378A-24E3-2894-DCF63437DFDB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B36A15E2-6A26-468D-BC2F-7869A2F59EE6}
+		SolutionGuid = {A245C1E4-78DC-4072-AD76-07CD2C43A9E7}
 	EndGlobalSection
 EndGlobal
