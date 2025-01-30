@@ -18,19 +18,19 @@
    value is whatever is assigned to a return variable at the end of 
    the control flow. But that can easily scale to multiple outputs! */
 method Min(a : int, b: int) returns (x : int, y : int)
-    ensures x <= y
-    ensures (x == a && y == b) || (x == b && y == a)
+  ensures x <= y
+  ensures (x == a && y == b) || (x == b && y == a)
 {
-    if a <= b 
-    {
-        x := a;
-        y := b;
-    }
-    else
-    {
-        x := b;
-        y := a;
-    }
+  if a <= b
+  {
+    x := a;
+    y := b;
+  }
+  else
+  {
+    x := b;
+    y := a;
+  }
 }
 
 /* As it stands, Dafny accepts this definition. There is no specification 
@@ -50,9 +50,9 @@ this expression - but that's inefficient: we perform too many multiplications!
 Here's the standard more efficient way:
 */
 method Poly2(a:int,b:int,c:int,x:int) returns (out:int)
-    ensures out == a*x*x+b*x+c
+  ensures out == a*x*x+b*x+c
 {
-    out := a*x*x+b*x+c;
+  out := a*x*x+b*x+c;
 }
 /* For most straight-line code, Dafny can prove the correctness of your 
 code with respect to its specification automatically. But there is a 
@@ -65,7 +65,7 @@ method LoopToZero(n : nat) returns (x : nat)
   ensures x == 0
 {
   x := n;
-  while x > 0 
+  while x > 0
   {
     x := x - 1;
   }
@@ -73,15 +73,15 @@ method LoopToZero(n : nat) returns (x : nat)
 
 /* Let's start with a simple loop: */
 method SquareRoot(N: int) returns (r: int)
-    requires N >= 0
-    ensures r*r <= N < (r+1)*(r+1)
+  requires N >= 0
+  ensures r*r <= N < (r+1)*(r+1)
 {
-    r := 0;
-    while (r + 1) * (r + 1) <= N
-        invariant r*r <= N
-    {
-        r := r + 1;
-    }
+  r := 0;
+  while (r + 1) * (r + 1) <= N
+    invariant r*r <= N
+  {
+    r := r + 1;
+  }
 }
 
 /* A nice feature of verification is that we can verify more complicated
@@ -95,8 +95,8 @@ method EfficientSquareRoot(N: int) returns (r: int)
   r := 0;
   var s := 1;
   while s <= N
-    invariant r * r <= N        //只要第一遍验证过了编译器就不会报错
-    invariant s == (r+1)*(r+1)  //只要第一遍验证过了编译器就不会报错
+    invariant r * r <= N
+    invariant s == (r+1)*(r+1)
   {
     s := s + 2*r + 3;
     r := r + 1;
@@ -116,8 +116,8 @@ method EfficientSquareRoot(N: int) returns (r: int)
   3. Invariant?
    */
 method FindMin (a : array<int>) returns (m : int)
-    requires a.Length > 0
-    ensures forall j :: 0 <= j < a.Length ==> m <= a[j]
+  requires a.Length > 0
+  ensures forall j :: 0 <= j < a.Length ==> m <= a[j]
 {
   m := a[0];
   var i:= 1;
@@ -126,7 +126,7 @@ method FindMin (a : array<int>) returns (m : int)
     invariant forall k :: 0 <= k < i ==> m <= a[k]  //保证到当前的i的时候m是最小的
   {
     if a[i] < m
-      { m := a[i]; }
+    { m := a[i]; }
     i := i+1;
   }
 }
@@ -152,9 +152,9 @@ to return.
 What can we do with this definition? For the most part, we will be using
 such functions as specifications:
 */
-method Fib(n:int) returns (x : int) 
-    requires n >= 0
-    ensures x == fib(n)
+method Fib(n:int) returns (x : int)
+  requires n >= 0
+  ensures x == fib(n)
 {
   x := 0;
   var y := 1;
@@ -177,7 +177,7 @@ inefficient functional implementation. */
 of the factorial function, and verify that they correspond! */
 function fact (n : int) : int
 {
-    if (n <= 0) then 1 else n * fact(n-1)
+  if (n <= 0) then 1 else n * fact(n-1)
 }
 
 /* A note on termination:
@@ -194,7 +194,7 @@ method Fact(n : int) returns (x : int)
   requires n >= 0
   ensures x == fact(n)
 {
-  var i := n; // NOTE: n is not a variable that can be assigned to! 
+  var i := n; // NOTE: n is not a variable that can be assigned to!
   x := 1;
   while (i > 0)
     invariant x*fact(i) == fact(n)  //尽量不要用除法，容易触发divisionByZero
@@ -211,10 +211,12 @@ method FactCountingUp(n : int) returns (x : int)
   requires n >= 0
   ensures x == fact(n)
 {
-  var i := 1; // NOTE: n is not a variable that can be assigned to! 
+  var i := 1; // NOTE: n is not a variable that can be assigned to!
   x := 1;
   while (i <= n)
-    invariant x == fact(i)
+    //invariant可以理解为loop的ensures 第一个statement保证while结束后x==fact(i-1) 第二个statement保证while结束后i=n+1
+    //（猜想：要是while里面i--的话 那就是保证while结束后i=1 反之才是i=n+1）
+    invariant x == fact(i-1) && 0 < i <= n+1
   {
     x := x * i;
     i := i + 1;
