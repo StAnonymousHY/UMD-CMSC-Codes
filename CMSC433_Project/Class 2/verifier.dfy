@@ -230,7 +230,27 @@ method FactCountingUpAlternative(n : int) returns (x : int)
   var i := 0;
   x := 1;
   while (i <= n-1)
-    invariant x == fact(i) && 0 <= i <= n
+    invariant x == fact(i)
+    invariant 0 <= i <= n
+  {
+    x := x * (i+1);
+    i := i + 1;
+  }
+}
+
+method FactCountingUpAlternativeAlternative(n : int) returns (x : int)
+  requires n >= 0
+  ensures x == fact(n)
+{
+  var i := 1;
+  x := 1;
+  while (i <= n-1)
+    //invariant (n == 0 && i == 1 && x == fact(0)) || (n > 0 && 0 <= i <= n && x == fact(i))
+    //invariant (n == 0 && i == 1 && x == fact(1)) || (n > 0 && 0 <= i <= n && x == fact(i))
+    //invariant (n == 0 && i == 1 && x == fact(i)) || (n > 0 && 0 <= i <= n && x == fact(i))
+    //invariant (n == 0 && i == 1 && x == fact(i-1)) || (n > 0 && 0 <= i <= n && x == fact(i))
+    //invariant (n == 0 && i == 1 && x == 1) || (n > 0 && 0 <= i <= n && x == fact(i))
+    invariant (n == 0 && i > n && x == fact(0)) || (n > 0 && 0 <= i <= n && x == fact(i))
   {
     x := x * (i+1);
     i := i + 1;
