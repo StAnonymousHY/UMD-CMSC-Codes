@@ -211,7 +211,7 @@ method FactCountingUp(n : int) returns (x : int)
   requires n >= 0
   ensures x == fact(n)
 {
-  var i := 1; // NOTE: n is not a variable that can be assigned to!
+  var i := 1;
   x := 1;
   while (i <= n)
     //invariant可以理解为loop的ensures 第一个statement保证while结束后x==fact(i-1) 第二个statement保证while结束后i=n+1
@@ -219,6 +219,20 @@ method FactCountingUp(n : int) returns (x : int)
     invariant x == fact(i-1) && 0 < i <= n+1
   {
     x := x * i;
+    i := i + 1;
+  }
+}
+
+method FactCountingUpAlternative(n : int) returns (x : int)
+  requires n >= 0
+  ensures x == fact(n)
+{
+  var i := 0;
+  x := 1;
+  while (i <= n-1)
+    invariant x == fact(i) && 0 <= i <= n
+  {
+    x := x * (i+1);
     i := i + 1;
   }
 }
