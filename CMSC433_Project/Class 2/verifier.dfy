@@ -214,8 +214,9 @@ method FactCountingUp(n : int) returns (x : int)
   var i := 1;
   x := 1;
   while (i <= n)
-    //invariant可以理解为loop的ensures 第一个statement保证while结束后x==fact(i-1) 第二个statement保证while结束后i=n+1
+    //invariant可以理解为loop的ensures 第一个statement保证while结束后x==fact(i-1) 第二个statement保证while结束后i=n+1 
     //（猜想：要是while里面i--的话 那就是保证while结束后i=1 反之才是i=n+1）
+    //forall中的大小关系无法verify loop跑完后的最终值
     invariant x == fact(i-1) && 0 < i <= n+1
   {
     x := x * i;
