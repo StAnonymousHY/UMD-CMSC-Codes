@@ -896,19 +896,19 @@ method QuotDiv (m : int, n : int) returns (x : int, y : int)
     implements this idea.  Fill in decorations.
 
 (IN CLASS)
-   { x == m } ->
-                    { } 
+   { x == m && m >= 0 } ->
+                    { x >= 0 && 0 + x == m } 
       y := 0;
-                    { } 
+                    { x >= 0 && y + x == m } 
       while x > 0 {
-                    {  } ->
-                    {  }
+                    { x >= 0 && y + x == m && x > 0 } ->
+                    { x-1 >= 0 && y+1 + x-1 == m }
          x := x - 1;
-                    {  } 
+                    { x >= 0 && y+1 + x == m } 
          y := y + 1;
-                    {  }
+                    { x >= 0 && y + x == m }
       }
-    {  } ->
+    { x >= 0 && y + x == m  && !(x > 0)} ->
     { y == m } */
 
 /* ================================================================= */
@@ -938,17 +938,17 @@ method compute_parity(m:nat) returns (x:nat)
   // ensures (x == parity(m))
 {
   // { true } ==>
-  // { }
+  // { parity(m) == parity(m) }
   x := m;
-  // { }
+  // { parity(x) == parity(m) }
   while 2 <= x
   {
-    // { } ==>
-    // { }
+    // { parity(x) == parity(m) && 2 <= x } ==>
+    // { parity(x-2) == parity(m) }
     x := x - 2;
-    // { }
+    // { parity(x) == parity(m) }
   }
-  // { } ==>
+  // { parity(x) == parity(m) && !(2 <= x) } ==>
   // { x == parity(m) }
 }
 
@@ -988,11 +988,17 @@ method compute_parity(m:nat) returns (x:nat)
     The following program computes the integer square root of x
     by naive iteration:
 
-    { x == m }
+    { x == m && m >= 0 } ==>
+      {(0)*(0) <= x && x == m}
       z := 0;
+      {(z)*(z) <= x && x == m}
       while (z+1)*(z+1) <= x {
+        {(z)*(z) <= x && x == m} ==>
+        {(z+1)*(z+1) <= x && x == m}
         z := z+1
+        {z*z <= x && x == m}
       }
+      {z*z <= x && !((z+1)*(z+1) <= x) && x == m} ==>
     { z*z<=m && m<(z+1)*(z+1) }
 
 
@@ -1053,13 +1059,21 @@ method compute_parity(m:nat) returns (x:nat)
 
   Here is a program that squares x by repeated addition:
 
-  { x == m }
+  { x == m && m >= 0} ==>
+    {0 <= x && x==m && 0 == 0*x}
     y := 0;
+    {y <= x && x==m && 0 == y*x}
     z := 0;
+    {y <= x && x==m && z == y*x}
     while y != x {
+      {y <= x && x==m && z == y*x && y != x} ==>
+      {y <= x && x==m && z+x == (y+1)*x}
       z := z + x;
+      {y <= x && x==m && z == (y+1)*x}
       y := y + 1
+      {y <= x && x==m && z == y*x}
     }
+    { y <= x && x == m && z == y*x && !(y != x) } ==>
   { z == m*m } */
 
 /** The first thing to note is that the loop reads x but doesn't
@@ -1146,7 +1160,7 @@ method factorial(n:nat) returns (x:nat)
   x := 1;
 
   while (i > 0)
-    invariant true 
+    invariant i >= 0 && x * fact(i) == fact(n)  //mutiplication instead of division :)
   {
     x := x * i;
     i := i - 1;
@@ -1160,24 +1174,24 @@ method factorial(n:nat) returns (x:nat)
 /** ** Exercise: Minimum 
 
     { true } ->
-    { FILL_IN_HERE }
+    { (x >= 0 && y >= 0) && a - a == b - b == 0 }
       x := a
-             { FILL_IN_HERE };
+             { (x >= 0 && y >= 0) && a - x == b - b == 0 };
       y := b
-             { FILL_IN_HERE };
+             { (x >= 0 && y >= 0) && a - x == b - y == 0 };
       z := 0
-             { FILL_IN_HERE };
+             { (x >= 0 && y >= 0) && a - x == b - y == z };
       while x != 0 && y != 0 {
-             { FILL_IN_HERE } ->
-             { FILL_IN_HERE }
+             { (x >= 0 && y >= 0) && a - x == b - y == z && (x != 0 && y != 0) } ->
+             { (x >= 0 && y >= 0) && a - x + 1 == b - y + 1 == z + 1 }
         x := x - 1
-             { FILL_IN_HERE };
+             { (x >= 0 && y >= 0) && a - x == b - y + 1 == z + 1 };
         y := y - 1
-             { FILL_IN_HERE };
+             { (x >= 0 && y >= 0) && a - x == b - y == z + 1 };
         z := z + 1
-             { FILL_IN_HERE }
+             { (x >= 0 && y >= 0) && a - x == b - y == z }
       }
-    { FILL_IN_HERE } ->
+    { (x >= 0 && y >= 0) && a - x == b - y == z && !(x != 0 && y != 0) } ->
     { z == min a b }
 */
 
