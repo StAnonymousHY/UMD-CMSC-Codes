@@ -444,7 +444,7 @@ method LoopToZero_3(m : int, p : int) returns (x: int, z: int) {
   z := p;
   //  { x >= 0 && z - x == p - m }
   while x > 0 {
-    //      { x >= 0 z - x == p - m && x > 0 } ->
+    //      { x >= 0 && z - x == p - m && x > 0 } ->
     //      { x - 1 >= 0 && (z - 1) - (x - 1) == p - m }
     z := z - 1;
     //      { x - 1 >= 0 && z - (x - 1) == p - m }

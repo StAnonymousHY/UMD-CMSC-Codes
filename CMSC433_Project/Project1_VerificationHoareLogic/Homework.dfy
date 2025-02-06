@@ -180,24 +180,24 @@ function pow2(n : nat) : nat {
 
 /* 
     { true } ->
-(1)    { FILL_IN_HERE }
+(1)    { 0 <= n &&  1 == pow2(0) && 1 == pow2(0+1)-1 }
       x := 0;
-(2)    { FILL_IN_HERE }
+(2)    { x <= n &&  1 == pow2(x) && 1 == pow2(x+1)-1 }
       y := 1;
-(3)    { FILL_IN_HERE };
+(3)    { x <= n &&  1 == pow2(x) && y == pow2(x+1)-1 };
       z := 1;
-(4)    { FILL_IN_HERE }
+(4)    { x <= n &&  z == pow2(x) && y == pow2(x+1)-1 }
       while x != n {
-(5)       { FILL_IN_HERE } ->
-(6)       { FILL_IN_HERE }
+(5)       { x <= n &&  z == pow2(x) && y == pow2(x+1)-1 && x != n} ->
+(6)       { x+1 <= n && 2*z == pow2(x+1) && y+2*z == pow2(x+1)-1+2*z }
         z := 2 * z;
-(7)       { FILL_IN_HERE }
+(7)       { x+1 <= n && z == pow2(x+1) && y+z == pow2(x+1)-1+z }
         y := y + z;
-(8)       { FILL_IN_HERE }
+(8)       { x+1 <= n && z == pow2(x+1) && y == pow2(x+1)-1+z }
         x := x + 1;
-(9)       { FILL_IN_HERE }
+(9)       { x <= n && z == pow2(x) && y == pow2(x)-1+z }
       }
-(10)  { FILL_IN_HERE } ->
+(10)  { x <= n && z == pow2(x) && y == pow2(x)-1+z && !(x != n) } ->
       { y == pow2 (n+1) - 1 }
 */
 
@@ -226,31 +226,31 @@ function pow2(n : nat) : nat {
 
 /*
     { true } ->
-(a) { FILL_IN_HERE }
+(a) { 0 <= b && 0 <= a && c == 0 + 0 + c }
       x := 0;
-(b)                { FILL_IN_HERE }
+(b)                { 0 <= b && x <= a && c == x + 0 + c }
       y := 0;
-(c)                { FILL_IN_HERE }
+(c)                { y <= b && x <= a && c == x + y + c }
       z := c;
-(d)                { FILL_IN_HERE }
+(d)                { y <= b && x <= a && z == x + y + c }
       while x != a {
-(e)                { FILL_IN_HERE } ->
-(f)                { FILL_IN_HERE }
+(e)                { y <= b && x <= a && z == x + y + c && x != a } ->
+(f)                { y <= b && x+1 <= a && z+1 == x+1 + y + c }
         x := x + 1;
-(g)                { FILL_IN_HERE }
+(g)                { y <= b && x <= a && z+1 == x + y + c }
         z := z + 1;
-(h)                { FILL_IN_HERE }
+(h)                { y <= b && x <= a && z == x + y + c }
       end;
-(i)                { FILL_IN_HERE } ->
-(j)                { FILL_IN_HERE }
+(i)                { y <= b && x <= a && z == x + y + c  && !(x != a)} ->
+(j)                { y <= b && z == a + y + c }
       while y != b {
-(k)                { FILL_IN_HERE } ->
-(l)                { FILL_IN_HERE }
+(k)                { y <= b && z == a + y + c  && y != b } ->
+(l)                { y+1 <= b && z+1 == a + y+1 + c }
         y := y + 1;
-(m)                { FILL_IN_HERE }
+(m)                { y <= b && z+1 == a + y + c }
         z := z + 1;
-(n)                { FILL_IN_HERE }
+(n)                { y <= b && z == a + y + c }
       }
-(o) { FILL_IN_HERE } ->
+(o) { y <= b && z == a + y + c && !(y != b) } ->
     { z == a + b + c }
 */
