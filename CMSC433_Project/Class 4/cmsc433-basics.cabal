@@ -1,0 +1,23 @@
+cabal-version:       >=1.10
+name:                cmsc433-basics
+version:             0.1.0.0
+synopsis:            Class materials from CMSC 433, UMD
+description:         Course introduction: basics
+bug-reports:         leonidas@umd.edu
+license:             MIT
+license-file:        LICENSE
+maintainer:          leonidas@umd.edu
+-- copyright:
+build-type:          Simple
+extra-source-files:  CHANGELOG.md
+
+library 
+  exposed-modules:     Basics
+  build-depends:         base  
+                       , HUnit 
+                       , filepath 
+                       , containers
+  ghc-options:         -Wno-type-defaults -fwarn-incomplete-patterns
+  default-language:
+    GHC2021
+  default-extensions:
