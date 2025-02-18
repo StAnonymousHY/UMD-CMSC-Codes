@@ -1,0 +1,24 @@
+cabal-version:       >=1.10
+name:                cmsc433-higherorder
+version:             0.1.0.0
+synopsis:            Class materials from CMSC 433, UMD
+description:         Higher-order functions
+license:             MIT
+license-file:        LICENSE
+maintainer:          leonidas@umd.edu
+-- copyright:
+build-type:          Simple
+extra-source-files:  CHANGELOG.md
+
+library 
+  exposed-modules:     HigherOrder
+                       Sum
+                       Foldr
+  build-depends:       base >=4.15
+                       , HUnit >= 1.6
+                       , filepath >= 1.4
+  default-language:    GHC2021
+  ghc-options:         -Wno-type-defaults -fwarn-incomplete-patterns
+  default-extensions:
+
+

@@ -1,0 +1,27 @@
+cabal-version:       >=1.10
+name:                cmsc433-trees
+version:             0.1.0.0
+synopsis:            Class materials from CMSC 433, UMD
+description:         Datatypes and Trees
+license:             MIT
+license-file:        LICENSE
+maintainer:          leonidas@umd.edu
+-- copyright:
+build-type:          Simple
+extra-source-files:  CHANGELOG.md
+
+library 
+  exposed-modules:     Datatypes
+                       DList
+                       TreeFolds
+                       
+  build-depends:       base >= 4.15
+                       , HUnit >= 1.6
+                       , dlist
+  default-language:    GHC2021
+  ghc-options:         -Wno-type-defaults -Wincomplete-patterns
+  -- these extensions are enabled for GHC2021, turning them on now for 
+  -- future compatibility
+  default-extensions:
+    
+
