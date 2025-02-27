@@ -1,0 +1,18 @@
+cabal-version:       >=1.10
+name:                haskell-intro
+version:             0.1.0.0
+synopsis:            Intro Haskell Homework for CMSC 433, UMD
+description:         Course introduction: lists and higher-order functions
+bug-reports:         leonidas@umd.edu
+license:             MIT
+license-file:        LICENSE
+maintainer:          leonidas@ud.edu
+-- copyright:
+build-type:          Simple
+
+executable hw01 
+  main-is:             Main.hs
+  build-depends:       base, HUnit
+  default-language:    GHC2021
+  ghc-options:         -Wno-type-defaults -fwarn-incomplete-patterns
+
