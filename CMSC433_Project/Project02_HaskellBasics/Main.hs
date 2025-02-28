@@ -226,10 +226,13 @@ tstartsWith = "startsWith" ~:
 -- False
 
 endsWith :: String -> String -> Bool
-endsWith = undefined
+endsWith s1 s2 = startsWith (reverse s1) (reverse s2)
 
 tendsWith :: Test
-tendsWith = "endsWith" ~: (assertFailure "testcase for endsWith" :: Assertion)
+tendsWith = "endsWith" ~: 
+  TestList [  endsWith "Hello" "World Hello" ~?= True, 
+              startsWith "Hello" "World Wello" ~?= False, 
+              startsWith "Hello" "Hello" ~?= True]
 
 -- Part Four
 
@@ -249,11 +252,19 @@ tendsWith = "endsWith" ~: (assertFailure "testcase for endsWith" :: Assertion)
 -- >>> transpose [[1,2],[3,4,5]]
 -- [[1,3],[2,4]]
 -- (WARNING: this one is tricky!)
+
+           
 transpose :: [[a]] -> [[a]]
 transpose = undefined
 
 ttranspose :: Test
-ttranspose = "transpose" ~: (assertFailure "testcase for transpose" :: Assertion)
+ttranspose = "transpose" ~: 
+  TestList [  transpose [[1,2,3],[4,5,6]] ~?= [[1,4],[2,5],[3,6]], 
+              transpose [] ~?= ([] :: [[Int]]), 
+              transpose [[]] ~?= ([] :: [[Int]]), 
+              transpose [[],[]] ~?= ([] :: [[Int]]), 
+              transpose [[3,4,5]] ~?= [[3],[4],[5]], 
+              transpose [[1,2],[3,4,5]] ~?= [[1,3],[2,4]]]
 
 -- Part Five
 
@@ -266,9 +277,16 @@ ttranspose = "transpose" ~: (assertFailure "testcase for transpose" :: Assertion
 -- 5
 
 countSub :: String -> String -> Int
-countSub = undefined
+countSub s1 s2 = countSubAux s1 s2 0 where
+  countSubAux [] [] cnt = (cnt+1)
+  countSubAux s1 [] cnt = cnt
+  countSubAux s1 (x:xs) cnt = if startsWith s1 (x:xs) then countSubAux s1 xs (cnt+1) else countSubAux s1 xs cnt
+
 tcountSub :: Test
-tcountSub = "countSub" ~: (assertFailure "testcase for countSub" :: Assertion)
+tcountSub = "countSub" ~: 
+  TestList [  countSub "aa" "aaa" ~?= 2, 
+              countSub "" "aaac" ~?= 5, 
+              countSub "aa" "aaacaabaaa" ~?= 5]
 
 --------------------------------------------------------------------------------
 -- Problem (Higher-order list operations)
