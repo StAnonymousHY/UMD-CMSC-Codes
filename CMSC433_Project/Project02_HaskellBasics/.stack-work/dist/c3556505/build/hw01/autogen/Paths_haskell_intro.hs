@@ -42,12 +42,12 @@ getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: 
 
 
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
-bindir     = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\8d683448\\bin"
-libdir     = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\8d683448\\lib\\x86_64-windows-ghc-9.4.5\\haskell-intro-0.1.0.0-LE8q5Mr4Dn8HwPrA9myE1B-hw01"
-dynlibdir  = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\8d683448\\lib\\x86_64-windows-ghc-9.4.5"
-datadir    = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\8d683448\\share\\x86_64-windows-ghc-9.4.5\\haskell-intro-0.1.0.0"
-libexecdir = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\8d683448\\libexec\\x86_64-windows-ghc-9.4.5\\haskell-intro-0.1.0.0"
-sysconfdir = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\8d683448\\etc"
+bindir     = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\d3b0f0cc\\bin"
+libdir     = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\d3b0f0cc\\lib\\x86_64-windows-ghc-9.4.5\\haskell-intro-0.1.0.0-LE8q5Mr4Dn8HwPrA9myE1B-hw01"
+dynlibdir  = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\d3b0f0cc\\lib\\x86_64-windows-ghc-9.4.5"
+datadir    = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\d3b0f0cc\\share\\x86_64-windows-ghc-9.4.5\\haskell-intro-0.1.0.0"
+libexecdir = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\d3b0f0cc\\libexec\\x86_64-windows-ghc-9.4.5\\haskell-intro-0.1.0.0"
+sysconfdir = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project02_HaskellBasics\\.stack-work\\install\\d3b0f0cc\\etc"
 
 getBinDir     = catchIO (getEnv "haskell_intro_bindir")     (\_ -> return bindir)
 getLibDir     = catchIO (getEnv "haskell_intro_libdir")     (\_ -> return libdir)
