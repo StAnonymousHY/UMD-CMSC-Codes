@@ -806,7 +806,7 @@ from our list-length function?
 
 len' :: [a] -> Int
 len' = foldr (\a b -> b + 1) 0 
-len' = foldr (const (+1)) 0 
+--len' = foldr (const (+1)) 0 
 --len' l = foldr (const (+1)) 0 l
 
 {- 

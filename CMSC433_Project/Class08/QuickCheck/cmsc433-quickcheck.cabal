@@ -1,0 +1,14 @@
+cabal-version:       >=1.10
+name:                cmsc433-quickcheck
+version:             0.1.0.0
+maintainer:          leonidas@umd.edu
+build-type:          Simple
+
+library
+  exposed-modules:      QuickCheck
+                      , QuickList
+  build-depends:       base >= 4.15, QuickCheck, dlist
+  default-language:    GHC2021
+  ghc-options:         -Wno-type-defaults -Wincomplete-patterns
+  default-extensions:
+    

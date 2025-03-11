@@ -115,6 +115,13 @@ define a record accessor to let us conveniently extract the parser:
 
 newtype Parser a = P { doParse :: String -> Maybe (a, String) }
 
+-- Since this parser is parsing into a Maybe type, then according to implicit convention, parsing to Nothing indicates parse FAILURE
+
+-- difference between newtype and data: newtype forces you to only have one constructor
+-- Here the type of doParse is actually Parser a -> String -> Maybe (a, String) instead of String -> Maybe(a, String). 
+-- This means that if you want to call doParse, you would first have to give doParse a (Parse a) type, 
+-- so that the doParse can extract the (String -> Maybe(a,String)) function from the (Parser a) you gave, 
+-- and then it can use the function to convert from String to Maybe(a, String). 
 
 -- >>> :t doParse
 -- doParse :: Parser a -> String -> Maybe (a, String)
@@ -179,8 +186,8 @@ char of a (nonempty) string and interprets it as an int in the range
 oneDigit :: Parser Int
 oneDigit = P $ \s -> case s of
                   (c : cs) | (c >= '0' && c <= '9')-> Just (ord c - ord '0', cs)  
-                  -- 用char - char 来convert digit to int 在Haskell不适用
-                  []       -> Nothing
+                  -- 用char - char 来convert digit to int 在Haskell不适用 需要用到ord来获取ASCII
+                  _       -> Nothing
 
 -- >>> doParse oneDigit "1"
 -- Just (1,"")
@@ -199,6 +206,11 @@ as the unary negation operator, if it is `'-'`, and an identity function if it
 is `'+'`.
 -}
 
+
+-- Both negate and id are functions of type (Int -> Int)
+-- negate 3 gives -3
+-- id 3 gives 3
+
 oneOp :: Parser (Int -> Int)
 oneOp = P $ \s -> case s of
                     ('-' : cs) -> Just (negate, cs)
@@ -216,7 +228,7 @@ if the first character satisfies the predicate.
 satisfy :: (Char -> Bool) -> Parser Char
 satisfy f = P $ \s -> case s of
                   (c : cs) | (f c)-> Just (c, cs)
-                  [] -> Nothing
+                  _ -> Nothing
 
 
 -- >>>  doParse (satisfy isAlpha) "a"
@@ -234,6 +246,15 @@ filter :: (a -> Bool) -> Parser a -> Parser a
 filter f p = P $ \s -> case doParse p s of
                       Just(a, s') | f a -> Just(a, s')
                       _ -> Nothing
+
+-- >>> doParse ((filter (<3)) oneDigit) "123"
+-- Just (1, "23")
+
+-- >>> doParse ((filter (<3)) oneDigit) "abc"
+-- Nothing
+
+-- >>> doParse ((filter (<3)) oneDigit) "456"
+-- Nothing
 
 --    SPOILER SPACE
 --     |
@@ -332,7 +353,7 @@ Similarly, finish this parser that should parse just one specific `Char`:
 -}
 
 char :: Char -> Parser Char
-char c = undefined
+char c = satisfy (==c)
 
 
 -- >>> doParse (char 'a') "ab"
@@ -349,9 +370,7 @@ And now let's use `fmap` to rewrite `oneDigit`:
 -}
 
 oneDigit' :: Parser Int
-oneDigit' = cvt <$> digitChar where    -- <$> is fmap!
-  cvt :: Char -> Int
-  cvt c = ord c - ord '0'
+oneDigit' = (\c -> ord c - ord '0') <$> digitChar    -- <$> is fmap!
 
 
 -- >>> doParse oneDigit' "92"
@@ -359,9 +378,6 @@ oneDigit' = cvt <$> digitChar where    -- <$> is fmap!
 
 -- >>> doParse oneDigit' "cat"
 -- Nothing
-
-
-
 
 
 {- 
@@ -397,7 +413,14 @@ other and returns the pair of resulting values...
 -}
 
 pairP0 ::  Parser a -> Parser b -> Parser (a,b)
-pairP0 = undefined
+pairP0 p1 p2 = P $ \s ->
+  case doParse p1 s of
+    Just (c1, cs) ->
+      case doParse p2 cs of
+        Just (c2, cs') -> Just ((c1,c2), cs')
+        _ -> Nothing
+    _ -> Nothing
+
 
 {- 
 and use that to rewrite `twoChar` more elegantly like this:
@@ -460,7 +483,13 @@ are arguments to the combinator?
 -}
 
 apP :: Parser (t -> a) -> Parser t -> Parser a
-apP p1 p2 = undefined
+apP p1 p2 = P $ \ s ->
+  case doParse p1 s of
+    Just (f, cs) ->
+      case doParse p2 cs of
+        Just (x, cs') -> Just (f x, cs')
+        _ -> Nothing
+    _ -> Nothing
 
 {- 
 Does this type look familiar? It's sort of like a Functor.. That's
@@ -528,8 +557,18 @@ Let's go back and reimplement our examples with the applicative combinators:
 twoChar :: Parser (Char, Char)
 twoChar = pure (,) <*> get <*> get
 
+-- Usage of zap <*>
+-- Parser (Char -> Char -> (Char, Char)) <*> Parser Char <*> Parser Char
+-- Parser (Char -> (Char, Char)) <*> Parser Char
+-- Parser (Char, Char)
+
 signedDigit :: Parser Int
 signedDigit = oneOp <*> oneDigit
+
+-- OneOp type: Parser (Int -> Int)
+-- oneDigit type: Parser Int
+-- Parser (Int -> Int) <*> Parser Int
+-- Parser Int
 
 
 -- >>> doParse twoChar "hey!"
@@ -557,6 +596,14 @@ tool will suggest this rewrite to you.)
 
 pairP' :: Parser a -> Parser b -> Parser (a,b)
 pairP' p1 p2 = (,) <$> p1 <*> p2
+
+-- 重点：
+-- pure       :: a -> f a                         (f is a type)
+-- p          :: (a -> b)                         (p is a function)
+-- <*>        :: f (a -> b) -> f a -> f b         (zap)
+-- <$>        :: (a -> b) -> f a -> f b           (fmap)
+-- p <$>      :: f a -> f b
+-- pure p <*> :: f a -> f b
 
 {- 
 We can even dip into the `Control.Applicative` library and write `pairP` even
@@ -603,6 +650,10 @@ parenP p = char '(' *> p <* char ')'
 
 -- >>> doParse (parenP get) "(1)"
 
+-- >>> doParse (parenP get) "(1"
+-- Nothing
+-- Why? 
+
 {- 
 Recursive Parsing
 -----------------
@@ -618,6 +669,12 @@ Let's try to write it!
 string :: String -> Parser String
 string ""     = pure ""
 string (x:xs) = (:) <$> char x <*> string xs
+
+-- How to understand the type for 
+-- (:) <$> char x <*> string xs
+-- (Char -> String -> String) <$> Parser Char <*> Parser String
+-- Parser (String -> String) <*> Parser String
+-- Parser String
 
 
 {- 
@@ -635,7 +692,10 @@ For fun, try to write `string` using `foldr` for the list recursion.
 -}
 
 string' :: String -> Parser String
-string' = foldr undefined undefined
+string' s = foldr (\x acc -> (pure (:)) <*> char x <*> acc) (pure "") s
+
+string'' :: String -> Parser String
+string'' s = foldr (\x acc -> (:) <$> char x <*> acc) (pure "") s
 
 {- 
 Furthermore, we can use natural number recursion to write a parser that grabs
@@ -715,7 +775,7 @@ either case, the result is a list.
 -}
 
 manyP :: Parser a -> Parser [a]
-manyP p = undefined
+manyP p = (:) <$> p <*> (manyP p) `chooseFirstP` pure []
 
 
 -- >>> doParse (manyP oneDigit) "12345a"
@@ -852,8 +912,19 @@ Challenge: use the `Alternative` operators to implement a parser that parses
 zero or more occurrences of `p`, separated by `sep`.
 -}
 
+
+-- The code do the string cutting and slicing in the parser
+-- It does the cutting in p and sep
 sepBy :: Parser a -> Parser b -> Parser [a]
-sepBy p sep = undefined
+sepBy p sep = 
+  (:) <$> (p <* sep) <*> (sepBy p sep)
+  <|>
+  (:[]) <$> p
+  <|>
+  pure []
+
+sepBy' :: Parser a -> Parser b -> Parser [a]
+sepBy' p sep = (:) <$> p <*> many (sep *> p) <|> pure []
 
 
 -- >>> doParse (sepBy oneNat (char ',')) "1,12,0,3"
