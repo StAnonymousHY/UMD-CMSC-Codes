@@ -1,0 +1,18 @@
+cabal-version:       >=1.10
+name:                cmsc433-parsers
+version:             0.1.0.0
+synopsis:            Applicative Parsing
+maintainer:          leonidas@umd.edu
+build-type:          Simple
+
+library
+  exposed-modules:     Parsers
+                     , ParserCombinators
+                     , Xml
+  build-depends:       base >= 4.15
+  default-language:    GHC2021
+  ghc-options:         -Wincomplete-patterns
+  -- these extensions are enabled for GHC2021, turning them on now for 
+  -- future compatibility
+  default-extensions:
+    
