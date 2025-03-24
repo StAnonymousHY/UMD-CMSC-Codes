@@ -71,7 +71,7 @@ need the `space` parser from the [Parser](Parser.hs) library.
 -}
 
 wsP :: Parser a -> Parser a
-wsP p = undefined
+wsP p = p <* (many P.space)
 
 test_wsP :: Test
 test_wsP = TestList [
@@ -86,7 +86,9 @@ that trailing whitespace is being treated appropriately.
 -}
 
 stringP :: String -> Parser ()
-stringP = undefined
+stringP s = (\s1 -> ()) <$> (string s) where
+     string ""     = pure ""
+     string (x:xs) = (:) <$> ((P.char x) <* (many P.space)) <*> string xs
 
 test_stringP :: Test
 test_stringP = TestList [
@@ -99,7 +101,9 @@ test_stringP = TestList [
 -- | given value `x`, and also and consume any white space that follows.
 
 constP :: String -> a -> Parser a
-constP _ _ = undefined
+constP s c = (\s1 -> c) <$> (string s) where
+     string ""     = pure ""
+     string (x:xs) = (:) <$> ((P.char x) <* (many P.space)) <*> string xs
 
 test_constP :: Test
 test_constP = TestList [
@@ -119,7 +123,7 @@ braces x = P.between (stringP "{") x (stringP "}")
 -- >>> P.parse (many (brackets (constP "1" 1))) "[1] [  1]   [1 ]"
 -- Right [1,1,1]
 brackets :: Parser a -> Parser a
-brackets x = undefined
+brackets x = P.between (stringP "[") x (stringP "]")
 
 
 
@@ -141,12 +145,12 @@ valueP = intValP <|> boolValP
 -- >>> P.parse (many intValP) "1 2\n 3"
 -- Right [IntVal 1,IntVal 2,IntVal 3]
 intValP :: Parser Value
-intValP = undefined
+intValP = Syntax.IntVal <$> (read <$> ((some P.digit) <* (many P.space)))
 
 -- >>> P.parse (many boolValP) "true false\n true"
 -- Right [BoolVal True,BoolVal False,BoolVal True]
 boolValP :: Parser Value
-boolValP = undefined
+boolValP = Syntax.BoolVal <$> ((constP "true" True) <|> (constP "false" False))
 
 -- | At this point you should be able to run tests using the `prop_roundtrip_val` property. 
 

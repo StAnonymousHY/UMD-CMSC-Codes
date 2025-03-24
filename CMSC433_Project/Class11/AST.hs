@@ -77,3 +77,9 @@ expP = addP <|> multP where
     addP = (\e1 _ e2 -> Plus e1 e2) <$> (multP <|> leafP) <*> char '+' <*> (addP <|> multP <|> leafP) where
     multP = (\e1 _ e2 -> Mult e1 e2) <$> leafP <*> char '*' <*> (multP <|> leafP) where
     leafP = numP <|> varP
+
+-- fmap and applicative: 
+-- addP = (Exp -> Char -> Exp -> Exp) <$> Parser Exp <*> Parser Char <*> Parser Exp
+--      = Parser (Char -> Exp -> Exp) <*> Parser Char <*> Parser Exp
+--      = Parser (Exp -> Exp) <*> Parser Exp
+--      = Parser Exp
