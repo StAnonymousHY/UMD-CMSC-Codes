@@ -224,8 +224,15 @@ reserved = [ "assert", "break","else","Length"
 
 -- >>> P.parse (many nameP) "x sfds _ int"
 -- Right ["x","sfds", "_"]
+
+validName :: Name -> Bool
+validName n = case n of 
+     "" -> False
+     (x:xs) -> (not (elem n reserved)) && (Char.ord x < Char.ord '0' || Char.ord x > Char.ord '9')
+
 nameP :: Parser Name
-nameP = undefined
+nameP = P.filter validName ((some (P.digit <|> P.alpha <|> P.char '_')) <* (many P.space))
+
 
 -- Now write parsers for the unary and binary operators. Make sure you
 --  check out the Syntax module for the list of all possible
@@ -234,12 +241,28 @@ nameP = undefined
 -- >>> P.parse (many uopP) "- - !"
 -- Right [Neg,Neg,Not]
 uopP :: Parser Uop
-uopP = undefined
+uopP =    ((\s -> Syntax.Neg) <$> (P.char '-' <* many P.space)) <|>
+          ((\s -> Syntax.Not) <$> (P.char '!' <* many P.space)) <|>
+          ((\s -> Syntax.Len) <$> (stringP ".Length" <* many P.space)) 
 
 -- >>> P.parse (many bopP) "+ >= &&"
 -- Right [Plus,Ge,Conj]
 bopP :: Parser Bop
-bopP = undefined
+bopP =    ((\s -> Syntax.Plus) <$> (P.char '+'<* many P.space)) <|>
+          ((\s -> Syntax.Minus) <$> (P.char '-'<* many P.space)) <|>
+          ((\s -> Syntax.Times) <$> (P.char '*'<* many P.space)) <|>
+          ((\s -> Syntax.Divide) <$> (P.char '/'<* many P.space)) <|>
+          ((\s -> Syntax.Modulo) <$> (P.char '%'<* many P.space)) <|>
+          ((\s -> Syntax.Eq) <$> (stringP "==" <* many P.space)) <|>
+          ((\s -> Syntax.Neq) <$> (stringP "!=" <* many P.space)) <|>
+          ((\s -> Syntax.Ge) <$> (stringP ">=" <* many P.space)) <|>
+          ((\s -> Syntax.Gt) <$> (P.char '>' <* many P.space)) <|>
+          ((\s -> Syntax.Le) <$> (stringP "<=" <* many P.space)) <|>
+          ((\s -> Syntax.Lt) <$> (P.char '<' <* many P.space)) <|>
+          ((\s -> Syntax.Conj) <$> (stringP "&&" <* many P.space)) <|>
+          ((\s -> Syntax.Disj) <$> (stringP "||" <* many P.space)) <|>
+          ((\s -> Syntax.Implies) <$> (stringP "==>" <* many P.space)) <|>
+          ((\s -> Syntax.Iff) <$> (stringP "<==>" <* many P.space))
 
 -- | At this point you should be able to test the  `prop_roundtrip_exp` property.
 

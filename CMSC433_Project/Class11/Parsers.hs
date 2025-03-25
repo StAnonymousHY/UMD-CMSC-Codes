@@ -1200,6 +1200,20 @@ factorE2 = parenP addE2 <|> oneNat
 
 -- >>> doParse addE2 "10+2*1"
 
+-- doParse addE2 "10*2+1"
+-- mulE2 <+> addOp <+> mulE2
+-- factorE2 <+> mulOp <+> factorE2 <+> addOp <+> factorE2 <+> mulOp <+> factorE2 
+-- (Because many ((,) <$> pop <*> p), then "rest" can choose to parse 0 or more times. Therefore the "mulOp <+> factorE2" can be discarded)
+-- oneNat <+> mulOp <+> oneNat <+> addOp <+> oneNat
+--   10         *         2          +          1
+
+-- doParse addE2 "10-1-1"
+-- mulE2 <+> addOp <+> mulE2
+-- (Because many ((,) <$> pop <*> p), then "rest" can choose to parse 0 or more times. Therefore we can parse "addOp <+> mulE2" multiple times)
+-- mulE2 <+> addOp <+> mulE2 <+> addOp <+> mulE2
+-- factorE2 <+> addOp <+> factorE2 <+> addOp <+> factorE2
+-- oneNat <+> addOp <+> oneNat <+> addOp <+> oneNat
+--   10         -         1          -          1
 
 {- 
 Of course, we can generalize `chainl1` even further so that it is not
