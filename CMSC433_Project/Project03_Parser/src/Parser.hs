@@ -50,7 +50,7 @@ prop_roundtrip_val :: Value -> Bool
 prop_roundtrip_val v = P.parse valueP (pretty v) == Right v
 
 prop_roundtrip_exp :: Expression -> Bool
-prop_roundtrip_exp e = P.parse expP (pretty e) == Right e
+prop_roundtrip_exp e = P.parse (wsP expP) (pretty e) == Right e
 
 prop_roundtrip_stat :: Statement -> Bool
 prop_roundtrip_stat s = P.parse statementP (pretty s) == Right s
@@ -178,17 +178,17 @@ However, this code *won't* work until you complete all the parts of this section
 -} 
 
 expP :: Parser Expression
-expP    = conjP where
+expP      = conjP where
   conjP   = compP `P.chainl1` opAtLevel (level Conj)  
   compP   = catP `P.chainl1` opAtLevel (level Gt)
   catP    = sumP `P.chainl1` opAtLevel (level Eq)
   sumP    = prodP `P.chainl1` opAtLevel (level Plus)
-  prodP   = uopexpP `P.chainl1` opAtLevel (level Times)
-  uopexpP = baseP
-      <|> Op1 <$> uopP <*> uopexpP 
+  prodP   = uop expP `P.chainl1` opAtLevel (level Times)
+  uop expP = baseP
+      <|> Op1 <$> uopP <*> uop expP
   baseP = lenP
        <|> Var <$> varP
-       <|> parens expP
+       <|> parens (wsP expP)
        <|> Val <$> valueP
       -- .Length here
 
@@ -204,7 +204,7 @@ opAtLevel l = flip Op2 <$> P.filter (\x -> level x == l) bopP
 -- >>> P.parse varP "y[1]"
 -- Right (Proj "y" (Val (IntVal 1)))
 varP :: Parser Var
-varP = (Proj <$> nameP <*> brackets expP) <|> (Name <$> nameP)
+varP = (Proj <$> nameP <*> brackets (wsP expP)) <|> (Name <$> nameP)
 
 lenP :: Parser Expression
 lenP = (Op1 Len . Var . Name) <$> (nameP <* stringP ".Length")
@@ -248,12 +248,12 @@ uopP =    ((\s -> Syntax.Neg) <$> (P.char '-' <* many P.space)) <|>
 -- >>> P.parse (many bopP) "+ >= &&"
 -- Right [Plus,Ge,Conj]
 bopP :: Parser Bop
-bopP =    ((\s -> Syntax.Plus) <$> (P.char '+'<* many P.space)) <|>
+bopP =    ((\s -> Syntax.Iff) <$> (stringP "<==>" <* many P.space)) <|>
+          ((\s -> Syntax.Plus) <$> (P.char '+'<* many P.space)) <|>
           ((\s -> Syntax.Minus) <$> (P.char '-'<* many P.space)) <|>
           ((\s -> Syntax.Times) <$> (P.char '*'<* many P.space)) <|>
           ((\s -> Syntax.Divide) <$> (P.char '/'<* many P.space)) <|>
           ((\s -> Syntax.Modulo) <$> (P.char '%'<* many P.space)) <|>
-          ((\s -> Syntax.Eq) <$> (stringP "==" <* many P.space)) <|>
           ((\s -> Syntax.Neq) <$> (stringP "!=" <* many P.space)) <|>
           ((\s -> Syntax.Ge) <$> (stringP ">=" <* many P.space)) <|>
           ((\s -> Syntax.Gt) <$> (P.char '>' <* many P.space)) <|>
@@ -262,7 +262,7 @@ bopP =    ((\s -> Syntax.Plus) <$> (P.char '+'<* many P.space)) <|>
           ((\s -> Syntax.Conj) <$> (stringP "&&" <* many P.space)) <|>
           ((\s -> Syntax.Disj) <$> (stringP "||" <* many P.space)) <|>
           ((\s -> Syntax.Implies) <$> (stringP "==>" <* many P.space)) <|>
-          ((\s -> Syntax.Iff) <$> (stringP "<==>" <* many P.space))
+          ((\s -> Syntax.Eq) <$> (stringP "==" <* many P.space))
 
 -- | At this point you should be able to test the  `prop_roundtrip_exp` property.
 
@@ -274,16 +274,24 @@ First, define a parser for bindings...
 -}
 
 bindingP :: Parser Binding
-bindingP = undefined
+bindingP =     ((,TInt) <$> nameP <* (wsP (P.char ':')) <* (wsP (P.string "int"))) <|> 
+               ((,TBool) <$> nameP <* (wsP (P.char ':')) <* (wsP (P.string "bool"))) <|>
+               ((,TArrayInt) <$> nameP <* (wsP (P.char ':')) <* (wsP (P.string "array<int>")))
 
 -- | ...and predicates...
 predicateP :: Parser Predicate
-predicateP = undefined
+predicateP =   ((\lb e -> Forall lb e) <$> ((wsP (P.string "forall")) *> (some bindingP)) <*> (wsP expP)) <|>
+               ((\e -> Forall [] e) <$> (wsP expP)) <|>
+               ((\p1 b p2 -> PredOp p1 b p2) <$> (wsP predicateP) <*> bopP <*> (wsP predicateP))
 
 -- | Finally, define a parser for statements:
 
 statementP :: Parser Statement
-statementP = undefined
+statementP =   ((\b e -> Decl b e) <$> ((wsP (P.string "var")) *> bindingP) <*> ((wsP expP) <* (wsP (P.char ';')))) <|>
+               ((\v e -> Assign v e) <$> (varP <* (wsP (P.string ":="))) <*> ((wsP expP) <* (wsP (P.char ';')))) <|>
+               ((\e b1 b2 -> If e b1 b2) <$> ((wsP (P.string "if")) *> (wsP expP)) <*> (braces blockP) <*> ((wsP (P.string "else")) *> braces blockP)) <|>
+               ((\e b1 -> If e b1 (Block [])) <$> ((wsP (P.string "if")) *> (wsP expP)) <*> (braces blockP)) <|>
+               ((\e p b -> While p e b) <$> ((wsP (P.string "while")) *> (wsP expP)) <*> invariantP <*> (braces blockP))
 
 
 invariantP :: Parser Predicate
@@ -292,7 +300,7 @@ invariantP = (stringP "invariant" *> predicateP) <|> pure (Forall [] (Val (BoolV
 -- | ... and one for blocks.
 
 blockP :: Parser Block
-blockP = undefined
+blockP = (\ls -> Block ls) <$> (many statementP)
 
 {- | Parsing Methods
      ---------------
@@ -302,10 +310,41 @@ blockP = undefined
 
 -}
 
-methodP :: Parser Method
-methodP = undefined
+specificationP :: Parser Specification
+specificationP =    (\p -> Requires p) <$> ((wsP (P.string "requires")) *> predicateP) <|>
+                    (\p -> Ensures p) <$> ((wsP (P.string "ensures")) *> predicateP)
 
- 
+methodP :: Parser Method
+methodP = argsAndReturnP <|> noArgsP <|> noReturnP <|> noArgsAndReturnP
+
+argsAndReturnP :: Parser Method
+argsAndReturnP =    (\n bl1 bl2 sl1 b -> Method n bl1 bl2 sl1 b) <$> 
+                    ((wsP (P.string "method")) *> nameP) <*> 
+                    (parens ((:) <$> bindingP <*> (many ((wsP (P.char ',')) *> bindingP)))) <*> 
+                    (wsP (P.string "returns") *> (parens ((:) <$> bindingP <*> (many ((wsP (P.char ',')) *> bindingP))))) <*>
+                    (many specificationP) <*>
+                    (braces blockP)
+
+noArgsP :: Parser Method
+noArgsP = (\n bl2 sl1 b -> Method n [] bl2 sl1 b) <$> 
+          ((wsP (P.string "method")) *> nameP <* (parens (many (P.satisfy Char.isSpace)))) <*> 
+          (wsP (P.string "returns") *> (parens ((:) <$> bindingP <*> (many ((wsP (P.char ',')) *> bindingP))))) <*>
+          (many specificationP) <*>
+          (braces blockP)
+
+noReturnP :: Parser Method
+noReturnP =    (\n bl1 sl1 b -> Method n bl1 [] sl1 b) <$> 
+               ((wsP (P.string "method")) *> nameP) <*> 
+               (parens ((:) <$> bindingP <*> (many ((wsP (P.char ',')) *> bindingP)))) <*>
+               (many specificationP) <*>
+               (braces blockP)
+
+noArgsAndReturnP :: Parser Method
+noArgsAndReturnP =  (\n sl1 b -> Method n [] [] sl1 b) <$> 
+                    ((wsP (P.string "method")) *> nameP <* (parens (many (P.satisfy Char.isSpace)))) <*> 
+                    (many specificationP) <*>
+                    (braces blockP)
+
 {- | Parsing Expressions and Files
      -----------------------------
 
@@ -315,7 +354,7 @@ the parser.
 -}
 
 parseDafnyExp :: String -> Either P.ParseError Expression
-parseDafnyExp = P.parse expP 
+parseDafnyExp = P.parse (wsP expP) 
 
 parseDafnyStat :: String -> Either P.ParseError Statement
 parseDafnyStat = P.parse statementP
