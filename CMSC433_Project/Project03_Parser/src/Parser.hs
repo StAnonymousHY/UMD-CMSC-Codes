@@ -287,7 +287,7 @@ predicateP =   ((\lb e -> Forall lb e) <$> ((wsP (P.string "forall")) *> (some b
 -- | Finally, define a parser for statements:
 
 statementP :: Parser Statement
-statementP =   ((\b e -> Decl b e) <$> ((wsP (P.string "var")) *> bindingP) <*> ((wsP expP) <* (wsP (P.char ';')))) <|>
+statementP =   ((\b e -> Decl b e) <$> ((wsP (P.string "var")) *> bindingP) <*> ((wsP (P.string ":=")) *> (wsP expP) <* (wsP (P.char ';')))) <|>
                ((\v e -> Assign v e) <$> (varP <* (wsP (P.string ":="))) <*> ((wsP expP) <* (wsP (P.char ';')))) <|>
                ((\e b1 b2 -> If e b1 b2) <$> ((wsP (P.string "if")) *> (wsP expP)) <*> (braces blockP) <*> ((wsP (P.string "else")) *> braces blockP)) <|>
                ((\e b1 -> If e b1 (Block [])) <$> ((wsP (P.string "if")) *> (wsP expP)) <*> (braces blockP)) <|>
