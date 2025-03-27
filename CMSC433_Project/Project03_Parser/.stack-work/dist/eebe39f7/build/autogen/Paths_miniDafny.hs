@@ -46,12 +46,12 @@ getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: 
 
 
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
-bindir     = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\77d2fa40\\bin"
-libdir     = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\77d2fa40\\lib\\x86_64-windows-ghc-9.6.5\\miniDafny-1.0.0-1EMiIflhn9NFEhHVX1biC5"
-dynlibdir  = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\77d2fa40\\lib\\x86_64-windows-ghc-9.6.5"
-datadir    = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\77d2fa40\\share\\x86_64-windows-ghc-9.6.5\\miniDafny-1.0.0"
-libexecdir = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\77d2fa40\\libexec\\x86_64-windows-ghc-9.6.5\\miniDafny-1.0.0"
-sysconfdir = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\77d2fa40\\etc"
+bindir     = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\ed5a7b66\\bin"
+libdir     = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\ed5a7b66\\lib\\x86_64-windows-ghc-9.6.5\\miniDafny-1.0.0-1EMiIflhn9NFEhHVX1biC5"
+dynlibdir  = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\ed5a7b66\\lib\\x86_64-windows-ghc-9.6.5"
+datadir    = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\ed5a7b66\\share\\x86_64-windows-ghc-9.6.5\\miniDafny-1.0.0"
+libexecdir = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\ed5a7b66\\libexec\\x86_64-windows-ghc-9.6.5\\miniDafny-1.0.0"
+sysconfdir = "C:\\Users\\YHXHa\\Desktop\\UMD-CMSC-Codes\\CMSC433_Project\\Project03_Parser\\.stack-work\\install\\ed5a7b66\\etc"
 
 getBinDir     = catchIO (getEnv "miniDafny_bindir")     (\_ -> return bindir)
 getLibDir     = catchIO (getEnv "miniDafny_libdir")     (\_ -> return libdir)

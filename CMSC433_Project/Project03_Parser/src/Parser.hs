@@ -280,9 +280,9 @@ bindingP =     ((,TInt) <$> nameP <* (wsP (P.char ':')) <* (wsP (P.string "int")
 
 -- | ...and predicates...
 predicateP :: Parser Predicate
-predicateP =   ((\lb e -> Forall lb e) <$> ((wsP (P.string "forall")) *> (some bindingP)) <*> (wsP expP)) <|>
+predicateP =   ((\lb e -> Forall lb e) <$> ((wsP (P.string "forall")) *> (some bindingP)) <*> ((wsP (P.string "::")) *> wsP expP)) <|>
                ((\e -> Forall [] e) <$> (wsP expP)) <|>
-               ((\p1 b p2 -> PredOp p1 b p2) <$> (wsP predicateP) <*> bopP <*> (wsP predicateP))
+               ((\p1 b p2 -> PredOp p1 b p2) <$> (predicateP) <*> bopP <*> (predicateP))
 
 -- | Finally, define a parser for statements:
 

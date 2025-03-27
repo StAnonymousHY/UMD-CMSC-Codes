@@ -50,16 +50,6 @@
   (major1) == 0 && (major2) <  6 || \
   (major1) == 0 && (major2) == 6 && (minor) <= 7)
 #endif /* MIN_VERSION_containers */
-/* package miniDafny-1.0.0 */
-#ifndef VERSION_miniDafny
-#define VERSION_miniDafny "1.0.0"
-#endif /* VERSION_miniDafny */
-#ifndef MIN_VERSION_miniDafny
-#define MIN_VERSION_miniDafny(major1,major2,minor) (\
-  (major1) <  1 || \
-  (major1) == 1 && (major2) <  0 || \
-  (major1) == 1 && (major2) == 0 && (minor) <= 0)
-#endif /* MIN_VERSION_miniDafny */
 /* package mtl-2.3.1 */
 #ifndef VERSION_mtl
 #define VERSION_mtl "2.3.1"
@@ -162,9 +152,15 @@
   (major1) == 9 && (major2) == 6 && (minor) <= 5)
 #endif /* MIN_TOOL_VERSION_runghc */
 
+#ifndef CURRENT_PACKAGE_KEY
+#define CURRENT_PACKAGE_KEY "miniDafny-1.0.0-1EMiIflhn9NFEhHVX1biC5"
+#endif /* CURRENT_packageKey */
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "miniDafny-1.0.0-KBCMLDovKhaDhwofdZQlSi-miniDafny"
+#define CURRENT_COMPONENT_ID "miniDafny-1.0.0-1EMiIflhn9NFEhHVX1biC5"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "1.0.0"
 #endif /* CURRENT_PACKAGE_VERSION */
+
+#undef CURRENT_PACKAGE_KEY
+#undef CURRENT_COMPONENT_ID
