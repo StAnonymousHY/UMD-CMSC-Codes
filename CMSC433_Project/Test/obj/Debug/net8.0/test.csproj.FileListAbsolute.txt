@@ -1,0 +1,15 @@
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\obj\Debug\net8.0\test.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\obj\Debug\net8.0\test.AssemblyInfoInputs.cache
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\obj\Debug\net8.0\test.AssemblyInfo.cs
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\obj\Debug\net8.0\test.csproj.CoreCompileInputs.cache
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\obj\Debug\net8.0\test.sourcelink.json
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\test.exe
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\obj\Debug\net8.0\test.dll
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\obj\Debug\net8.0\refint\test.dll
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\obj\Debug\net8.0\test.pdb
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\test.deps.json
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\obj\Debug\net8.0\test.genruntimeconfig.cache
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\test.runtimeconfig.json
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\test.dll
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\obj\Debug\net8.0\ref\test.dll
+c:\Users\YHXHa\Desktop\UMD-CMSC-Codes\CMSC433_Project\Test\test.pdb
