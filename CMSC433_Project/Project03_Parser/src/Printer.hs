@@ -133,10 +133,10 @@ instance PP Int where
 
 -- | TODO: Implement pretty printing for Booleans and lists of integers
 instance PP Bool where
-  pp = undefined
+  pp b = PP.text (show b)
 
 instance PP [Int] where
-  pp = undefined
+   pp arr = PP.text (show arr)
 
 -- | That should allow you to also pretty pring values if needed.
 instance PP Value where
@@ -146,8 +146,21 @@ instance PP Value where
 
 -- | TODO: Implement pretty printing for binary operators
 instance PP Bop where
-  pp Plus   = PP.char '+'
-  pp _ = undefined
+  pp Plus     = PP.char '+'
+  pp Minus    = PP.char '-'
+  pp Times    = PP.char '*'
+  pp Divide   = PP.char '/'
+  pp Modulo   = PP.char '%'
+  pp Gt       = PP.char '>'
+  pp Lt       = PP.char '<'
+  pp Eq       = PP.text "=="
+  pp Neq      = PP.text "!="
+  pp Ge       = PP.text ">="
+  pp Le       = PP.text "<="
+  pp Conj     = PP.text "&&"
+  pp Disj     = PP.text "||"
+  pp Implies  = PP.text "==>"
+  pp Iff      = PP.text "<==>"
 
 -- | Types and bindings can be pretty printed
 
@@ -158,7 +171,7 @@ instance PP Type where
 
 -- | TODO: Implement pretty printing for bindings
 instance PP Binding where
-  pp = undefined  
+  pp (n,t) = (pp n) <> (pp " : ") <> (pp t)
 
 {- |
    Expressions are trickier if you want to avoid putting parentheses everywhere.
@@ -209,17 +222,24 @@ level _      = 2    -- comparison operators
 
 -- | TODO: Implement pretty printing for variables
 instance PP Var where
-  pp = undefined 
+  pp (Name n) = pp n
+  pp (Proj n exp) = (pp n) <> (pp "[") <> (pp exp) <> (pp "]")
 
 -- | TODO: Implement pretty printing for blocks
 
 instance PP Block where
-  pp = undefined
+  pp (Block sl) = (pp "{") PP.$+$ (PP.nest 4 (PP.vcat (map pp sl))) PP.$+$ (pp "}") 
 
 -- | TODO: Implement the rest of pretty printing for statements.
 
 instance PP Statement where
-  pp _ = undefined
+  pp (Decl b e) = (pp "var ") <> (pp b) <> (pp " := ") <> (pp e) <> (pp ";")
+  pp (Assign v e) = (pp v) <> (pp " := ") <> (pp e) <> (pp ";")
+  pp (If e b1 b2) = (pp "if ") <> (pp e) PP.$$ ((pp b1)) PP.$$ (pp "else") PP.$$ ((pp b2))
+  pp (While (Forall [] (Val (BoolVal True))) e b) = (pp "while ") <> (pp e) PP.$$ (pp b)
+  pp (While p e b) = (pp "while ") <> (pp e) PP.$$ (PP.nest 2 (pp "invariant ") <> (pp p)) PP.$$ (pp b)
+  
+    
 
 instance PP [Binding] where
   pp bs = PP.parens $ PP.hsep $ PP.punctuate PP.comma $ map pp bs
@@ -228,11 +248,19 @@ instance PP [Binding] where
 -- These are also tricky if you want to avoid putting parentheses everywhere.
 -- You don't have to for this homework, but you can try adopting the pretty
 -- printing code for expressions if you want.
+
+instance PP Specification where
+  pp (Requires p) = pp ("requires ") <> (pp p)
+  pp (Ensures p) = pp ("ensures ") <> (pp p)
+
 instance PP Predicate where
-  pp = undefined
+  pp (Forall [] e) = pp e
+  pp (Forall (b:[]) e) = (pp "forall ") <> (pp b) <> (pp " :: ") <> (pp e)
+  pp (Forall bl e) = (pp "forall ") <> (pp bl) <> (pp " :: ") <> (pp e)
+  pp (PredOp p1 bop1 p2) = (pp p1) <+> (pp bop1) <+> (pp p2)
 
 -- | TODO: Finally, implement pretty printing for MiniDafny methods
 
 instance PP Method where
-  pp = undefined
+  pp (Method n bl1 bl2 sl b) = (pp "method ") <> (pp n) <> (pp bl1) <> (pp " returns ") <> (pp bl2) PP.$$ (PP.nest 2 (PP.vcat (map pp sl))) PP.$$ (pp b)
 
