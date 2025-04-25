@@ -1,0 +1,3 @@
+method Empty(x:int) {
+
+}
