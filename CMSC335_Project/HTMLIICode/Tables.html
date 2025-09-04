@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables</title>
+    <style>
+        .tableStyle, .tableStyle th, .tableStyle td {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tables</h1>
+    <h2>By Default Tables Have No Borders</h2>
+
+    <table>
+        <caption>Basic Table</caption>
+        <tr>
+            <th>Student</th>
+            <th>Exam1</th>
+            <th>Exam2</th>
+        </tr>
+        <tr>
+            <td>John</td>
+            <td>99</td>
+            <td>95</td>
+        </tr>
+        <tr>
+            <td>Mary</td>
+            <td>98</td>
+            <td>100</td>
+        </tr>
+    </table>
+
+    <h2>Using border Attribute (will not validate)</h2>
+    <table border="1">
+        <caption>Basic Table</caption>
+        <tr>
+            <th>Student</th>
+            <th>Exam1</th>
+            <th>Exam2</th>
+        </tr>
+        <tr>
+            <td>John</td>
+            <td>99</td>
+            <td>95</td>
+        </tr>
+        <tr>
+            <td>Mary</td>
+            <td>98</td>
+            <td>100</td>
+        </tr>
+    </table>
+
+    <h2>Using CSS for Borders</h2>
+    <table class="tableStyle">
+        <caption>Basic Table</caption>
+        <tr>
+            <th>Student</th>
+            <th>Exam1</th>
+            <th>Exam2</th>
+        </tr>
+        <tr>
+            <td>John</td>
+            <td>99</td>
+            <td>95</td>
+        </tr>
+        <tr>
+            <td>Mary</td>
+            <td>98</td>
+            <td>100</td>
+        </tr>
+    </table>
+
+    <h2>Using colspan</h2>
+    <table class="tableStyle">
+        <caption>Basic Table</caption>
+        <tr>
+            <th>Student</th>
+            <th>Exam1</th>
+            <th>Exam2</th>
+        </tr>
+        <tr>
+            <td>John</td>
+            <td>99</td>
+            <td>95</td>
+        </tr>
+        <tr>
+            <td>Mary</td>
+            <td>98</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>Peter</td>
+            <td colspan="2">No Scores</td>
+        </tr>
+        <tr>
+            <td>Rachel</td>
+            <td>98</td>
+            <td>100</td>
+        </tr>
+    </table>
+
+    <h2>Using rowspan</h2>
+    <table class="tableStyle">
+      <tr>
+            <td>Student1</td>
+            <td>10</td>
+            <td>100</td>
+      </tr>
+      
+      <tr>
+            <td rowspan="3">Student2</td>
+            <td>20</td>
+            <td>200</td>
+      </tr>
+      
+      <tr>  <!-- Notice only two entries -->
+            <td>40(Retaken)</td>
+            <td>400(Retaken)</td>
+      </tr>
+      
+      <tr>  <!-- Notice only two entries -->
+            <td>60(Retaken)</td>
+            <td>600(Retaken)</td>
+      </tr>
+    </table>
+</body></html>
