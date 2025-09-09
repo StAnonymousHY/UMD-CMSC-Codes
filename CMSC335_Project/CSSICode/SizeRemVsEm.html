@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Width/Height</title>
+    <style>
+        html {
+            font-size: 10px;
+        }
+        body {
+            font-size: 2em;
+        }
+
+        /* To get a sense for rem */
+        #p1 { font-size: 1rem; border-style: solid; border-color: red; }
+
+        /* To get a sense for twice rem */
+        #p2 { font-size: 2rem; border-style: solid; border-color: blue; }
+
+        /* To get a sense for em */
+        #p3 { font-size: 1em; border-style: solid; border-color: green; }
+        #p4 { font-size: 2em; border-style: solid; border-color: orange; }
+
+         /* To show <strong> inherits p5's font-size */
+        #p5 { font-size: 2rem; border-style: solid; border-color: orange; }
+        
+        strong {
+            /* twice font-size of p5 */
+            font-size: 2em; /* equivalent to 4rem */
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p id="p1">First Paragraph:<br>
+            Line #1<br>
+            Line #2
+        </p>
+
+        <p id="p2">Second Paragraph:<br>
+            Line #1<br>
+            Line #2
+        </p>
+
+        <p id="p3">Third Paragraph:<br>
+            Line #1<br>
+            Line #2
+        </p>
+
+        <p id="p4">Fourth Paragraph:<br>
+            Line #1<br>
+            Line #2
+        </p>
+
+        <p id="p5">Fifth Paragraph:<br>
+            Line #1<br>
+            <strong>Line #2</strong>
+        </p>        
+    </div>
+</body>
+
+</html>

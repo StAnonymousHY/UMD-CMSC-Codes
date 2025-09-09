@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Shorthand Properties</title>
+    <style>
+        body {
+            /* Note multiple values are given as "fallback"s. */
+            font-family: arial, Helvetica, sans-serif;
+        }
+
+        .noShorthand {
+            /* Font specification */
+            font-style: italic;
+            font-variant: small-caps;
+            font-weight: normal;
+            font-size: .80em;
+            line-height: 1.1em;
+            font-family: Verdana, Arial, sans-serif;
+
+            /* Border specification */
+            border-width: 2em;
+            border-style: solid;
+            border-color: green;
+
+            /* Margin specification */
+            margin-top: 6em;
+            margin-right: 8em;
+            margin-bottom: 4em;
+            margin-left: 2em;
+
+            /* Padding specification*/
+            padding-top: 3em;
+            padding-right: 4em;
+            padding-bottom: 2em;
+            padding-left: 1em;
+        }
+
+        .withShorthand {
+            /* Font specification */
+            font: italic small-caps normal .80em/1.1em Verdana, Arial, sans-serif;
+
+            /* Border specification */
+            border: 2em solid green;
+
+            /* Margin specification */
+            margin: 6em 8em 4em 2em;
+
+            /* Padding specification*/
+            padding: 3em 4em 2em 1em;
+
+            /* Description defining the color of each side */
+            border-color: red green blue yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Not Using Shorthands</h1>
+    <p class="noShorthand">
+        The future of public higher education in America depends on forming
+        effective partnerships with government, industry, business, faculty
+        and students to carry on the discovery and creation of knowledge
+        that underlies the continuing improvement of our social, civic,
+        economic and cultural lives.
+    </p>
+
+    <h2>Using Shorthands</h2>
+
+    <p class="withShorthand">
+        The President has facilitated the establishment and enhancement of
+        many partnerships that will benefit both the university and the
+        larger society.
+    </p>
+</body>
+
+</html>

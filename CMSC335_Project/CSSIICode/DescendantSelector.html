@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Descendant Selectors</title>
+    <style>
+        a {
+            color: green;
+        }
+
+        /* When anchor (a) found inside of li override definition */
+        li a {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Local News</h1>
+    <p>
+        <a href="http://www.diamondbackonline.com/" title="City News">Diamondback</a>
+    </p>
+
+    <h2>TV Stations</h2>
+    <ul>
+        <li><a href="http://www.abc.com/">ABC</a></li>
+        <li><a href="http://www.nbc.com/">NBC</a></li>
+    </ul>
+</body>
+
+</html>

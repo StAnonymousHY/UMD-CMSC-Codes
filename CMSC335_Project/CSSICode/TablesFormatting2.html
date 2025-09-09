@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables</title>
+    <style>
+        table, td, th {
+            border: 1px solid gray
+        }
+      
+        /* try odd below (replace 2n with 3n, even, odd) */
+        /* afterwards use td instead of tr */
+        tr:nth-child(2n) {background-color: silver}
+    </style>
+</head>
+
+<body>
+    <h1>Scores table</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Assignment</th>
+                <th>Grade</th>
+                <th>Day</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Project #1</td>
+                <td>100</td>
+                <td>Wed</td>
+            </tr>
+            <tr>
+                <td>Project #2</td>
+                <td>90</td>
+                <td>Fri</td>
+            </tr>
+            <tr>
+                <td>Project #3</td>
+                <td>85</td>
+                <td>Thu</td>
+            </tr>
+            <tr>
+                <td>Project #4</td>
+                <td>87</td>
+                <td>Tue</td>
+            </tr>
+            <tr>
+                <td>Project #5</td>
+                <td>90</td>
+                <td>Mon</td>
+            </tr>
+            <tr>
+                <td>Project #6</td>
+                <td>90</td>
+                <td>Mon</td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3">UMCP CS Dept</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Flex Display Property</title>
+    <meta charset="UTF-8"> <!-- Can be in uppercase -->
+
+    <style>
+        /* main is the container */
+        main {
+            display: grid; /* Change to block */
+
+            /* one-third and two-thirds */
+            grid-template-columns: 1fr 2fr; /* Two columns */
+
+            grid-template-areas:
+                "headerArea headerArea"  /* first row; we could have used header; both header columns */
+                "navArea contentArea"    /* second row; first column for nav and second for contents */
+                "footerArea footerArea"; /* third row; both columns for footer */
+        }
+
+        header {
+            background-color: red;
+            grid-area: headerArea; /* where */
+            text-align: center;
+        }
+
+        nav {
+            background-color: green;
+            grid-area: navArea; /* where */
+        }
+
+        div {
+            background-color: yellow;
+            grid-area: contentArea; /* where */
+        }
+
+        footer {
+            background-color: orange;
+            grid-area: footerArea; /* where */
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <header>The Local News</header>
+        <nav>
+            <a href="http://www.cnn.com/">CNN</a>
+            <a href="https://today.umd.edu/">UMD Today</a>
+        </nav>
+       
+        <div>
+            HERE IS THE PAGE CONTENT
+        </div>
+       
+        <footer>Fear the turtle</footer>
+    </main>
+
+</body>
+
+</html>

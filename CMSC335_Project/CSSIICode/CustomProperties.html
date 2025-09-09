@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Width/Height</title>
+
+    <style>
+        /* Variables defined in :root */
+        :root {
+            --my-size: 10px;
+            --red: 128;
+            --green: 0;
+            --blue: 119;
+            --my-favorite-color: rgb(var(--red), var(--green), var(--blue));
+        }
+
+        #p1 {
+            background-color: var(--my-favorite-color, green);
+            font-size: var(--my-size); 
+        }
+
+        #p2 {
+            background-color: red;
+            font-size: calc(var(--my-size) * 2); /* no units specified */
+        }
+
+        #p3 {
+            background-color: blue;
+            font-size: calc(var(--my-size) + 10px);  /* units specified */
+        }
+    </style>
+</head>
+
+<body>
+    <p id="p1">
+        Line #1 (paragraph #1).<br>
+        Line #2 (paragraph #2).
+    </p>
+
+    <p id="p2">
+        Line #1 (paragraph #2).<br>
+        Line #2 (paragraph #2).
+    </p>
+
+    <p id="p3">
+        Line #1 (paragraph #3).<br>
+        Line #2 (paragraph #3).
+    </p>
+</body>
+
+</html>

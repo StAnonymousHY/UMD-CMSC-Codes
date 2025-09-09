@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Flex Display Property</title>
+    <meta charset="UTF-8"> <!-- Can be in uppercase -->
+
+    <style>
+        body {
+            font-size: 1.5em;
+        }
+
+        /* main is the container */
+        .container {
+            display: grid;
+            border: .25em solid green;
+            grid-template-columns: 4em 4em;  /* we can use auto instead of 4em */
+            grid-template-rows: 2em 2em;
+            justify-content: space-around; /* try space-between, space-evenly */
+            text-align: center;
+
+            /* You can modify gaps with the following two properties (currently disabled). */
+            /*
+            row-gap: 1em; 
+            column-gap: 1em;
+            */
+        }
+
+        div {
+            border: .125em solid blue;
+        }
+    </style>
+</head>
+
+<body>
+  <div class="container">
+    <div>One</div>
+    <div>Two</div>
+    <div>Three</div>
+    <div>Four</div>
+  </div>
+
+</body>
+
+</html>
