@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Class/Id Selectors</title>
+    <link rel="stylesheet" href="ExternalFile.css" type="text/css">
+    <style>
+        h1 {
+            color: blue;
+            /* Overriding ExternalFile.css rule */
+        }
+
+        h2 {
+            color: orange;
+            /* Try this rule: color: orange !important; */
+        }
+
+        pre {
+            color: silver;
+        }
+
+        h2 {
+            /* Overriding previous rule (what if we use !imporant above) */
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Overriding Example</h1>
+    <h2>Second Header</h2>
+    <pre>
+        To be or not to be.
+    </pre>
+</body>
+
+</html>

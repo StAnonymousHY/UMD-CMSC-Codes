@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Class Id Selectors</title>
+	<style>
+		ol {
+			/* try lower-roman, upper-roman, upper-latin */
+			list-style-type: lower-latin;
+
+		}
+
+		ul {
+			color: maroon;
+
+			/* list-style-image: url(bus.gif); option instead of next one  */
+
+			/* try disc, square, none */
+			list-style-type: circle;
+		}
+
+		/* try odd below (replace 2n with 3n, even, odd) */
+        li:nth-child(even) {background-color: silver}
+	</style>
+</head>
+
+<body>
+	<h1>Lists</h1>
+
+	<h2>Midterm Paper Questions</h2>
+	<ol>
+		<li>Which road would you travel(<strong>today</strong>)?</li>
+		<li>Which road have you been taken?</li>
+		<li>Which road was best?</li>
+		<li>Which road you recommend?</li>
+		<li>Which road was longer?</li>
+	</ol>
+
+	<h3>Final Paper Questions</h3>
+	<ul>
+		<li>Compare Robert Frost work with another author discussed in lecture.</li>
+		<li>What is the major contribution of Robert Frost's work?</li>
+		<li>What do you think inspired Robert Frost?</li>
+	</ul>
+</body>
+
+</html>
