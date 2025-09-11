@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Positioning</title>
+    <meta charset="UTF-8"> <!-- Can be in uppercase -->
+
+    <style>
+        body {
+            font-size: 1.5rem;
+            border: 1rem solid green;
+            width: 60rem;
+            height: 50rem;
+        }
+        * {
+            /* Important: to better understanding positioning, 
+               we are setting the padding and margin of all 
+               elements to zero */
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            top: 4rem;
+            left: 4rem;
+            width: 40rem;
+            height: 40rem;
+            position: fixed; /* change to static so #target uses body as reference point */
+            border: 1rem solid red;
+        }
+
+        #target {
+            position: absolute; /* Containing block is the div  */
+            width: 20rem;
+            border-style: solid;
+            background-color: yellow;
+
+            top: 0rem; /* first change fixed to static; then change to 10 */
+            left: 0rem; /* first change fixed to static; then change to 20 */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div> <!-- Paragraph is now in div -->
+        <p>
+            The first paragraph we see.
+            The first paragraph we see.
+            The first paragraph we see.
+            The first paragraph we see.
+        </p>
+        <p id="target">
+            A second paragraph and the one we want to move.
+        </p>
+        <p>
+            A third paragraph here.
+            A third paragraph here.
+        </p>
+    </div>
+</body>
+
+</html>

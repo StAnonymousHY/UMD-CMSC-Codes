@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Positioning</title>
+    <meta charset="UTF-8"> <!-- Can be in uppercase -->
+
+    <style>
+        * {
+            /* Important: to better understanding positioning, 
+               we are setting the padding and margin of all 
+               elements to zero. Good example of using * */
+            padding: 0;
+            margin: 0;
+        }
+
+        #target {
+            position: static;
+            width: 20rem;
+            border-style: solid;
+            background-color: red;
+
+            /* The following has no effect */
+            left: 5rem;
+            top: 10rem;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        First paragraph we see.<br>
+        First paragraph we see.<br>
+        First paragraph we see.<br>
+        First paragraph we see.
+    </p>
+    <p id="target">
+        Second paragraph and the one we want to move.
+    </p>
+    <p>
+        Third paragraph here.
+        Third paragraph here.
+    </p>
+    <p>
+        Fourth paragraph here.
+        Fourth paragraph here.
+    </p>
+</body>
+
+</html>
