@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>&lt;button&gt; Example</title>
+	<style>
+		h1, h2 {
+			text-decoration: underline;
+		}
+
+		button[form] {
+			background-color: white;
+			transition-duration: .75s;
+			color: red;
+			cursor: pointer;  /* Hand pointing */
+		}
+
+		button[form]:hover {
+			background-color: aqua;
+			font-size:.75em;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>&lt;button&gt;</h1>
+
+	<h2>Example #1</h2>
+	<form action="getProcessing.php" method="get" id="firstForm">
+		<strong>Name: </strong><input type="text" name="firstname" value="Testudo"><br><br>
+		<strong>Age: </strong><input type="text" name="age" value="200"><br><br>
+		<button type="submit">Submit</button>
+		<button>SubmitTwo</button> <!-- No type specification; defaults to type="submit" -->
+		<button type="submit"><em>Go Ahead Submit</em></button>
+		<button type="submit" title="Click to submit"><img src="./testudo.jpg" alt="Testudo"></button>
+	</form>
+	
+	<h2>Example #2 (Plain Button)</h2>
+	<button type="button" onclick="alert('Hello UMD')">Hello</button>
+	
+	<h2>Example #3 (Sharing Form Fields)</h2>
+	<form id="secondForm">
+		<strong>Name: </strong><input type="text" name="firstname" value="Mary"><br><br>
+		<strong>Age: </strong><input type="text" name="age" value="40"><br><br>
+
+		<!-- We can use form fields for different actions -->
+		<button type="submit" formaction="getProcessing.php" formmethod="get">Submit (Get)</button>
+		<button type="submit" formaction="postProcessing.php" formmethod="post">Submit (Post)</button>
+	</form>
+
+	<h2>Example #4 (_self vs _blank) and Rest</h2>
+	<form>
+		<strong>Name: </strong><input type="text" name="firstname" value="John"><br><br>
+		<strong>Age: </strong><input type="text" name="age" value="50"><br><br>
+
+		<!-- Specifying where to display the response -->
+		<button type="submit" formaction="getProcessing.php" formmethod="get" formtarget="_self">Submit (_self)</button>
+		<button type="submit" formaction="getProcessing.php" formmethod="get" formtarget="_blank">Submit (_blank)</button>
+		<button type="reset">Reset</button>
+	</form>
+
+	<h2>Example #5 (Form Id and Style)</h2>
+	<button type="submit" form="firstForm" formaction="getProcessing.php" formmethod="get">First Form</button>
+	<button type="submit" form="secondForm" formaction="getProcessing.php" formmethod="get">Second Form</button>
+</body>
+
+</html>
