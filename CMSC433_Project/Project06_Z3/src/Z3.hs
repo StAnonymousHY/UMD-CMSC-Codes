@@ -115,60 +115,63 @@ import System.Process(readProcessWithExitCode)
 import Data.Set(Set)
 import qualified Data.Set as Set
 
-varsBL :: [Binding] -> Set.Set Name
-varsBL [] = Set.empty
-varsBL ((n,t):xs) = Set.union (Set.singleton n) (varsBL xs)
 
-varsP :: Predicate -> Set.Set Name
-varsP (Forall bl e) = Set.union (varsBL bl) (varsE e)
-varsP (PredOp p1 b p2) = Set.union (varsP p1) (varsP p2)
+predicate_vars :: Predicate -> Set.Set Name
+predicate_vars (Forall binding_list e1) = Set.union (Set.fromList (map fst binding_list)) (expression_vars e1)
+predicate_vars (PredOp p1 _ p2) = Set.union (predicate_vars p1) (predicate_vars p2)
+predicate_vars _ = Set.empty
 
-varsE :: Expression -> Set.Set Name
-varsE (Var (Name n)) = Set.singleton n
-varsE (Var (Proj n e)) = Set.singleton n
-varsE (Val v) = Set.empty
-varsE (Op1 u e) = varsE e
-varsE (Op2 e1 b e2) = Set.union (varsE e1) (varsE e2)
+expression_vars :: Expression -> Set.Set Name
+expression_vars (Var v) = case v of
+  (Name n) -> Set.singleton n
+  (Proj n e1) -> Set.singleton n
+expression_vars (Op1 u1 e1) =  expression_vars e1
+expression_vars (Op2 e1 b1 e2) = Set.union (expression_vars e1) (expression_vars e2)
+expression_vars _ = Set.empty
 
-toSMTBop :: Bop -> String
-toSMTBop Plus = "+"
-toSMTBop Minus = "-"
-toSMTBop Times = "*"
-toSMTBop Divide = "div"
-toSMTBop Modulo = "mod"
-toSMTBop Eq = "="
-toSMTBop Neq = "distinct"
-toSMTBop Gt = ">"
-toSMTBop Ge = ">="
-toSMTBop Lt = "<"
-toSMTBop Le = "<="
-toSMTBop Conj = "and"
-toSMTBop Disj = "or"
-toSMTBop Implies = "=>"
-toSMTBop Iff = "="
+predicate_to_SMT :: Predicate -> String
+predicate_to_SMT (Forall binding_list e1) = expression_to_SMT e1
+predicate_to_SMT (PredOp p1 b p2) =case b of
+  Conj -> "(and " ++ (predicate_to_SMT p1) ++ " " ++ (predicate_to_SMT p2) ++ ")"
+  Disj -> "(or " ++ (predicate_to_SMT p1) ++ " " ++ (predicate_to_SMT p2) ++ ")"
+  Implies -> "(=> " ++ (predicate_to_SMT p1) ++ " " ++ (predicate_to_SMT p2) ++ ")"
+  Iff -> "(= " ++ (predicate_to_SMT p1) ++ " " ++ (predicate_to_SMT p2) ++ ")"
 
-toSMTP :: Predicate -> String
-toSMTP (Forall bl e) = toSMTE e
-toSMTP (PredOp p1 b p2) = "(" ++ (toSMTBop b) ++ " " ++ (toSMTP p1) ++ " " ++ (toSMTP p2) ++ ")"
+expression_to_SMT :: Expression -> String
+expression_to_SMT (Var v) = case v of
+  (Name n) -> n
+  (Proj n e) -> n
+expression_to_SMT (Val v) = case v of
+  (IntVal i) -> show i
+  (BoolVal b) -> if b then "true" else "false"
+expression_to_SMT (Op1 u e) = case u of 
+  Neg -> "(- " ++ (expression_to_SMT e) ++ ")"
+  Not -> "(not " ++ (expression_to_SMT e) ++ ")"
+expression_to_SMT (Op2 e1 b e2) = case b of
+  Plus      -> "(+ " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Minus     -> "(- " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Times     -> "(* " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Divide    -> "(div " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Modulo    -> "(mod " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Eq        -> "(= " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Neq       -> "(distinct " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Gt        -> "(> " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Ge        -> "(>= " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Lt        -> "(< " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Le        -> "(<= " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Conj      -> "(and " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Disj      -> "(or " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Implies   -> "(=> " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
+  Iff       -> "(= " ++ (expression_to_SMT e1) ++ " " ++ (expression_to_SMT e2) ++ ")"
 
-toSMTE :: Expression -> String
-toSMTE (Var (Name n)) = n
-toSMTE (Var (Proj n e)) = n
-toSMTE (Val (IntVal i)) = show i
-toSMTE (Val (BoolVal True)) = "true"
-toSMTE (Val (BoolVal False)) = "false"
-toSMTE (Op1 Neg e) = "(- " ++ (toSMTE e) ++ ")"
-toSMTE (Op1 Not e) = "(not " ++ (toSMTE e) ++ ")"
-toSMTE (Op2 e1 b e2) = "(" ++ (toSMTBop b) ++ " " ++ toSMTE e1 ++ " " ++ toSMTE e2 ++ ")"
-
-toString :: [String] -> String
-toString [] = ""
-toString (x:xs) = x ++ (toString xs)
+list_to_string :: [String] -> String
+list_to_string string_list = foldr (\x acc -> x ++ acc) "" string_list
 
 toSMT :: Predicate -> String
-toSMT p = (toString decl) ++ assertion ++ "(check-sat)" where
-  decl = map (\s -> "(declare-const " ++ s ++ " Int)\n") (Set.toList (varsP p))
-  assertion = "(assert (not " ++ (toSMTP p) ++ "))\n"
+toSMT p = (list_to_string real_declaration) ++ assertion ++ "\n" ++ "(check-sat)" where
+    declaration = map (\s -> "(declare-const " ++ s ++ " Int)") (Set.toList (predicate_vars p))
+    real_declaration = map (\s -> s ++ "\n") declaration
+    assertion = "(assert (not " ++ (predicate_to_SMT p) ++ "))"
 
 -- | The name of the z3 executable. Change this to whatever it is in your system:
 --   In unix based systems, this is just "z3".
