@@ -10,8 +10,8 @@
 
 <body>
     <div class="box1">
-        <a href="https://www.cs.umd.edu" target="_blank"><img src="UMDGlobe.gif" height="70"></a>
-        <img src="deptcs.png">
+        <a href="https://www.cs.umd.edu" target="_blank"><img src="UMDGlobe.gif" height="70" alt="UMDGlobe"></a>
+        <img src="deptcs.png" alt="deptcs">
         <h1>UMD HTML/CSS Summer Camp</h1>
         <p id="first_paragraph">
             The UMD HTML/CSS Summer Camp provides seminars to intoduce adults to HTML and CSS. Located in the heart of the <span class="bold_font">City of College Park</span>, the camp is a two-week program starting June 1<sup>st</sup> and ending June 22<sup>nd</sup>. 
@@ -64,10 +64,10 @@
                 </ul>
             </li>
             <li>Validators
-                <ul>
+                <ol>
                     <li><a href="http://validator.w3.org/#validate-by-upload/">http://validator.w3.org/#validate-by-upload/</a></li>
                     <li><a href="http://jigsaw.w3.org/css-validator/">http://jigsaw.w3.org/css-validator/</a></li>
-                </ul>
+                </ol>
             </li>
         </ol>
 

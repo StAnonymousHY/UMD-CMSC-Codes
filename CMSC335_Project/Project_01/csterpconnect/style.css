@@ -1,0 +1,68 @@
+:root{
+    --my-size: 14px;
+}
+html{
+    background-color: rgb(24,26,39);
+    border-style: double;
+    border-width: 1rem;
+    border-color: firebrick;
+    font-family: 'Times New Roman';
+    font-size: var(--my-size);
+    color: antiquewhite;
+}
+
+body{
+    background-image: url(Background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+h1{
+    font-family: "Press Start 2P";
+}
+
+h2{
+    font-family: "Press Start 2P";
+    color: salmon;
+}
+
+.picture_frame{
+    border-style: ridge;
+    border-width: 0.5rem;
+    border-color: firebrick;
+}
+
+p{
+    font-family: "Share Tech";
+}
+
+.titles{
+    font-family: "Press Start 2P";
+}
+
+.contents{
+    font-family: "Share Tech";
+}
+
+table, td, th {
+    border: 1px solid gray;
+    font-family: "Share Tech";
+}
+
+tr:nth-child(2n) {background-color: firebrick}
+
+.absolute_position{
+    position: absolute; /* Containing block is the div  */
+    width: 20rem;
+    top: 7.6rem; /* first change fixed to static; then change to 10 */
+    left: 17rem;
+}
+
+.header_row{
+    background-color: firebrick;
+}
+
+a {
+    color: lightblue;
+}

@@ -56,7 +56,7 @@ table, td, th {
 }
 
 .box1{
-    border-style: solid;
+    border-style: groove;
     border-color: blue;
     border-width: 0.5rem;
     background-color: white;

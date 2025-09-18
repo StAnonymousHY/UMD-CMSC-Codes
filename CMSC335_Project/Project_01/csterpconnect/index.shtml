@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Portfolio</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Ink:wght@100..900&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Ink:wght@100..900&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Share+Tech&display=swap" rel="stylesheet">
+    <link rel="icon" href="logo.svg" type="image/svg">
+</head>
+
+<body>
+    <h1>Hanxuan Yang (Hanson)</h1>
+    <p>Welcome to my portfolio! </p>
+    <img src="selfie.jpg" height="200" alt="selfie" class="picture_frame">
+    <div class="absolute_position">
+        <p>Name: Hanxuan(Hanson) Yang</p>
+        <p>Year: Senior undergraduate</p>
+        <p>Majors: CS + MATH</p>
+        <p>Phone: +1 (301)-454-9845</p>
+        <p>Email: yhanson@terpmail.umd.edu</p>
+        <p>Motto: Life is short, make it sweet. </p>
+        <p>Current Status: Working hard for double degree...</p>
+    </div>
+
+    <h2>About Me</h2>
+    <p>Hi, I’m Hanxuan (Hanson) Yang, an undergraduate double-majoring in Computer Science and Statistics at the University of Maryland, College Park. I’m passionate about building data-driven, practical solutions that combine software engineering and statistical insight, from full-stack applications (Vue + Spring Boot) to verification tools in Haskell and statistical modeling in Python and SAS. My internship at Danfoo Tech gave me hands-on experience developing manufacturing analytics dashboards, managing large datasets, and creating tools that improve decision-making on the factory floor.</p>
+    <p>But when VSCode is closed, I swap one set of challenges for another. I’m an excessive gamer — the type who can grind through Counter-Strike matches, drop into endless PUBG battle royales, and spend hours perfecting combos in Street Fighter 6. Gaming isn’t just a hobby for me; it’s a way of thinking. It sharpens my focus, trains me to adapt quickly, and pushes me to collaborate under pressure — skills I bring right back into my programming and project work.</p>
+    <p>I thrive in both worlds: solving bugs with the same persistence I bring to ranked matches, and approaching complex projects like strategic team plays. Whether it’s debugging, deploying, or defeating opponents, I’m always looking for the next challenge to level up.</p>
+
+    <h2>Projects</h2>
+    <table>
+        <thead class="header_row">
+            <tr>
+                <th>Subject/Courses</th>
+                <th>Demo/Product</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>CMSC425</td>
+                <td><a href="https://github.com/StAnonymousHY/UMD-CMSC-Codes/tree/main/CMSC425_FinalProject" target="_blank">Final Project: Fog of War</a></td>
+            </tr>
+            <tr>
+                <td>CMSC423</td>
+                <td><a href="https://github.com/StAnonymousHY/UMD-CMSC-Codes/tree/main/CMSC423_Project" target="_blank">Lecture Notes and Projects</a></td>
+            </tr>
+            <tr>
+                <td>CMSC433</td>
+                <td><a href="https://github.com/StAnonymousHY/UMD-CMSC-Codes/tree/main/CMSC433_Project" target="_blank">Lecture Codes and Projects</a></td>
+            </tr>
+            <tr>
+                <td>ENGL101X</td>
+                <td><iframe width="500" height="300" src="https://www.youtube.com/embed/EMadWSa06ls"></iframe></td>
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+
+</html>
