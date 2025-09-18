@@ -1,0 +1,46 @@
+html {
+    font-size: 14px;
+}
+
+h1 {
+    text-decoration: underline;
+}
+h2 {
+    text-decoration: underline;
+}
+
+#first_paragraph {
+    color: brown;
+}
+
+#first_paragraph::first-letter {
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+#first_paragraph:hover {
+    color: red;
+}
+
+.bold_font {
+    font-weight: bold;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+
+.weekly_schedule {
+    font-style: italic;
+    color: blue;
+    text-decoration: underline;
+}
+
+.italic_font {
+    font-style: italic;
+}
+
+.header {
+    background-color: antiquewhite;
+    color: brown;
+}
