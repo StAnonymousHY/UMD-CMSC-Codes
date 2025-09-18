@@ -9,55 +9,74 @@
 </head>
 
 <body>
-    <a href="https://www.cs.umd.edu" target="_blank"><img src="UMDGlobe.gif" height="70"></a>
-    <img src="deptcs.png">
-	<h1>UMD HTML/CSS Summer Camp</h1>
-	<p id="first_paragraph">
-        The UMD HTML/CSS Summer Camp provides seminars to intoduce adults to HTML and CSS. Located in the heart of the <span class="bold_font">City of College Park</span>, the camp is a two-week program starting June 1<sup>st</sup> and ending June 22<sup>nd</sup>. 
-	</p>
+    <div class="box1">
+        <a href="https://www.cs.umd.edu" target="_blank"><img src="UMDGlobe.gif" height="70"></a>
+        <img src="deptcs.png">
+        <h1>UMD HTML/CSS Summer Camp</h1>
+        <p id="first_paragraph">
+            The UMD HTML/CSS Summer Camp provides seminars to intoduce adults to HTML and CSS. Located in the heart of the <span class="bold_font">City of College Park</span>, the camp is a two-week program starting June 1<sup>st</sup> and ending June 22<sup>nd</sup>. 
+        </p>
 
-	<h2>Schedule</h2>
-	<table>
-        <caption class="weekly_schedule">Weekly Schedule</caption>
-        <thead class="header">
-            <tr>
-                <th>Week</th>
-                <th>Monday</th>
-                <th>Wednesday</th>
-                <th>Friday</th>
-            </tr>
-        </thead>
+        <h2>Schedule</h2>
+        <table>
+            <caption class="weekly_schedule">Weekly Schedule</caption>
+            <thead class="header">
+                <tr>
+                    <th>Week</th>
+                    <th>Monday</th>
+                    <th>Wednesday</th>
+                    <th>Friday</th>
+                </tr>
+            </thead>
 
-        <tbody>
-            <tr>
-                <td rowspan="2">#1</td>
-                <td>HTML Intro</td>
-                <td>Images</td>
-                <td class="bold_font">Editors</td>
-            </tr>
-            <tr>
-                <td>HTML Tags</td>
-                <td>Tables</td>
-                <td class="italic_font">Validators</td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td rowspan="2">#1</td>
+                    <td>HTML Intro</td>
+                    <td>Images</td>
+                    <td class="bold_font">Editors</td>
+                </tr>
+                <tr>
+                    <td>HTML Tags</td>
+                    <td>Tables</td>
+                    <td class="italic_font">Validators</td>
+                </tr>
 
-            <tr>
-                <td rowspan="2">#2</td>
-                <td>CSS Intro</td>
-                <td colspan="2"><a href="https://umd.edu/visit" title="Virtual Tour">Campus Tour</a></td>
-            </tr>
-            <tr>
-                <td>Layout</td>
-                <td>Menus</td>
-                <td>Other</td>
-            </tr>
-        </tbody>
-    </table>
+                <tr>
+                    <td rowspan="2">#2</td>
+                    <td>CSS Intro</td>
+                    <td colspan="2"><a href="https://umd.edu/visit" title="Virtual Tour">Campus Tour</a></td>
+                </tr>
+                <tr>
+                    <td>Layout</td>
+                    <td>Menus</td>
+                    <td>Other</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <h2>Resources</h2>
+        <h2>Resources</h2>
+        <ol type="A">
+            <li>Online Learning
+                <ul>
+                    <li><a href="http://www.htmldog.com/">http://www.htmldog.com/</a></li>
+                    <li><a href="http://www.w3schools.com/">http://www.w3schools.com/</a></li>
+                </ul>
+            </li>
+            <li>Validators
+                <ul>
+                    <li><a href="http://validator.w3.org/#validate-by-upload/">http://validator.w3.org/#validate-by-upload/</a></li>
+                    <li><a href="http://jigsaw.w3.org/css-validator/">http://jigsaw.w3.org/css-validator/</a></li>
+                </ul>
+            </li>
+        </ol>
 
-    <h2>Additional Information</h2>
-
+        <h2>Additional Information</h2>
+        <p class="paragraph">Information about your class instructor can be found at <a href="https://www.cs.umd.edu/~nelson/">Instructor.html</a></p>
+        <p>&copy; Copyright UMD | UMD HTML/CSS Summer Camp | <span class="italic_font">All Rights Reserved. </span></p>
+        <p>Developed by: Hanxuan Yang</p>
+        <hr>
+    </div>
 </body>
 
 </html>

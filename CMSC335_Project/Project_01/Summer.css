@@ -1,5 +1,11 @@
 html {
     font-size: 14px;
+    border-style: double;
+    border-color: brown;
+    border-width: 0.5rem;
+    background-color: antiquewhite;
+    margin: 1rem;
+    font-family: "Times New Roman";
 }
 
 h1 {
@@ -43,4 +49,19 @@ table, td, th {
 .header {
     background-color: antiquewhite;
     color: brown;
+}
+
+.paragraph{
+    color: brown;
+}
+
+.box1{
+    border-style: solid;
+    border-color: blue;
+    border-width: 0.5rem;
+    background-color: white;
+    margin: 0.5rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    padding: 5rem;
 }
