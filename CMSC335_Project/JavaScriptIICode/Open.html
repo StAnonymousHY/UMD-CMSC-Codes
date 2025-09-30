@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Network</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+
+        const windowOptions = "width=450,height=350,top=60,left=50";
+        const site = "http://www.cs.umd.edu";
+        const windowName = "CS Department"
+        const handle = window.open(site, windowName, windowOptions);
+        if (!handle) {
+            alert("Window cannot be opened (built-in blockers as possible cause)");
+        }
+    </script>
+</body>
+
+</html>

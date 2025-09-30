@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JS Example</title>
+  </head>
+
+  <body>
+    <script>
+      "use strict";
+
+      main();
+
+      function getLetter(name, body, signature) {
+        const letter = `<br>Dear ${name}:
+                          <br>
+                          <br>
+                          ${body}
+                          <br>
+                          <br>  
+                          Sincerely
+                          <br><br><br>
+                          ${signature}<hr>`;
+        return letter;
+      }
+
+      function sum(x, y) {
+        return x + y;
+      }
+
+      function main() {
+        document.writeln("***** Interpolating Variable *****<br>");
+        const mascot = "turtle";
+        const message = `Fear the ${mascot}`; // "Fear the " + turtle
+        document.writeln(message + "<br>");
+
+        document.writeln("***** Interpolating Expression *****<br>");
+        const x = 20, y = 30;
+        const totalCost = `Total Cost is ${x * y}<br>`;
+        document.writeln(totalCost);
+
+        document.writeln("***** Interpolating Function Call *****<br>");
+        let sumResult = `Sum is ${sum(x, y)}`;
+        document.writeln(sumResult);
+
+        document.writeln("<br>***** Space in Template Literals Matters *****<br>");
+        /* Try using " " for next variable */
+        const helloStr = `Hello
+
+  terps!`;
+        document.writeln("<pre>" + helloStr + "</pre>");
+        document.writeln("<p>" + helloStr + "</p>");
+
+
+        document.writeln("***** Letter *****<br>");
+        /* Generating letter (try alert instead of document.writeln()) */
+        document.writeln(getLetter("Mary", "I hope you get well soon", "Jack"));
+        // alert(getLetter("Mary", "I hope you get well soon", "Jack"));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>JS JSON Example</title>
+   </head>
+
+   <body>
+      <script>
+         "use strict";
+
+         /* JavaScript object (not JSON) */
+         const obj = {
+            /* sayHello: printHello, method will not be converted to JSON */
+            name: "Mary",
+            age: 45,
+            salary: 20000.0,
+            employed: true,
+            boss: null,
+            cars: ["toyota", "honda"] /* array example */,
+            friends: /* array of objects */ [
+               {
+                  fname: "Peter",
+                  id: 10
+               },
+               {
+                  fname: "Rachel",
+                  id: 20
+               },
+            ],
+            
+         };
+
+         function printHello() {
+            document.writeln("Hello");
+         }
+      
+         document.writeln("Ex1: JSON (after stringify() call)<br>");
+         const str = JSON.stringify(obj);
+         document.writeln(`${str}<br><br>`);
+
+         document.writeln("Ex2: After parsing string with parse()<br>");
+         const newObj = JSON.parse(str);
+         for (const prop in newObj) {
+            document.writeln(`${prop} &rarr; ${newObj[prop]}<br>`);
+         }
+
+         /* Using template literal (this is JSON); try school:"UMCP" and JSON 
+            creation will fail. */
+         let school = `{
+                "school": "UMCP", 
+                "zipCode": 20742
+            }`;
+         document.writeln(`<br>Ex3: Check console to see parse() result for</h2> ${school}`);
+         let schoolObj = JSON.parse(school);
+         console.log(schoolObj);
+         console.table(schoolObj);
+      </script>
+   </body>
+</html>

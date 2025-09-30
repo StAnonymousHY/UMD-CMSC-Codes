@@ -8,12 +8,11 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Bitcount+Ink:wght@100..900&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bitcount+Ink:wght@100..900&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Share+Tech&display=swap" rel="stylesheet">
-    <link rel="icon" href="logo.svg" type="image/svg">
+    <link rel="icon" href="avatar.png" type="image/png">
 </head>
 
 <body>
     <h1>Hanxuan Yang (Hanson)</h1>
-    <p>Welcome to my portfolio! </p>
     <img src="selfie.jpg" height="200" alt="selfie" class="picture_frame">
     <div class="absolute_position">
         <p>Name: Hanxuan(Hanson) Yang</p>
@@ -41,23 +40,47 @@
 
         <tbody>
             <tr>
-                <td>CMSC425</td>
-                <td><a href="https://github.com/StAnonymousHY/UMD-CMSC-Codes/tree/main/CMSC425_FinalProject" target="_blank">Final Project: Fog of War</a></td>
+                <td>CMSC132</td>
+                <td><a href="https://github.com/StAnonymousHY/PortfolioCode/tree/main/CMSC132" target="_blank">Lecture Codes and Projects</a></td>
             </tr>
             <tr>
-                <td>CMSC423</td>
-                <td><a href="https://github.com/StAnonymousHY/UMD-CMSC-Codes/tree/main/CMSC423_Project" target="_blank">Lecture Notes and Projects</a></td>
+                <td>CMSC330</td>
+                <td><a href="https://github.com/StAnonymousHY/PortfolioCode/tree/main/CMSC330" target="_blank">Lecture Codes and Discussions</a></td>
+            </tr>
+            <tr>
+                <td>CMSC351</td>
+                <td><a href="https://github.com/StAnonymousHY/PortfolioCode/tree/main/CMSC351" target="_blank">Fall23 HW questions</a></td>
+            </tr>
+            <tr>
+                <td>CMSC425</td>
+                <td><a href="https://github.com/StAnonymousHY/PortfolioCode/tree/main/CMSC425" target="_blank">Final Project: Fog of War</a></td>
             </tr>
             <tr>
                 <td>CMSC433</td>
-                <td><a href="https://github.com/StAnonymousHY/UMD-CMSC-Codes/tree/main/CMSC433_Project" target="_blank">Lecture Codes and Projects</a></td>
+                <td><a href="https://github.com/StAnonymousHY/PortfolioCode/tree/main/CMSC433" target="_blank">Lecture Codes with Notes</a></td>
+            </tr>
+            <tr>
+                <td>CMSC452</td>
+                <td><a href="https://github.com/StAnonymousHY/PortfolioCode/tree/main/CMSC452" target="_blank">Spring24 HW questions</a></td>
             </tr>
             <tr>
                 <td>ENGL101X</td>
                 <td><iframe width="500" height="300" src="https://www.youtube.com/embed/EMadWSa06ls"></iframe></td>
             </tr>
+            <tr>
+                <td>ENGL390</td>
+                <td><a href="FinalProposal.pdf" target="_blank">Understanding the Impact of Violent Video Games on Adolescents</a></td>
+            </tr>
         </tbody>
     </table>
+
+    <h2>Steam Page (add me if you are interested! )</h2>
+    <a href="https://steamcommunity.com/profiles/76561199106667559/" target="_blank">
+        <img src="SteamPage.png" width= "1000" alt="steam profile image" class="picture_frame">
+    </a>
+    <br>
+    <span style="font-family: 'Share Tech'; color: antiquewhite"><strong>Last Modified: </strong><!--#echo var="LAST_MODIFIED" --></span>
+    <br>
     
 </body>
 

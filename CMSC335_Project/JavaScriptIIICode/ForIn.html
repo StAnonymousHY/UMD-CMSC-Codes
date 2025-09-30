@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>for</title>
+</head>
+
+<body>
+	<script>
+		"use strict";
+
+		const employee = {
+			name: "Mary",
+			age: 15,
+			newEmployee: true
+		};
+
+		document.writeln("Employee<br>");
+        for (const key in employee) {
+			/* We can access value of a property using [property name as string] */
+			document.writeln(key + ": " + employee[key] + "<br>");
+		}
+
+		document.writeln("<br>Scores<br>");
+		let scores = [10, 20, 30];
+		for (const key in scores) {
+			document.writeln(key + ": " + scores[key] + "<br>");
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Get Value in Text Field</title>
+</head>
+
+<body>
+    <!-- Notice this elements are not in a form  (if you want a reset button you need a form)-->
+    Enter Value
+    <input type="text" id="myTextField" value="20"><br><br>
+    <button type="button" id="displayValueButton">Display Value</button><br><br>
+  
+    <script>
+        
+        /* Adding two tasks to the same event */
+        document.getElementById("displayValueButton").addEventListener("click", displayValue);
+        document.getElementById("displayValueButton").addEventListener("click", extraTask);
+        
+        function displayValue() {
+            const textProvided = document.getElementById("myTextField").value;
+            alert(`Value entered is ${textProvided}`);
+            alert(`Adding 10 to to value entered: ${textProvided + 10}`);
+        }
+
+        function extraTask() { alert("Extra task called"); }
+
+    </script>
+</body>
+
+</html>

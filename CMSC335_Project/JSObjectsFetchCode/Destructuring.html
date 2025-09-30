@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>JS Destructuring Example</title>
+</head>
+
+<body>
+	<script>
+		"use strict";
+
+			/* Destructuring array */
+			const names = ["Ian", "Hasan", "Olivia", "Ryan", "Laura"];
+			const [first, second] = names;
+            document.writeln(`Ex1: Original Array: ${names} <br>`);
+			document.writeln(`First: ${first}, Second: ${second}<br><br>`);
+
+            document.writeln("Ex2: Destructuring Object<br>");
+			const app = {name: "mapApp", developed: 2026, location: "CP"};
+			/* 
+			   You must use the same property name; try name2 instead of name
+			   You don't need to retrieve all properties (convenient for objects 
+			   with several properties)
+			 */
+			/* Notice using { }; the order of variables does not matter */
+			const {name, developed} = app; 
+			document.writeln(`Name: ${name}, Developed: ${developed}<br>`);
+			const {name: nameTwo, developed: developedTwo} = app; /* Notice using { } */
+			document.writeln(`NameTwo: ${nameTwo}, DevelopedTwo: ${developedTwo}<br><br>`);
+
+
+            document.writeln(`Ex3: Destructuring object in function call<br>`);
+			destructure(app);
+			function destructure({developed}){
+				document.writeln(`In Function: developed: ${developed}<br><br>`);
+			}
+
+            document.writeln(`Ex4: Destructuring object in function call (different name)<br>`);
+			destructureTwo(app);
+			/* Using a property name different than original */
+			function destructureTwo({name: appName}){
+				document.writeln(`In function: appName: ${appName}<br><br>`);
+			}
+
+            document.writeln("Ex5: Swapping Values<br>");
+			/* swap */
+			let a = 100, b = 200;
+			document.writeln(`Original: ${a}, ${b}<br>`);
+			[b, a] = [a, b];
+			document.writeln(`Swapped: ${a}, ${b}<br>`);
+	
+	</script>
+</body>
+
+</html>

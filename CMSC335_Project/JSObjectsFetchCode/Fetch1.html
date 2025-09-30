@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Example</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <script>
+        
+        async function main() {
+            let url = "https://jsonplaceholder.typicode.com/todos/1"; // Notice the 1 at the end
+            document.writeln(`Retrieving data from ${url} (check console for results)`);
+        
+            const response = await fetch(url);
+            console.log(`***** Response *****`);
+            console.log(response);
+            
+            console.log(`***** JSON *****`);
+            const json = await response.json();
+            console.log(json);
+        }
+
+        main();
+
+    </script>
+</body>
+
+</html>

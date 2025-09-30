@@ -2,35 +2,36 @@
     --my-size: 14px;
 }
 html{
-    background-color: rgb(24,26,39);
+    background-color: rgb(18,21,22);
     border-style: double;
     border-width: 1rem;
-    border-color: firebrick;
-    font-family: 'Times New Roman';
+    border-color: #0035cc;
     font-size: var(--my-size);
     color: antiquewhite;
+    margin: 0.5rem;
 }
 
 body{
     background-image: url(Background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment: fixed;
 }
 
 h1{
     font-family: "Press Start 2P";
+    color: rgb(0,66,255)
 }
 
 h2{
     font-family: "Press Start 2P";
-    color: salmon;
+    color: rgb(0,66,255);
 }
 
 .picture_frame{
     border-style: ridge;
     border-width: 0.5rem;
-    border-color: firebrick;
+    border-color: rgb(0,66,255);
 }
 
 p{
@@ -46,23 +47,24 @@ p{
 }
 
 table, td, th {
-    border: 1px solid gray;
+    border: 1px solid antiquewhite;
     font-family: "Share Tech";
+    height: 4rem;
 }
 
-tr:nth-child(2n) {background-color: firebrick}
+tr:nth-child(2n) {background-color: rgba(61,43,190, 0.7)}
 
 .absolute_position{
-    position: absolute; /* Containing block is the div  */
+    position: absolute;
     width: 20rem;
-    top: 7.6rem; /* first change fixed to static; then change to 10 */
-    left: 17rem;
+    top: 6rem;
+    left: 17.5rem;
 }
 
 .header_row{
-    background-color: firebrick;
+    background-color: rgb(61,43,190);
 }
 
 a {
-    color: lightblue;
+    color: antiquewhite;
 }

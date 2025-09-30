@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Adding Properties</title>
+  </head>
+
+  <body>
+    <script>
+      "use strict";
+
+      const sale = {};
+      do {
+          const item = prompt("Enter name of item you want to buy.");
+          const numberOfItems = Number(prompt("Enter number of items you want to buy"));
+
+          /* Adding property */
+          if (sale[item] === undefined) { // IMPORTANT: Otherwise will remove previous value
+              sale[item] = numberOfItems; // Adding property
+          } else {
+              sale[item] += numberOfItems; // Increasing existing value for property
+          }
+
+          if (!window.confirm("Do you want to buy another item?")) {
+              break;
+          }
+      } while (true);
+
+      /* Report about bought items */
+      let report = "Items bought<br>";
+      for (let propertyName in sale) {
+          report += `${propertyName} &rarr; ${sale[propertyName]}<br>`;
+      }
+      document.writeln(report);
+    </script>
+  </body>
+</html>

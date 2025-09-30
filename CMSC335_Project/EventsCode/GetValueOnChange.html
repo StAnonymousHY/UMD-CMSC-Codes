@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <title>Get Value in Text Field</title>
+</head>
+
+<body>
+   <form>
+      Provide a number and press enter: 
+      <input type="text" id="myTextField" style="width: 100px"><br><br>
+      
+      Provide a string and press enter:
+      <input type="text" id="myTextFieldTwo" style="width: 100px"><br><br>
+   </form>
+
+   <script>
+      document.querySelector("#myTextField").onchange = () => {
+         const value = document.querySelector("#myTextField").value;
+         const answer = Math.pow(2, value);
+         alert(`Math.pow(2, ${value}): ${answer}`);
+      };
+
+
+      document.getElementById("myTextFieldTwo").addEventListener("change", displayValue);
+
+      /* Every event listener callback has as its first parameter the event object */
+      function displayValue(event) {
+         /* Relying on event object */
+         const textProvided = event.target.value;
+         alert(`${textProvided}'s length is ${textProvided.length}`);
+      }
+
+   </script>
+</body>
+
+</html>

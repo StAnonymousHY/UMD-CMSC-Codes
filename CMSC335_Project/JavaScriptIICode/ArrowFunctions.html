@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Example</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+
+         /* Anonymous function */
+        let productFunc = function(x) {
+            return x * 3;
+        }
+        document.writeln("productFunc(10): " + productFunc(10) + "<br>");
+
+        /* No parameters */
+        let initialValue = () => 1000;
+        document.writeln("initialValue(): " + initialValue() + "<br>");
+
+        /* One parameter and expression as returned value */
+        let prod2 = x => x * 2;
+        document.writeln("prod2(10): " + prod2(10) + "<br>");
+
+        /* More than one parameter and expression as returned value */
+        let sum = (x, y, z) => x + y + z;
+        document.writeln("sum(10, 2, 4): " + sum(10, 2, 4) + "<br>");
+
+        /* We need curly brackets */
+        let process = x => {
+            x++;
+            console.log("Value is: " + x);
+            document.writeln("Result in console");
+        };
+        process(10);
+
+    </script>
+</body>
+
+</html>

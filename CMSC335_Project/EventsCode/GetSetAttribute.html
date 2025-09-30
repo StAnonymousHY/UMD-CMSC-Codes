@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Get/Set Attribute in HTML Element</title>
+</head>
+
+<body>
+    <form>
+        <img id="theImage" src="images/Testudo1.jpg" alt="viewerImg"><br>
+        <button type="button" id="changeImageButton">Change Image</button>
+        <button type="button" id="changeSize">Change Size</button>
+        <button type="button" id="changeImageButtonTwo">Change Image (Two)</button><br>
+        You can also change the image by double-clicking on the image.
+    </form>
+
+    <script>
+
+        main();
+        
+        function main() {
+            document.querySelector("#changeImageButton").onclick = changeImage;
+            const imageElement = document.querySelector("#theImage");
+            imageElement.addEventListener("dblclick", changeImage); // same: imageElement.ondblclick = changeImage;  
+            
+            document.querySelector("#changeSize").addEventListener("click", changeSize);
+            document.querySelector("#changeImageButtonTwo").onclick = changeImageTwo;
+        }
+
+        function changeImage() {
+            const imageElement = document.getElementById("theImage");
+            const currentPhoto = imageElement.getAttribute("src"); // retrieving value of src attribute
+
+            alert("Current photo being displayed is: " + currentPhoto);
+            const photoToDisplay = prompt("Enter name of photo to display (Testudo1.jpg, Testudo2.jpg, Testudo3.jpg)", "images/Testudo2.jpg");
+            imageElement.setAttribute("src", photoToDisplay);
+        }
+
+        function changeImageTwo() {
+            const currentPhoto = document.querySelector("#theImage").src;
+            alert("Current photo being displayed is: " + currentPhoto);
+            
+            const photoToDisplay = prompt("Enter name of photo to display (Testudo1.jpg, Testudo2.jpg, Testudo3.jpg)", "images/Testudo2.jpg");
+            document.querySelector("#theImage").src = photoToDisplay;
+        }
+
+        function changeSize() {
+            const currentWidth = document.querySelector("#theImage").width;
+            alert(`Current width ${currentWidth}`);
+            document.querySelector("#theImage").width = currentWidth / 2;
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Inner HTML</title>
+</head>
+
+<body>
+    <h1>Square Root Table Generator</h1>
+    <!-- Do not include input element in form -->
+    <input type="text" id="myTextField" style="width:100px" value="10">
+    <button type="button" id="displayTable">Display Sqrt Table</button><br><br>
+    <div id="displayArea"></div>
+
+    <script>
+        document.querySelector("#displayTable").onclick = displaySqrts;
+      
+        function displaySqrts() {
+             let usingInnerHTML = true;  // Try true
+
+            const maximum = Number(document.querySelector("#myTextField").value);
+
+            let answer = "<table border='1'>";
+            answer += "<tr><th>Value</th><th>Sqrt</th></tr>"
+            for (let i = 1; i <= maximum; i++) {
+                answer += `<tr><td>${i}</td><td>${Math.sqrt(i)}</td></tr>`;
+            }
+            answer += "</table>";
+
+            if (usingInnerHTML) {
+                document.querySelector("#displayArea").innerHTML = answer;
+            } else {
+                document.writeln(answer);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

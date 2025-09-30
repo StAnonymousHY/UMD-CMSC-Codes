@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>Promises Intro</title>
+   </head>
+
+   <body>
+      <script>
+
+         /* 
+           We don't have an actual asynchronous task; using it to show 
+           how to use a promise. 
+          */
+         async function getRandomQuote() {
+            const quotes = ["To C or not to C", "Believe and it will compile"];
+            const index = Math.floor(Math.random() * 2);
+            return quotes[index];
+         }
+
+         async function main() {
+            const promise = getRandomQuote();
+
+            console.log(promise); // Check console to see promise object
+            promise.then(quote => document.writeln(quote));
+            document.writeln("<br>Done<br>");  // Where does it appear in the output?
+         }
+
+         main();
+      </script>
+   </body>
+</html>

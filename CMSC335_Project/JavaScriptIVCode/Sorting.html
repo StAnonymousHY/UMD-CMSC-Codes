@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Sorting</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+
+            const names = ["Rose", "Bob", "Magda", "Albert"];
+            document.writeln(`Ex1: Original array: ${names}<br>`);
+            names.sort(); /* Sorting, changes the array*/
+            document.writeln(`After sorting array: ${names}<br><br>`);
+
+            document.writeln("Ex2: unexpected result for numerical sorting<br>");
+            const scores = [30, 2, 4, 5];
+            document.writeln(`Original array: ${scores}<br>`);
+            scores.sort(); /* Sorting */
+            document.writeln("Wrong sort: " + scores + "<br><br>");
+
+            document.writeln("Ex3: Numerical sorting (using comparison function)<br>");
+            scores.sort((x, y) => x - y);
+            document.writeln(`After sorting: ${scores.join()}<br><br>`);
+
+            document.writeln(`Ex4: Sorted names in descending order<br>`);
+            names.sort((x, y) => x < y ? 1 : x === y ? 0 : -1); // ? :
+            document.writeln(names.join() + "<br><br>");
+
+            document.writeln(`Ex5: Sorting array of objects (students) by name<br>`);
+            document.writeln("See console for results<br><br>");
+            let students = [{name: "John", id: 3}, {name: "Peter", id: 2}, {name: "Mary", id: 10}];
+            students.sort((x, y) => x.name.localeCompare(y.name));
+            console.table(students);
+
+            document.writeln(`Ex6: Using sort to randomize an array`);
+            let data = [2, 3, 4, 5];
+            document.writeln(`Original array: ${data}<br>`);
+            data.sort((x, y) => Math.random() - 0.5);
+            document.writeln(`Randomized array: ${data}`);
+        
+    </script>
+</body>
+
+</html>

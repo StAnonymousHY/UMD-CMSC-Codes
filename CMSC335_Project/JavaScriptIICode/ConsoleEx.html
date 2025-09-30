@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Console Example</title>
+</head>
+
+<body>
+    <script>
+        let option = prompt("Enter error, info, warn, log, table");
+
+        if (option === "error") {
+            console.error("Using console.error");
+        } else if (option === "info") {
+            console.info("Using console.info");
+        } else if (option === "warn") {
+            console.warn("Using console.warn");
+        } else if (option === "log") {
+            console.log("Using console.log");
+        } else if (option === "table") {
+            let scores = [10, 20, 30];
+            console.table(scores);
+            let student = { name: "Mary", age: "30"};
+            console.table(student);
+        } else {
+            console.log("Invalid option: " + option);
+        }
+
+    </script>
+</body>
+
+</html>

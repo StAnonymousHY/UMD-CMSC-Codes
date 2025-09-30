@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Objects Example</title>
+</head>
+
+<body>
+    <script>
+        main();
+
+        function main() {
+            /* Alternatives for creating an empty object */
+            const emptyObject1 = new Object();
+            const emptyObject2 = new Object(undefined);
+            const emptyObject3 = new Object(null);
+            const emptyObject4 = {};
+
+            /* Boolean Object alternative */
+            const booleanObject1 = new Object(true);
+            const booleanObject2 = new Boolean(true);
+
+            /* Number Object alternative */
+            const numObject1 = new Object(3);
+            const numObject2 = new Number(3);
+
+            /* String Object alternative */
+            const strObject1 = new Object("Hello world");
+            const strObject2 = new String("Hello world");
+
+            /* Using Object constructor for person object */
+            const person1 = new Object();
+            /* Adding properties */
+           
+            person1["name"] = "John"; // alternative: person1.name = "John";
+            person1.age = 45;
+            person1.school = umcpSchool;
+            /* Printing person */
+            printPerson(person1);
+
+            /* Using object initializer/literal notation */
+            const person2 = {
+                name: "Mary",  /* We could have used "name":"Mary" */
+                age: 30,       /* We could have used "age": 30 */
+                school: umcpSchool, /* Assigning a method */
+                bestFriend: person1 /* Assigning an object */
+            };
+            /* Printing person */
+            printPerson(person2);
+
+            const exam = {
+                location, /* Possible? Yes, as it creates property with that value */
+                semester: "fall",
+                "difficulty-level": 10, /* Needs " " as key is not valid */
+                3: "midterm3",
+                "": "empty string"
+            };
+            exam[person1] = "person1";
+            // exam.difficulty-level = 10; // Not possible
+            // exam.3 = "midterm3"; // Not possible
+             
+            /* Printing to console */
+            document.writeln("<br>***** Check console for output *****<br>");
+            console.log("\n\n ***** Printing exam object *****\n\n");
+            console.log(exam);
+            console.log("\n\n ***** Printing exam object using table *****\n\n");
+            console.table(exam); /* Using console.table */
+        }
+
+        function printPerson(personParam) {
+            document.writeln("Name: " + personParam.name + ", ");
+            document.writeln("Age: " + personParam.age + ", ");
+
+            /* A property that does not exist is undefined */
+            if (personParam.bestFriend != undefined) {
+                document.writeln(
+                    "Best Friend: " + personParam.bestFriend.name + ", "
+                );
+            }
+            personParam.school();
+        }
+
+        function umcpSchool() {
+            document.writeln("University of MD College Park" + "<br>");
+        }
+
+    </script>
+</body>
+
+</html>

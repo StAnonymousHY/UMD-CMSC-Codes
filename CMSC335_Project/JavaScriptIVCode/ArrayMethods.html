@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Array Methods</title>
+  </head>
+
+  <body>
+    <script>
+      "use strict";
+
+      let languages = ["JavaScript", "Java", "PHP", "Python"];
+
+      // No need for languages.join()
+      document.writeln(`Array of Languages: ${languages}<br>`);
+      languages.push("C");
+      /* Using * as delimeter */
+      document.writeln(
+        `Ex1: After pushing C, Languages:  ${languages.join("*")}<br><br>`
+      );
+
+      const popped = languages.pop();
+      document.writeln(`Ex2: Popped element: ${popped}<br>`);
+      document.writeln(`Languages: ${languages}<br><br>`); 
+
+      const shiftedElement = languages.shift();
+      document.writeln(`Ex3: Shifted element: ${shiftedElement}<br>`);
+      document.writeln(`After shifting, Languages: ${languages}<br><br>`);
+
+      languages.unshift(shiftedElement);
+      document.writeln(
+        `Ex4: After unshifting, Languages: ${languages}<br><br>`
+      );
+
+      document.writeln(
+        `Ex5: Index: of "Python" ${languages.indexOf("Python")}<br><br>`
+      );
+
+      languages = ["JavaScript", "Java", "PHP", "Python", "Ruby", "C#"];
+      document.writeln(`Ex6: Original Languages: ${languages}<br>`);
+      let start = 1,
+        end = 3;
+      document.writeln("splice arguments " + start + ", " + end + "<br>");
+      let returnedValue = languages.splice(start, end);
+      document.writeln(`After splice, Languages: ${languages}<br>`);
+      document.writeln(`Value returned by splice: ${returnedValue}<br><br>`);
+
+      languages = ["JavaScript", "Java", "PHP", "Python", "Ruby", "C#"];
+      document.writeln(
+        `Ex7: Languages: ${languages} <br>`
+      ); /* No join argument, defaults to , */
+      (start = 1), (end = 3);
+      document.writeln("slice arguments " + start + ", " + end + "<br>");
+      returnedValue = languages.slice(start, end);
+      document.writeln(
+        `After slice, Languages array after slice: ${languages}<br>`
+      );
+      document.writeln(
+        `Value returned by slice ${returnedValue.join()}<br><br>`
+      );
+
+      let seasons = ["Fall", "Winter", "Spring", "Summer"];
+      document.writeln(`Ex8: Seasons: " ${seasons}`);
+      seasons.reverse(); // Changes original array
+      document.writeln(`<br>Reversed seasons array: ${seasons}<br><br>`);
+
+      const part1 = [10, 20, 30],
+        part2 = [40, 60];
+      document.writeln(`Ex9: Concatenating: ${part1} and ${part2}<br>`);
+      document.writeln(
+        "Concatenating result: " + part1.concat(part2) + "<br><br>"
+      );
+
+      let filled = new Array(4).fill(100);
+      document.writeln(
+        `Ex10: Result of filling array with value 100 ${filled}<br><br>`
+      );
+
+      /* Notice initialization of array */
+      const arr = new Array();  // const only applies to the reference
+      arr.push({ name: "Delaware" });
+      arr.push({ name: "Maryland",});
+      arr.push({name: "Virginia"});
+      // arr.length = 10; // OK
+      // arr = null; // Not possible
+
+      document.writeln("<strong>Check console</strong><br>");
+      console.log("\n\nOriginal array");
+      console.table(arr); /* Notice the use of console.table() */
+      const sliced = arr.slice(1, 3); /* Only DE and MD */
+      console.log("\n\nResult of slice 1, 3");
+      console.table(sliced);
+
+      /* Modifying entry of sliced */
+      sliced[0].name = "ThisReplacesMaryland";
+      console.log("\n\nsliced array result");
+      console.table(sliced);
+
+      console.log("\n\nOriginal array (illustrates shallow copying)");
+      console.table(arr);
+
+      /* Using splice */
+      const arr2 = new Array();  // const only applies to the reference
+      arr2.push({ name: "Peter" });
+      arr2.push({ name: "Mary",});
+      arr2.push({name: "John"});
+      console.log("\n\nOriginal array");
+      console.table(arr2); /* Notice the use of console.table() */
+      const spliced = arr2.splice(1, 3);
+      console.log("\n\nResult of pslice 1, 3");
+      console.table(spliced);
+
+      /* Modifying entry of sliced */
+      spliced[0].name = "MaryModified";
+      console.log("\n\nspliced array result");
+      console.table(spliced);
+
+      console.log("\n\nOriginal array (illustrates shallow copying)");
+      console.table(arr2);
+    </script>
+  </body>
+</html>
