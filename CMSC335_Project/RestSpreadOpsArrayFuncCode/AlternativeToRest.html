@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Spread Operator Example</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+
+        /* Original (using rest operator) */
+        document.writeln("<br>*** Using rest operator<br>");
+        function partyInfo(partyName, host, ...guests) {
+           document.writeln(`Party name: ${partyName}, Host: ${host}<br>`);
+           document.writeln(`Number of Guests: ${guests.length}<br>`);
+           document.writeln(`Guests:<br>`);
+           for (const guest of guests) {
+                document.writeln(`Guest: ${guest}<br>`);
+            }
+        }
+        partyInfo("FirstParty", "John", "Mary", "Laura");
+
+
+        document.writeln("<br>*** Using arguments object<br>");
+        /* Alternative based on arguments object */
+        function partyInfoAlternative(partyName, host) {
+           document.writeln(`Party name: ${arguments[0]}, Host: ${arguments[1]}<br>`);
+           document.writeln(`Number of Guests: ${arguments.length - 2}<br>`);
+           document.writeln(`Guests:<br>`);
+           for (let guestIndex = 2; guestIndex <= arguments.length - 1; guestIndex++) {
+                document.writeln(`Guest: ${arguments[guestIndex]}<br>`);
+           }
+           // document.writeln(`Invalid access: ${arguments[100]}`);
+        }
+        partyInfoAlternative("FirstParty", "John", "Mary", "Laura");
+        partyInfoAlternative("SecondParty", "John", "Mary", "Laura", "Mike", "Rose");
+    </script>
+</body>
+
+</html>

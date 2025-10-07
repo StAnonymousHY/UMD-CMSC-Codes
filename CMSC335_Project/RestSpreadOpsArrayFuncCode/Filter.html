@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Filter Method</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+
+        document.writeln(`<strong>Example #1: </strong> Using filter function to get even values<br>`);
+        const numbers = [2, 7, 30, 44, 5];
+        const evenValues = numbers.filter(num => num % 2 === 0);
+        document.writeln(`Original array: ${numbers}<br>`);
+        document.writeln(`New array: ${evenValues} <br><br>`);
+        
+        document.writeln(`<strong>Example #2: </strong> Using filter function to get strings greater than Kathy<br>`);
+        const names = ["Rose", "Peter", "Bob", "Al", "Kathy"];
+        const greaterThan = names.filter(name => name.localeCompare("Kathy") > 0);
+        document.writeln(`Original array: ${names} <br>`);
+        document.writeln(`New array: ${greaterThan}`);
+    </script>
+</body></html>

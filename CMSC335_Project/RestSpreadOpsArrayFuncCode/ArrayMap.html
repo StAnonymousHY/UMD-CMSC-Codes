@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Array map method Example</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+
+        document.writeln("***** <strong>Example #1</strong> Using map function to double values *****<br>");
+        const numbers = [2, 30, 44, 5];
+        const doubles = numbers.map(num => num * 2);
+        document.writeln(`Original array: ${numbers}<br>`);
+        document.writeln(`New array (doubled): ${doubles} <br><br>`);
+        
+        document.writeln("*****<strong>Example #2</strong> Using map function to triple values *****<br>");
+        const triples = numbers.map(n => n * 3);
+        document.writeln(`Original array: ${numbers.join("-")} <br>`);
+        document.writeln(`New array: ${triples.join("-")}`);
+      
+    </script>
+</body></html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rest Operator Example</title>
+  </head>
+
+  <body>
+    <script>
+      "use strict";
+
+      function partyInfo(partyName, host, ...guests) {
+        document.writeln(`Party name: ${partyName}, Host: ${host}<br>`);
+        document.writeln(`Number of Guests: ${guests.length}<br>`);
+        document.writeln(`Guests:<br>`);
+        for (let i = 0; i < guests.length; i++) {
+          document.writeln(`${guests[i]}<br>`);
+        }
+      }
+
+      partyInfo("FirstParty", "Ali", "Theresa", "Arushi", "Mike", "Pete");
+      document.writeln("<br>*****<br>");
+      partyInfo("SecondParty", "Josh", "Trenton");
+
+      /* The array associated with the rest operator can have different types of data */
+      partyInfo("ThirdParty", "Ali", "Theresa", "Arushi", "Mike", 12, true);
+    </script>
+  </body>
+</html>

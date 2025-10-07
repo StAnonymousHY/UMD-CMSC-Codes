@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+		<meta charset="utf-8">
+        <title>Terp Store</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+	</head>
+
+    <body>
+        <div class="background">
+        <h1 class="header">Terp Store</h1>
+
+        <div class="center">
+            <div class="wrapper">
+                <a href="catalogInquiry.shtml" class="twolinks">Catalog Inquiry</a>
+                <a href="placingOrder.shtml" class="twolinks">Placing Order</a>
+            </div>
+        </div>
+        
+        <div class="footerWrapper"><div class="footer"><!--#include virtual="footer.shtml" --></div></div>
+        </div>
+    </body>
+</html>

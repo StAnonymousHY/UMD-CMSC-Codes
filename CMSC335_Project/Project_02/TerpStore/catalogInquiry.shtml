@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+		<meta charset="utf-8">
+        <title>Catalog Inquiry</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+	</head>
+
+    <body>
+        <div class="background">
+        <h1 class="header">Catalog Inquiry</h1>
+        <form action="http://npp.cs.umd.edu/cmsc335/projects/TerpStore/catalogInquiry.php" method="get">
+            <span class="underline">Item Category</span>
+            <input id="itemCategory" list="item-category" name="item-choice" autofocus required>
+            <datalist id="item-category">
+                <option value="clothes">
+                <option value="books">
+                <option value="music">
+                <option value="food">
+                <option value="other">
+            </datalist>
+            <br><br>
+            <span class="underline">Maximum Cost ($)</span>
+            <input id="maximumCost" type="number" step="5" max="1000" min="1" name="maximumCost" value="1">
+            <br><br>
+            <input type="checkbox" name="availableOnCampus"><span class="underline">Available on Campus</span>
+            <br><br>
+			<input type="checkbox" name="availableOnline" checked><span class="underline">Available Online</span>
+            <br><br>
+            <span class="underline">Additional Information</span>
+            <textarea id="additionalInformation" rows="10" cols="100" name="info"></textarea>
+            <br><br>
+            <span class="underline">Contact Email Address:</span>
+            <input id="emailAddress" type="email" name="email"  placeholder="example@terpmail.umd.edu">
+            <br><br>
+			<input id="submitButton" type="submit" value="Submit Inquiry">
+            <input id="resetButton" type="reset" value="Clear">
+	    </form>
+        
+        <div class="footerWrapper"><div class="footer"><!--#include virtual="footer.shtml" --></div></div>
+        </div>
+    </body>
+</html>

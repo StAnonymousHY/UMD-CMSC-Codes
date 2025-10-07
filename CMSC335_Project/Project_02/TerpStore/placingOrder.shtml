@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+		<meta charset="utf-8">
+        <title>Placing Order</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+	</head>
+
+    <body>
+        <div class="background">
+        <h1 class="header">Placing Order</h1>
+        <form action="processing/placingOrder.php" method="post">
+            <span class="underline">Item Serial #</span>
+            <input id="itemSerial" type="text" name="serialNumber" placeholder="umd-item-0000" autofocus required>
+            <br><br>
+            <span class="underline">Credit Card #</span>
+            <input type="text" maxlength="4" name="cc1" class="creditCard"> - <input type="text" maxlength="4" size="4" name="cc2" class="creditCard"> - <input type="text" maxlength="4" size="4" name="cc3" class="creditCard"> - <input type="text" maxlength="4" size="4" name="cc4" class="creditCard">
+            <br><br>
+            <span class="underline">Shipping Address</span>
+            <input id="shipping" type="text" name="shipping" maxlength="80">
+            <br><br>
+            <span class="underline">Contact Email Address:</span>
+            <input id="emailAddress" type="email" name="email"  placeholder="example@terpmail.umd.edu">
+            <br><br>
+			<input id="submitButton" type="submit" value="Submit Order">
+            <input id="resetButton" type="reset" value="Clear">
+        </form>
+        
+        <div class="footerWrapperOrder"><div class="footer"><!--#include virtual="footer.shtml" --></div></div>
+        </div>
+    </body>
+</html>

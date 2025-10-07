@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Spread Operator Example</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+
+        document.writeln("***** Using arrays for functions *****<br>");
+        const array1 = [1, 11, 2], array2 = [11, 2];
+        displayValuesInRange("test #1:", 1, 11, 2);
+        displayValuesInRange("test #2:", ...array1);
+        displayValuesInRange("test #3:", 1, ...array2); 
+        displayValuesInRange("test #4:", ...[]);  // What will happen?
+
+        /* We can add a rest parameter (...theRest) to gather any extra 
+           arguments after the delta value.  */
+        function displayValuesInRange(message, start, end, delta) {
+            document.writeln(`<br>${message} (starting value: ${start})`);
+            for (let i = start; i <= end; i += delta) {
+                document.writeln(`${i} `);
+            }
+        }
+
+        document.writeln(`<br><br>***** Combining arrays *****<br>`);
+        const part1 = ["C", "Java"], part2 = ["Python"];
+        const combined = [...part1, ...part2];
+        document.writeln(`${combined}<br><br>`);
+
+        document.writeln(`***** Computing maximum of arrays *****<br>`);
+        const numArray1 = [1, -21, 3, 4], numArray2 = [9, 3, -8, 10, 7];
+        const value = 1000;
+        document.writeln(`Maximum is: ${Math.max(...numArray1, value, ...numArray2)}<br><br>`);
+        
+        document.writeln(`***** Breaking Strings *****<br>`);
+        const string = "CMSCXYZ", charArray = [...string];
+        document.writeln(`Original: ${string}<br>`);
+        document.writeln(`As array: ${charArray}<br>`);
+        document.writeln(`Type of character: ${typeof charArray[0]}<br>`);
+    </script>
+</body>
+
+</html>

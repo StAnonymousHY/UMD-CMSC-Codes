@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JS WeakMap</title>
+</head>
+
+<body>
+    <h2>Inspect, Memory, Head Snapshot</h2>
+    <script>
+        "use strict";
+
+        function TerpObject() {
+            this.data = new Array(300000);
+        }
+
+        window.obj = new TerpObject();
+        const map = new Map(); // using Map. Change to WeakMap to see memory effect 
+        // const map = new WeakMap(); // using WeakMap 
+        map.set(window.obj, 1);
+        // fake processing here
+        delete window.obj; // for weak map the delete will also remove it from the map
+        // more processing here 
+
+    </script>
+</body>
+
+</html>

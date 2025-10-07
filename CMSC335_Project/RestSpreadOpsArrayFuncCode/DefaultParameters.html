@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>Default Parameters</title>
+   </head>
+
+   <body>
+      <script>
+         "use strict";
+
+         task();
+         task("Rose");
+         task(25); // task(,25,) will not work
+         task("Kelly", 30, 20000);
+         function task(name = "John", age = 21, salary = special()) {
+            document.writeln(`name: ${name} age: ${age}, salary: ${salary}<br>`);
+         }
+         function special() { return 10000; }
+
+
+        /* Parameters defined beforehand (to the left) are available to subsequent
+           default parameters */ 
+         document.writeln(`${greet("Welcome to CS", "Chris")}<br>`);
+         function greet(greeting, name, message = `Dear ${name}: ${greeting}`) {
+            return [greeting, name, message];
+         }
+
+
+         taskOldApproach();
+         function taskOldApproach(name, age) {
+            name = name || "John"; /* Trick to define a default value */
+            age = age || 21;
+            document.writeln(`Old approach: ${name}, age ${age}`);
+         }
+      </script>
+   </body>
+</html>
