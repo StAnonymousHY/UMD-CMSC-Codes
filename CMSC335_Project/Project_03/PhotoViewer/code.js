@@ -6,6 +6,16 @@ let photoList;
 let slideShowController;
 const interval = 1000;
 
+document.querySelector("#loadPhotos").onclick = loadPhotos;
+document.querySelector("#loadJSON").onclick = loadJSON;
+document.querySelector("#previousPhoto").onclick = previousPhoto;
+document.querySelector("#nextPhoto").onclick = nextPhoto;
+document.querySelector("#firstPhoto").onclick = firstPhoto;
+document.querySelector("#lastPhoto").onclick = lastPhoto;
+document.querySelector("#slideShow").onclick = slideShow;
+document.querySelector("#randomSlideShow").onclick = randomSlideShow;
+document.querySelector("#stopSlideShow").onclick = stopSlideShow;
+
 function loadPhotos() {
     document.querySelector("#DisplayMessage").textContent = "Photo Viewer System";
     const folder = document.querySelector("#PhotosFolder").value;
@@ -125,7 +135,6 @@ function randomSlideShow(){
         curr = Math.floor(Math.random() * photoList.length); 
         document.querySelector("#Image").src = photoList[curr];
         document.querySelector("#PhotoBeingDisplayed").value = photoList[curr];
-        console.log(curr);
     }, interval);
 }
 

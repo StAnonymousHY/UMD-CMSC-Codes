@@ -33,7 +33,7 @@
             <label for="StartPhotoNumber">Start Photo Number: <input id="StartPhotoNumber" type="text" value="2"></label>
             <label for="EndPhotoNumber">End Photo Number: <input id="EndPhotoNumber" type="text" value="4"></label>
             <br><br>
-            <button type="button" onclick="loadPhotos()">Load Photos</button>
+            <button id="loadPhotos" type="button">Load Photos</button>
         </fieldset>
 
         <fieldset>
@@ -41,26 +41,26 @@
                 <strong>Loading Images (JSON File)</strong>
             </legend>
             <label for="URL">URL: <input id="URL" type="text" value=""></label>
-            <button type="button" onclick="loadJSON()">Load JSON</button>
+            <button id="loadJSON" type="button">Load JSON</button>
         </fieldset>
 
         <fieldset>
             <legend>
                 <strong>Iterating</strong>
             </legend>
-            <button type="button" onclick="previousPhoto()">Previous Photo</button>
-            <button type="button" onclick="nextPhoto()">Next Photo</button>
-            <button type="button" onclick="firstPhoto()">First Photo</button>
-            <button type="button" onclick="lastPhoto()">Last Photo</button>
+            <button id="previousPhoto" type="button">Previous Photo</button>
+            <button id="nextPhoto" type="button">Next Photo</button>
+            <button id="firstPhoto" type="button">First Photo</button>
+            <button id="lastPhoto" type="button">Last Photo</button>
         </fieldset>
 
         <fieldset>
             <legend>
                 <strong>SlideShows</strong>
             </legend>
-            <button type="button" onclick="slideShow()">SlideShow</button>
-            <button type="button" onclick="randomSlideShow()">RandomSlideShow</button>
-            <button type="button" onclick="stopSlideShow()">StopSlideShow</button>
+            <button id="slideShow" type="button">SlideShow</button>
+            <button id="randomSlideShow" type="button">RandomSlideShow</button>
+            <button id="stopSlideShow" type="button">StopSlideShow</button>
         </fieldset>
         <hr>
         <input id="Reset" type="reset" value="Reset Form Values"> 

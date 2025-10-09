@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Scrollable List</title>
+</head>
+
+<body>
+	<h2>Scrollable List</h2>
+	<h2>Use CTRL KEY To Select Multiple Entries</h2>
+	<form>
+		<select id="preference" multiple size="5">
+			<option value="JavaScript">JavaScript</option>
+			<option value="Ruby" selected>Ruby</option> <!-- default selection -->
+			<option value="PHP">PHP</option>
+			<option value="C++" selected>C++</option> <!-- default selection -->
+			<option value="Pascal">Pascal</option>
+			<option value="Fortran">Fortran</option>
+			<option value="Basic">Basic</option>
+			<option value="Assembly">Assembly</option>
+			<option value="C#">C#</option>
+		</select>
+		<br><br>
+		<input type="button" id="processDataButton" value="Process" onclick="processData()">
+		<input type="reset">
+	</form>
+	<hr>
+	<div id="display"></div>
+
+	<script>
+		"use strict";
+
+		/* Enable one of the following two at a time */
+		document.querySelector("#processDataButton").onclick = displayChoice;
+		// document.getElementById("preference").onchange = displayChoice;
+
+		function displayChoice() {
+			let answer = "";
+
+			[...document.getElementById("preference").options].forEach(element => {
+				answer += element.selected ? element.value + "| " : "";
+			}); 
+
+			/* This for is equivalent to the previous code */
+			/*
+			for (const option of document.getElementById("preference").options) {
+				answer += option.selected ? option.value + "| " : "";
+			}*/
+			
+			document.getElementById("display").innerHTML = `User selected: ${answer}`;
+		}
+
+	</script>
+</body></html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Example</title>
+      <meta charset="utf-8">
+   </head>
+
+   <body>
+      <h1>Check console for result (IIFE)</h1>
+      <script>
+         "use strict";
+         
+         (async () => {
+            let url = "https://jsonplaceholder.typicode.com/todos/1"; 
+            const json = await (await fetch(url)).json();  // Notice the combined await calls
+            console.log(json);
+         })();
+      </script>
+   </body>
+</html>

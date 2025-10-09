@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Radio Buttons</title>
+</head>
+
+<body>
+	<h2>Radio Buttons</h2>
+	<form>
+		<!-- Notice: using same name but different ids -->
+		<input type="radio" name="category" value="High School">High School<br>
+		<input type="radio"  name="category" value="Undergraduate">Undergraduate<br>
+		<input type="radio" name="category" value="Graduate" checked>Graduate<br>
+		<input type="button" value="Process" id="processButton">
+		<input type="reset">
+	</form>
+	<hr>
+	<div id="display"></div>
+
+	<script>
+		"use strict";
+
+		document.getElementById("processButton").onclick = displayChoice;
+		
+		function displayChoice() {
+			const selected = [...document.getElementsByName("category")].find(element => {
+				return element.checked;
+			});
+			document.getElementById("display").innerHTML = selected.value;
+
+			/* This for is equivalent to the previous code */
+			/*
+			for (const entry of document.getElementsByName("category")) {
+				if (entry.checked) {
+					document.getElementById("display").innerHTML = entry.value;
+					break;
+				}
+			}*/
+		}
+	</script>
+</body></html>

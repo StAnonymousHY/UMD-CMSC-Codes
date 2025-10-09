@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Number, Range, Time</title>
+	<style>
+		h2, h3 { text-decoration: underline;}
+
+		/* Default size did not display clearly */
+		input[type = "time"] {
+			width: 95px;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>Form Elements (Number/Range/Time)</h2>
+	<form>
+		Enter age: <input type="number" id="numberElem" value="21" min="1" max="120" step="5">
+		<input type="button" id="processNumberButton" value="Process Number"><br><br>
+
+		Enter number in range: <input type="range" id="rangeElem" min="10" max="50">
+		<input type="button" id="processRangeButton" value="Process Range"><br><br>
+		
+		Enter time <input type="time" id="timeElem" size="100">
+		<input type="button" id="processTimeButton" value="Process Time"><br><br>
+
+		<input type="reset">
+	</form>
+
+	<h3>Display Area</h3>
+	<div id="display"></div>
+
+	<script>
+		"use strict";
+
+		/* Enable one of the following sets at a time */
+
+		/* First set */
+		document.getElementById("processNumberButton").onclick = processNumberValue;
+		document.getElementById("processRangeButton").onclick = processRangeValue;
+		document.getElementById("processTimeButton").onclick = processTimeValue;
+		
+		/* Second set */
+		/*
+		document.getElementById("numberElem").onchange = processNumberValue;
+		document.getElementById("rangeElem").onchange = processRangeValue;
+		document.getElementById("timeElem").onchange = processTimeValue;
+		*/
+
+		function processNumberValue() {
+			const age = document.getElementById("numberElem").value;
+			document.getElementById("display").innerHTML = `Age: ${age}`;
+		}
+
+		function processRangeValue() {
+			const value = document.getElementById("rangeElem").value;
+			document.getElementById("display").innerHTML = `Range value: ${value}`;
+		}
+		
+		function processTimeValue() {
+			let value = document.getElementById("timeElem").value;
+			if (value === "") {
+				value = "No time selected";
+			}
+			document.getElementById("display").innerHTML = `Time: ${value}`;
+		}
+	</script>
+</body></html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Checkboxes</title>
+</head>
+
+<body>
+	Indicate what kinds of computers you have.<br>
+	<form>
+		<input type="checkbox" id="laptop">Laptop<br>
+		<input type="button" id="processButton" value="Process" onclick="processData()">
+		<input type="reset" value="Clear">
+	</form>
+	<hr>
+	<div id="display"></div>
+
+	<script>
+		"use strict";
+
+		/* Enable one of the following two at a time */
+		document.getElementById("processButton").onclick = displayChoice;
+		// document.getElementById("laptop").onchange = displayChoice;
+
+		function displayChoice() {
+			document.getElementById("display").innerHTML =
+			document.getElementById("laptop").checked ? "laptop selected" : "laptop NOT selected";
+		}
+	</script>
+</body></html>

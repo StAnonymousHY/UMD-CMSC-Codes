@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Example</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+
+        class Bed {
+            #brand; #size;
+        
+            constructor(brand = "NOBRAND", size = "NOSIZE") {
+                this.#brand = brand;
+                this.#size = size;
+            }
+        
+            [Symbol.toPrimitive]() {  
+                return `Brand: ${this.#brand}, Size: ${this.#size}`;
+            }
+        }
+
+        class WaterBed extends Bed {
+            #gallons;
+
+            /* No constructor; one provided automatically calls superclass constructor */
+            set gallons(gallons) {
+                this.#gallons = gallons;
+            }
+
+            [Symbol.toPrimitive]() {
+                return `${super[Symbol.toPrimitive]()}, Gallons: ${this.#gallons}`;
+            }
+        }
+
+        const bed1 = new Bed("Softbed", "King");
+        document.writeln(`${bed1}<br>`);
+
+        const waterBed = new WaterBed();
+        waterBed.gallons = 50;
+        document.writeln(waterBed);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Example</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+
+        class Car {
+            static dealership = "Terp Cars"; /* static public */
+            static #instances = 0;  /* static private */
+            
+            passengers = ["Driver"]; /* public */
+            
+            #tag;                   /* private */
+            #mileage;               /* private */
+
+            constructor(tag, mileage) {
+                this.#tag = tag;
+                this.#mileage = mileage;
+                Car.#instances++;
+            }
+
+            /* Getter */
+            get tag() {  // obj.tag will execute this method
+                return this.#tag;
+            }
+
+            /* Setter */
+            set tag(newTag) { // obj.tag = value will execute this method
+                if (newTag == null) {
+                    document.writeln(`<br><strong>Oops, cannot set tag to null</strong>`);
+                } else {
+                    this.#tag = newTag;
+                }
+            }
+
+            static getInstances() {
+                return Car.#instances;
+            }
+            
+            [Symbol.toPrimitive]() {  /* Java's toString() */
+                /* template literal allow us to have the indentation below */
+                return `CarInfo: tag: "${this.#tag}", 
+                        mileage: ${this.#mileage},
+                        passengers: ${this.passengers}`;
+            }
+        }
+
+       
+        const car1 = new Car("abc", 22000);
+        document.writeln(`car1: ${car1}<br>`);
+        document.writeln(`Tag: ${car1.tag}<br>`);
+        car1.tag = "newTagABC";
+        document.writeln(`After updating tag:<br>${car1}`);
+        document.writeln(`<br>****`);
+
+        car1.tag = null; /* Setting tag to null */
+        document.writeln(`<br>****<br>`);
+
+        const car2 = new Car("core1", 40000);
+        document.writeln(`Dealership: ${Car.dealership}<br>`);
+        document.writeln(`Instances: ${Car.getInstances()}<br>`);
+    </script>
+</body>
+
+</html>

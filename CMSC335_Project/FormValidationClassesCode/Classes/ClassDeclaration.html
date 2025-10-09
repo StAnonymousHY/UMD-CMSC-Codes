@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>ES6 Class Example</title>
+   </head>
+
+   <body>
+      <script>
+         "use strict";
+
+         class Store {
+            #name; /* private instance variable (# makes it private) */
+            #location; /* private instance variable */
+            parkingLotCars; /* public (does not have a #) instance variable */
+            static #instances = 0; /* static and private */
+
+            /* Constructor */
+            constructor(name = "NONAME", location = "NOLOCATION", parkingLotCars = 5) {
+               if (!this.#isValidName(name)) {
+                  console.log("Warning, name too short");
+               }
+               this.#name = name;
+               this.#location = location;
+               this.parkingLotCars = parkingLotCars; // Not using # as it is a public variable
+               Store.#instances++; // Increasing number of instances
+            }
+
+            /* Non-static method */
+            displayInfo() {
+               /* Notice: no use of function keyword (function displayInfo()) */
+               document.writeln(`${this.#name} located in ${this.#location}`);
+               Store.#yearStoreFounded(); /* Calling private static method */
+            }
+
+            /* Java's toString() */
+            [Symbol.toPrimitive]() {
+               return `Name: ${this.#name}, Location: ${this.#location}, Parking Lot Cars: ${this.parkingLotCars}`;
+            }
+
+            /* static method */
+            static getInstances() {
+               return Store.#instances;
+            }
+
+            /* non-static private method (notice the #) */
+            #isValidName(name) {
+               return name.length >= 2;
+            }
+
+            /* static private method (notice the #) */
+            static #yearStoreFounded() {
+               document.writeln(`<br>Store founded in 2000<br>`);
+            }
+         }
+
+         const musicPalace = new Store("Music Palace", "Greenbelt");
+         musicPalace.displayInfo();
+         document.writeln(musicPalace);
+
+         document.writeln("<br>*****<br>");
+         const shoeWorld = new Store("Shoe World");
+         document.writeln(shoeWorld);
+         document.writeln("<br>*****<br>");
+        
+         const unnamedStore = new Store();
+         document.writeln(unnamedStore);
+
+         document.writeln("<br>*****<br>");
+         document.writeln(`Number of stores: ${Store.getInstances()}`);
+      </script>
+   </body>
+</html>

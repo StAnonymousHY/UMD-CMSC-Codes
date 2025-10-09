@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Text Area</title>
+</head>
+
+<body>
+	<h2>Text Area</h2>
+	<form>
+		<!-- Notice the default text -->
+		<textarea id="request" rows="8" cols="50">Please check my last assignment.</textarea>
+		<br>
+		<input type="button" id="processDataButton" value="Process">
+		<input type="reset">
+	</form>
+	<hr>
+	<div id="display"></div>
+
+	<script>
+		"use strict";
+
+		/* Enable one of the following two at a time */
+		document.getElementById("processDataButton").onclick = processData;
+		// document.getElementById("request").oninput = processData; // Notice we are using oninput
+
+		function processData() {
+			document.getElementById("display").innerHTML = document.getElementById("request").value;
+		}
+	</script>
+</body></html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>JS Example</title>
+   </head>
+
+   <body>
+      <script>
+         "use strict";
+
+         class InvalidDataError extends Error {
+            constructor(message) {
+               super(message);
+            }
+         }
+
+         try {
+            const value = Number(prompt(`Enter positive value (try 0 and negative)`));
+            if (value === 0) {
+               throw "Error: No zeros!!!";
+            } else if (value < 0) {
+               throw new InvalidDataError(`Positive value expected`);
+            } else {
+               alert(`Square Root: ${Math.sqrt(value)}`);
+            }
+         } catch (error) {
+            alert(`Error message: ${error.message}`);
+         }
+      </script>
+   </body>
+</html>
