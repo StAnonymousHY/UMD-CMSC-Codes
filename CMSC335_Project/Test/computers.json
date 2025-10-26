@@ -1,0 +1,6 @@
+[
+ {"type": "mac", "quantity": 30},
+ {"type": "pc", "quantity": 50},
+ {"type": "linux", "quantity": 15},
+ {"type": "tablet", "quantity": 5}
+]

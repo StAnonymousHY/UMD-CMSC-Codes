@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Research Form</title>
+    <link rel="stylesheet" href="research.css" type="text/css">
+    <script src="research.js" defer></script>
+</head>
+
+<body>
+    <h1><span class="shadow">Research Form</span></h1>
+    <form action="./researchProcessing.php" method="GET">
+        <fieldset>
+            <legend>
+                <strong>General Information</strong>
+            </legend>
+            <label for="firstName">Firstname: </label> <input id="firstName" type="text" name="firstname" required>
+            <label for="lastName">Lastname: </label> <input id="lastName" type="text" name="lastname" required>
+            <br><br>
+            <label for="PBlank1">Phone: </label>
+            <input id="PBlank1" type="text" class="phoneNumber" maxlength="3" name="phoneFirstPart" required> -
+            <input id="PBlank2" type="text" class="phoneNumber" maxlength="3" name="phoneSecondPart" required> -
+            <input id="PBlank3" type="text" class="phoneNumber" maxlength="4" name="phoneThirdPart" required>
+            <label for="email">Email: </label> <input id="email" type="email" name="email" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>
+                <strong>Research Study Data</strong>
+            </legend>
+                <br>
+            <fieldset>
+                <legend>
+                    <strong>Age/Height/Weight</strong>
+                </legend>
+                <label for="age" class="bold">Age: </label> <input id="age" type="number" min="1" max="125" step="1" name="age">
+                <label for="heightFeet" class="bold">Height: </label> 
+                <input id="heightFeet" type="number" min="2" max="7" step="1" name="heightFeet"><span class="italic">Feet</span>
+                <input id="heightInches" type="number" min="0" max="11" step="1" name="heightInches"><span id="inch" class="italic">Inches</span>
+                <label for="weight" class="bold">Weight: </label> <input id="weight" type="number" min="1" max="600" step="1" name="weight"><span class="italic">Pounds</span>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>
+                    <strong>Conditions</strong>
+                </legend>
+                Which of the following conditions are present in your family? (Check all that apply)<br>
+                <input type="checkbox" id="highBloodPressure" name="highBloodPressure" value="HighBloodPressure">High Blood Pressure
+                <input type="checkbox" id="diabetes" name="diabetes" value="Diabetes">Diabetes
+                <input type="checkbox" id="glaucoma" name="glaucoma" value="Glaucoma">Glaucoma
+                <input type="checkbox" id="asthma" name="asthma" value="Asthma">Asthma
+                <input type="checkbox" id="none" name="none" value="None">None
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>
+                    <strong>Time Period</strong>
+                </legend>
+                How long have you experienced an of the above conditions?<br>
+                <input type="radio" name="period" id="never" value="Never">Never
+                <input type="radio" name="period" id="lessThanOne" value="LessThanAYear">Less than a year
+                <input type="radio" name="period" id="oneToTwo" value="OneToTwoYears">One to two years
+                <input type="radio" name="period" id="moreThanTwo" value="MoreThanTwoYears">More than two years
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>
+                    <strong>Study Information</strong>
+                </legend>
+                Which study are you taking part of? 
+                <select id="studyField" name="studyType">
+                    <option value="LongTerm" selected="selected">Long Term</option>
+                    <option value="ShortTerm">Short Term</option>
+                </select>
+                <label for="StudyId1">Assigned Study Id: </label>
+                <input id="StudyId1" type="text" maxlength="4" placeholder="A777" class="studyID" name="firstFourDigits" required> - 
+                <input id="StudyId2" type="text" maxlength="4" placeholder="B888" class="studyID" name="secondFourDigits" required>
+            </fieldset>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>
+                <strong>Additional Information (Comments)</strong>
+            </legend>
+            <textarea id="additionalInfo" rows="5" cols="70" name="comments"></textarea>
+        </fieldset>
+        <br>
+        <fieldset>
+            <input type="reset" value="Clear Form">
+            <input type="submit" value="Submit Information">
+        </fieldset>
+    </form>
+    <br>
+    <hr class="double"><hr>
+    <div class="center">CMSC Research Institude &reg;</div>
+    <hr class="double"><hr>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Example</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+
+        /* Using Function constructor to create a function */
+        const firstFunction = new Function("x", "y", "return x * y;");
+        document.writeln(`Value #1: ${firstFunction(10, 20)}<br>`);
+
+        /* Two functions */
+        function generateResults(x) { document.writeln(x); }
+        function moreResults(x, y) { document.writeln(x, y); }
+        
+        /* A function is an object and I can access its properties */
+        document.writeln(`generateResults.length: ${generateResults.length} <br>`);
+        document.writeln(`moreResults.length: ${moreResults.length}<br>`);
+        document.writeln(`generateResults.toString(): ${generateResults.toString()}<br>`);
+        document.writeln(`generateResults.valueOf(): ${generateResults.valueOf()}<br>`);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Object Creation Example</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+        
+         /***** object1 *****/
+        document.writeln("<h2>Example #1 Properties of object1</h2>");
+        const object1 = {};
+        object1.temperature = 80;
+        let propertiesArray = getAllProperties(object1);
+        document.writeln("<strong>Displaying all properties collected</strong><br>");
+        propertiesArray.forEach(prop => document.writeln(prop + "<br>"));
+        if (Object.prototype.isPrototypeOf(object1)) {
+            document.writeln("<br><strong>Object.prototype is prototype of object1</strong>");
+        }
+        document.writeln("<hr>");
+
+        
+
+
+        document.writeln("<h2>Example #2 dessert properties</h2>");
+        const dessert = {
+            minimumCalories: 100,
+            displayDessert: function() {
+                /* Where are this.name and this.calories coming from? */
+                document.writeln(this.name + ", " + this.calories + "<br>");
+            },
+
+            showDessert: function() {
+                document.writeln(this.name + ", " + this.calories + "<br>");
+            }
+        };
+        propertiesArray = getAllProperties(dessert);
+        document.writeln("<strong>Displaying all properties collected</strong><br>");
+        propertiesArray.forEach(prop => document.writeln(prop + "<br>"));
+        if (Object.prototype.isPrototypeOf(dessert)) {
+            document.writeln("<strong>Object.prototype is prototype of dessert</strong><br>");
+        } else {
+            document.writeln("<strong>Object.prototype is NOT prototype of dessert</strong><br>");
+        }
+        document.writeln("<hr>");
+
+
+
+
+        document.writeln("<h2>Example #3 cheesecake properties</h2>");
+        // Creating new type (cheesecake)
+        const cheesecake = Object.create(dessert);
+        cheesecake.name = "cheesecake"; // add property
+        cheesecake.calories = 750; // add property
+
+        document.writeln("Calling cheesecake methods<br>");
+        cheesecake.displayDessert();
+
+        propertiesArray = getAllProperties(cheesecake);
+        document.writeln("<strong>Displaying all properties collected</strong><br>");
+        propertiesArray.forEach(prop => document.writeln(prop + "<br>"));
+        
+        /* Is dessert the prototype object for cheesecake? */
+        if (dessert.isPrototypeOf(cheesecake)) {
+            document.writeln("<strong>dessert is prototype of cheesecake</strong><br>");
+        }
+
+        /* Is Object.prototype the prototype object for cheesecake? Can it be reached? */
+        /* It says yes, even though is not the immediate prototype object */
+        if (Object.prototype.isPrototypeOf(cheesecake)) {
+            document.writeln("<strong>Object.prototype is prototype of cheesecake</strong><br>");
+        }
+
+        /* isHealthy function will be available to object even if object was created
+           before the function */
+        Object.prototype.isHealthy = function() { alert("No!!"); }
+        cheesecake.isHealthy();
+
+        /* Evidence a function is an object (adding a property) */
+        cheesecake.isHealthy.why = "We don't know";
+        alert(cheesecake.isHealthy.why);
+
+        document.writeln("<hr><br>");
+
+
+
+
+
+        /* Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects */
+        function getAllProperties(src) {
+            let currObj,
+                answer = [];
+
+            /* Traversing the prototype chain */
+            currObj = src;
+            let level = 1;
+            while (currObj !== null) {
+                let currObjProperties = Object.getOwnPropertyNames(currObj);
+                document.writeln(`getAllPropertiesMethod(): Adding own properties, Level ${level++}:  ${currObjProperties} <br>`);
+                answer = answer.concat(currObjProperties);
+                currObj = Object.getPrototypeOf(currObj); /* Gives me value of __proto__ */
+            }
+            document.writeln("<strong>Traversal Completed</strong><br>");
+            return answer;
+        }
+
+    </script>
+</body>
+
+</html>

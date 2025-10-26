@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JS Example</title>
+  </head>
+
+  <body>
+    <script>
+      // "use strict"; // adding it makes "this" in functions undefined
+
+      function printInfo() {
+        document.writeln(`Calling printInfo()`);
+        document.writeln(this.singer + "<br />");
+      }
+
+      window.singer = "Taylor Swift";
+      printInfo(); /* Relying on global object (window) as context object */
+
+      const obj = new Object(); // Alternative = {};
+      obj.singer = "Frank Sinatra";
+      obj.singerInfo = printInfo;
+      obj.singerInfo();
+    </script>
+  </body>
+</html>

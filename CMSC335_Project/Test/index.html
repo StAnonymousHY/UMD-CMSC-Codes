@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Photo Viewer</title>
+    <script src="code.js" defer></script>
+</head>
+
+<body>
+    <input id="factInput" type="text"> 
+    <button onclick="factorial()" type="button">input</button>
+    <div id="output"></div>
+    <button onclick="factTable(5)" type="button">input</button>
+    <button onclick="test1()" type="button">test1</button>
+    <form>
+        Value: 
+        <input type="text" value="2" id="inputBox">
+
+        <button type="button" onclick="computeSqrt()">Print</button>
+        <input type="reset">
+        <div id="display"></div>
+
+        <script>
+            function computeSqrt(){
+                const max = document.querySelector("#inputBox").value;
+                let answer = "Answers <br>";
+                for(let i = 1 ; i <= max ; i++){
+                    answer += Math.sqrt(i) + "<br>";
+                }
+                console.log(answer);
+                document.querySelector("#display").innerHTML = answer;
+            }
+        </script>
+    </form>
+    <button onclick="test2()" type="button">test2</button>
+
+    <form>
+        Enter Computer Type: 
+        <input value="pc" id="pcInput" type="text">
+        <br>
+        <button type="button" onclick="displayComputerTypeInfo()">GetComputerTypeInfo</button>
+        <input type="reset">
+    </form>
+
+    <div id="displayArea"></div>
+</body>
+
+</html>

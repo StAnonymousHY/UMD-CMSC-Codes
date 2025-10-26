@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Example</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+        window.terpConstant = 4;
+        function product(x, y) { return x * y * this.terpConstant; }
+
+        document.writeln(`applyExample(6, 5): ${applyExample(6, 5)}<br>`); 
+        document.writeln(`callExample(6, 5): ${callExample(6, 5)}<br>`); 
+        document.writeln(`callExample2(6, 5): ${callExample2(6, 5)}<br>`);
+        document.writeln("bindExample(): "); // obj, 2*5*9 */
+        bindExample();
+
+        function applyExample(x, y) {
+            const obj = new Object();
+            obj.terpConstant = 2;
+
+            return product.apply(obj, [x, y]); /* Passing x and y as array */
+        }
+
+        function callExample(x, y) {
+            const obj = new Object();
+
+            obj.terpConstant = 3;
+            return product.call(obj, x, y);
+        }
+
+        function callExample2(x, y) {
+            return product.call(window, x, y); /* Passing window */
+        }
+
+        function bindExample() {
+            const obj = new Object();
+            
+            obj.terpConstant = 5;
+            /* bind() returns a function */
+            const productObjFunction = product.bind(obj);
+            /* Executing the returned function */
+            document.writeln(productObjFunction(2, 5)); 
+            
+             /* This will not change the binding that took place */
+            document.writeln("<br>Second bind: ");
+            const objTwo = {};
+            objTwo.terpConstant = 10000;
+            const secondFunction = productObjFunction.bind(objTwo);
+            document.writeln(secondFunction(1, 2));
+        }
+
+    </script>
+</body>
+
+</html>

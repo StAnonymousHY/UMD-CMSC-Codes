@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JS Example</title>
+  </head>
+
+  <body>
+    <script>
+      "use strict";
+
+      function Singer(name, mainLocation) {  // Convention to use capital S
+        this.name = name;
+        this.mainLocation = mainLocation;
+
+        this.info = function () {
+          document.writeln(`Name: ${this.name}, Main Location: ${this.mainLocation}<br>`);
+        };
+      }
+
+      const singer1 = new Singer("BTS", "South Korea");
+      singer1.info();
+      document.writeln(`Name: ${singer1.name}<br>`); // name is not private
+    </script>
+  </body>
+</html>

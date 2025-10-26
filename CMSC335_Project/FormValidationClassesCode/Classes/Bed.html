@@ -27,6 +27,13 @@
         class WaterBed extends Bed {
             #gallons;
 
+            /*
+            constructor(brand = "NOBRAND", size = "NOSIZE", gallons = "NOGALLONS") {
+                super(brand, size);
+                this.#gallons = gallons;
+            }
+                */
+
             /* No constructor; one provided automatically calls superclass constructor */
             set gallons(gallons) {
                 this.#gallons = gallons;
@@ -40,7 +47,7 @@
         const bed1 = new Bed("Softbed", "King");
         document.writeln(`${bed1}<br>`);
 
-        const waterBed = new WaterBed();
+        const waterBed = new WaterBed("test1", "No Constructor");
         waterBed.gallons = 50;
         document.writeln(waterBed);
 

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JS Example</title>
+  </head>
+
+  <body>
+    <h2>Check console</h2>
+    <script>
+     "use strict";
+
+      /* Constructor function */
+      function Student(name, credits, courses) {
+        this.name = name;
+        this.credits = credits;
+        this.courses = courses;
+      }
+
+      Student.prototype = {
+        constructor: Student,
+        college: "UMCP",
+
+        info: function () {
+          document.writeln(`Name: ${this.name}`);
+          document.writeln(`, Credits: ${this.credits}`);
+          document.writeln(`, Courses: ${this.courses} `);
+          document.writeln(`, College: ${this.college}<br>`);
+        },
+      };
+
+      function GradStudent(name, credits, courses, advisor) {
+        /* Calls super class constructor */
+        Student.call(this, name, credits, courses); // Try without call
+
+        this.advisor = advisor;
+      }
+
+      /* 
+         What are the differences between the next new Student() 
+         and Object.create(Student.prototype)? 
+        */
+      GradStudent.prototype = new Student();
+      // GradStudent.prototype = Object.create(Student.prototype);
+      
+      GradStudent.prototype.constructor = GradStudent;
+      GradStudent.prototype.getAdvisor = function () {
+        return this.advisor;
+      };
+      GradStudent.prototype.info = function () {
+        Student.prototype.info.call(this); /* Calling parent's info() */
+        document.writeln(`Advisor: ${this.advisor} <br>`);
+      };
+
+    
+      const student1 = new Student("Peter", 17, [132, 241, 567]);
+      document.writeln(`Point #1:`);
+      student1.info();
+
+      const graduateStudent1 = new GradStudent("Kelly", 15, [414, 420], "Dr. Smith");
+      document.writeln(`Point #2:`);
+      graduateStudent1.info();
+
+      document.writeln(`Point #3: Advisor: ${graduateStudent1.getAdvisor()}<br>`);
+      document.writeln(`Point #4: College: ${graduateStudent1.college}`);
+  
+    </script>
+  </body>
+</html>

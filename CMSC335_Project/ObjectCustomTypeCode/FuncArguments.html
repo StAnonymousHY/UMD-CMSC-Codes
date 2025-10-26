@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JS Example</title>
+  </head>
+
+  <body>
+    <script>
+      "use strict";
+
+      document.writeln("processData call<br>");
+      processData(3, 4);
+
+      document.writeln("processData call (missing second argument)<br>");
+      processData(10);
+
+      document.writeln("processData call (no arguments) <br>");
+      processData();
+
+      document.writeln("processData call (extra arguments) <br>");
+      processData(10, 20, 30);
+
+      document.writeln("processDataRecursive call<br>");
+      processDataRecursive(2, 3);
+
+      function processData(x, y) {
+        /* Arguments is not array */
+        document.writeln(`x: ${x}, y: ${y}<br>`);
+        document.writeln(`arguments.length: ${arguments.length}`);
+        document.writeln(`, arguments[0]: ${arguments[0]}`);
+        document.writeln(`, arguments[1]: ${arguments[1]}`);
+        document.writeln(`, arguments[2]: ${arguments[2]}`);
+        document.writeln(`, Array? ${Array.isArray(arguments)}<hr>`);
+      }
+
+      function processDataRecursive(x, y) {
+        document.writeln(`arguments.length: ${arguments.length}`);
+        document.writeln(`, arguments[0]: ${arguments[0]}`);
+        document.writeln(`, arguments[1]: ${arguments[1]}<hr>`);
+
+        if (x !== 0) {
+          arguments.callee(--x, --y); /* recursive call */
+        }
+      }
+    </script>
+  </body>
+</html>
