@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ES6 Modules</title>
+  </head>
+  <body>
+    
+    <!-- remove type="module" to see what happens (check console) -->
+
+    <script type="module"> /* do not add defer as it is the default */
+      import * as utils from "./utils.mjs"; /* Using module we saw in NodeExamples */
+      import { hello, salute } from "./greeting.js";
+      
+      document.body.innerHTML = `Sum: ${utils.add(1, 2, 3, 4, 5)}<br>`;
+      document.body.innerHTML += `${hello("Terp")}<br>${salute("Terp")}`;
+
+      // document.writeln(`Sum: ${utils.add(1, 2, 3, 4, 5)}<br>`); // fails; see console
+    </script>
+  </body>
+</html>

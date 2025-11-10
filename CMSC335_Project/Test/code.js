@@ -16,3 +16,5 @@ a.enroll("STAT440");
 
 console.log(a.courses);
 console.log(b.courses);
+
+console.log(a.courses + `lmao`);
