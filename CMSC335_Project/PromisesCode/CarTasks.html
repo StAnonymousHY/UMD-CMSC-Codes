@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>JS Example</title>
+   </head>
+   <body>
+      <h1>Open console to see results</h1>
+      <script>
+         class Car {
+            #log = "";
+            addLogEntry(entry) {
+               this.#log += `|${entry}`;
+            }
+            getLog() {
+               return this.#log;
+            }
+         }
+
+         function randomTime(max) {
+            return Math.floor(Math.random() * max);
+         }
+
+         function washCar(car) {
+            setTimeout(() => {
+               console.log("Using cloth to wash the car");
+               car.addLogEntry("Car has been washed");
+            }, randomTime(2000));
+         }
+
+         function dryCar(car) {
+            setTimeout(() => { 
+               console.log("Using dryer to dry the car");
+               car.addLogEntry("Car has been dried");
+            }, randomTime(2000));
+         }
+
+         function polishCar(car) {
+            setTimeout(() => {
+               console.log("Using polishing machine to polish the car");
+               car.addLogEntry("Polishing completed");
+            }, randomTime(2000));
+         }
+         const car = new Car();
+         washCar(car)
+         dryCar(car)
+         polishCar(car);
+         /* Assuming that after 8000 milliseconds car is ready */
+         setTimeout(() => console.log(`Car's log: ${car.getLog()}`), 8000);
+      </script>
+   </body>
+</html>

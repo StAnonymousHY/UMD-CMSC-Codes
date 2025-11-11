@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>JS Example</title>
+   </head>
+   <body>
+      <h1>Open console to see results</h1>
+      <script>
+         function randomTime(message, max) {
+            const randomTime = Math.floor(Math.random() * max);
+            console.log(`${message} starting time: ${randomTime}`);
+            return randomTime;
+         }
+
+         class Car {
+            #log = "";
+            addLogEntry(entry) {
+               this.#log += `|${entry}`;
+            }
+            getLog() {
+               return this.#log;
+            }
+         }
+
+         /* callback parameter is as what to do after completing 
+            the task associated with the function */
+         function washCar(car, callback) {
+            setTimeout(() => {
+               console.log("Using cloth to wash the car");
+               car.addLogEntry("Car has been washed");
+               callback();
+            }, randomTime("wash", 2000));
+         }
+         
+         function dryCar(car, callback) {
+            setTimeout(() => {
+               console.log("Using dryer to dry the car");
+               car.addLogEntry("Car has been dried");
+               callback();
+            }, randomTime("dry", 2000));
+         }
+
+         function polishCar(car, callback) {
+            setTimeout(() => {
+               console.log("Using polishing machine to polish the car");
+               car.addLogEntry("Polishing completed");
+               callback();
+            }, randomTime("polishing", 2000));
+         }
+
+         function deliverCar(car, callback) {
+            setTimeout(() => {
+               console.log("Delivering car");
+               car.addLogEntry("Delivering completed");
+               callback();
+            }, randomTime("delivering", 2000));
+         }
+
+         function task1() {
+            const car = new Car();
+
+            washCar(car, () => {
+               dryCar(car, () => console.log(car.getLog()));
+            });
+         }
+
+         function task2() {
+            const car = new Car();
+
+            washCar(car, () => {
+               dryCar(car, () => {
+                  polishCar(car, () => console.log(car.getLog()));
+               });
+            });
+         }
+
+         function task3() {
+            const car = new Car();
+
+            washCar(car, () => {
+               dryCar(car, () => {
+                  polishCar(car, () => {
+                     deliverCar(car, () => console.log(car.getLog()));
+                  });
+               });
+            });
+         }
+
+         /* Try each task below individually */
+         console.log("***** Task *****");
+         task1();
+         // task2();
+         // task3();
+      </script>
+   </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>JS Example</title>
+   </head>
+   <body>
+      <h1>Open console to see results</h1>
+      <script>
+         function randomTime(message, max) {
+            const randomTime = Math.floor(Math.random() * max);
+            console.log(`${message} starting time: ${randomTime}`);
+            return randomTime;
+         }
+
+         class Car {
+            #log = "";
+            addLogEntry(entry) {
+               this.#log += `|${entry}`;
+            }
+            getLog() {
+               return this.#log;
+            }
+         }
+
+         /* resolve represents what to do after  
+            asynchronous task has been completed.  */
+         function washCar(car) {
+            let promise;
+
+            promise = new Promise((resolve, reject) =>            
+               setTimeout(() => {
+                  console.log("Using cloth to wash the car");
+                  car.addLogEntry("Car has been washed");
+                  resolve(car);
+               }, randomTime("wash", 2000))
+            );
+
+            return promise;
+         }
+         
+         function dryCar(car) {
+            return new Promise((resolve, reject) => 
+               setTimeout(() => {
+                  console.log("Using dryer to dry the car");
+                  car.addLogEntry("Car has been dried");
+                  resolve(car);
+               }, randomTime("dry", 2000))
+            );
+         }
+
+         function polishCar(car) {
+            return new Promise((resolve, reject) => 
+               setTimeout(() => {
+                  console.log("Using polishing machine to polish the car");
+                  car.addLogEntry("Polishing completed");
+                  resolve(car);
+               }, randomTime("polishing", 2000))
+            );
+         }
+
+         function deliverCar(car) {
+            return new Promise((resolve, reject) =>
+               setTimeout(() => {
+                  console.log("Delivering car");
+                  car.addLogEntry("Delivering completed");
+                  resolve(car);
+               }, randomTime("delivering", 2000))
+            );
+         }
+
+         function task1() {
+            const car = new Car();
+
+            /* We do not need .then() to have the car washed */
+            washCar(car);
+         }
+
+         function task2() {
+            const car = new Car();
+
+            let washedCarPromise = washCar(car);
+            // Value returned by promise is value returned by resolve()
+            let thenPromise = washedCarPromise.then(washedCar => console.log(washedCar.getLog()));
+            // let thenPromise = washedCarPromise.then(washedCar => 20);
+            // let thenPromise = washedCarPromise.then((washedCar, message) => "Hello");
+
+            console.log("***** thenPromise");
+            console.log(thenPromise);
+         }
+
+         function task3() {
+            const car = new Car();
+
+            washCar(car).then(washedCar => console.log(washedCar.getLog()));
+         }
+
+         function task4() {
+            const car = new Car();
+
+            washCar(car)
+            .then(washedCar => dryCar(washedCar))
+            .then(driedCar => console.log(driedCar.getLog()));
+         }
+
+         function task5() {
+            const car = new Car();
+
+            washCar(car)
+            .then(washedCar => dryCar(washedCar))
+            .then(driedCar => polishCar(driedCar))
+            .then(polishedCar => console.log(polishedCar.getLog()));
+         }
+
+         function task6() {
+            const car = new Car();
+
+            washCar(car)
+            .then(washedCar => dryCar(washedCar))
+            .then(driedCar => polishCar(driedCar))
+            .then(polishedCar => deliverCar(polishedCar))
+            .then(deliveredCar => console.log(deliveredCar.getLog()));
+         }
+
+       
+         /* Try each task below individually */
+         console.log("***** Task *****");
+         task1();
+         // task2();
+         // task3();
+         // task4();
+         // task5();
+         // task6();
+         // task7();
+      </script>
+   </body>
+</html>

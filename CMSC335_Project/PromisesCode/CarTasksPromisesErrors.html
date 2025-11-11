@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>JS Example</title>
+   </head>
+   <body>
+      <h1>Open console to see results</h1>
+      <script>
+         function randomTime(message, max) {
+            const randomTime = Math.floor(Math.random() * max);
+            console.log(`${message} starting time: ${randomTime}`);
+            return randomTime;
+         }
+
+         class Car {
+            #log = "";
+            addLogEntry(entry) {
+               this.#log += `|${entry}`;
+            }
+            getLog() {
+               return this.#log;
+            }
+         }
+
+         let washingOK = true, dryingOK = true, polishingOK = true;
+         function washCar(car) {
+            let promise;
+
+            promise = new Promise((resolve, reject) =>            
+               setTimeout(() => {
+                  if (washingOK && car.getLog() !== "|Rolls") {
+                     console.log("Using cloth to wash the car");
+                     car.addLogEntry("Car has been washed");
+                     resolve(car);
+                  } else {
+                     reject("washing problem (no water)");
+                  } 
+               }, randomTime("wash", 2000))
+            );
+
+            return promise;
+         }
+         
+         function dryCar(car) {
+            return new Promise((resolve, reject) => 
+               setTimeout(() => {
+                  if (dryingOK) {
+                     console.log("Using dryer to dry the car");
+                     car.addLogEntry("Car has been dried");
+                     resolve(car);
+                  } else {
+                     reject("drying problem");
+                  }
+               }, randomTime("dry", 2000))
+            );
+         }
+
+         function polishCar(car) {
+            return new Promise((resolve, reject) => 
+               setTimeout(() => {
+                  if (polishingOK) {
+                     console.log("Using polishing machine to polish the car");
+                     car.addLogEntry("Polishing completed");
+                     resolve(car);
+                  } else {
+                     reject("polishing problem (polishing machine broke)")
+                  }
+               }, randomTime("polishing", 2000))
+            );
+         }
+
+         function task1() {
+            washingOK = true; // try with false
+            const car = new Car();
+            washCar(car)
+              .then(washedCar => console.log(washedCar.getLog()), problem => console.error(problem));
+         }
+         
+         function task2() {
+            washingOK = true; // try with false 
+            const car = new Car();
+            washCar(car)
+              .then(washedCar => console.log(washedCar.getLog()))
+              .catch(problem => console.error(problem));
+         }
+
+         function task3() {
+            const car = new Car();
+            washingOK = true;
+            dryingOK = true;
+            washCar(car)
+              .then(washedCar => dryCar(washedCar), problem => console.error(problem))
+              .then(driedCar => console.log(driedCar.getLog()), problem => console.error(`Drying Phase: ${problem}`))
+         }
+
+         function task4() {
+            const car = new Car();
+            washingOK = true;
+            dryingOK = true;
+            polishingOK = true;
+            washCar(car)
+              .then(washedCar => dryCar(washedCar))
+              .then(driedCar => polishCar(driedCar))
+              .then(polishedCar => console.log(polishedCar.getLog()))
+              .catch(problem => console.error(problem))
+         }
+         function task5() {
+            const car1 = new Car(), car2 = new Car(), car3 = new Car();
+            car1.addLogEntry("Nexus");
+            car2.addLogEntry("Nelyota");
+            car3.addLogEntry("RollsRich"); // Change to Rolls to see what happens
+
+            const allCars = [washCar(car1), washCar(car2), washCar(car3)];
+            Promise.all(allCars)
+               .then(results => {
+                  console.log("All cars have been washed");
+                  console.log(results[0].getLog());
+                  console.log(results[1].getLog());
+                  console.log(results[2].getLog());
+               })
+               .catch(error => console.log("Could not wash all cars"))
+         }
+
+         /* Try each task below individually */
+         task1();
+         // task2();
+         // task3();
+         // task4();
+         // task5();
+      </script>
+   </body>
+</html>

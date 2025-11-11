@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>Promises</title>
+   </head>
+   <body>
+      <h1>Open console to see results</h1>
+      <script>
+         async function getGift(budget) {
+            if (budget != 0) {
+               const gifts = ["Clothes", "Laptop"];
+               const index = Math.floor(Math.random() * 2);
+               return gifts[index];
+            } else {
+               throw new Error("No budget");
+            }
+         }
+
+         /* Using IIFE */
+         (async () => {
+            const budget = 10; // try with 0 budget
+            const giftPromise = getGift(budget);
+            console.log("************");
+            console.log(giftPromise);
+            console.log("************");
+            giftPromise.then(gift => console.log(`Gift: ${gift}`)).catch(error => console.error(`Getting gift failed: ${error}`));
+            console.log("Done");
+         })();
+      </script>
+   </body>
+</html>
