@@ -50,13 +50,16 @@ app.get("/order", (request, response) => {
 });
 
 app.post("/order", (request, response) => {
-    let tableHTML = "<table border='1'><tr><th>Item</th><th>Cost</th></tr>";
+    let tableHTML = "";
     let totalCost = 0;
-    for (let i of request.body.itemsSelected){
-        tableHTML += `<tr><td>${content.itemsList[i].name}</td><td>${content.itemsList[i].cost.toFixed(2)}</td></tr>`;
-        totalCost += content.itemsList[i].cost;
+    if(request.body.itemsSelected != undefined){
+        tableHTML += "<table border='1'><tr><th>Item</th><th>Cost</th></tr>";
+        for (let i of request.body.itemsSelected){
+            tableHTML += `<tr><td>${content.itemsList[i].name}</td><td>${content.itemsList[i].cost.toFixed(2)}</td></tr>`;
+            totalCost += content.itemsList[i].cost;
+        }
+        tableHTML += `<tfoot><tr><td>Total Cost: </td><td>${totalCost}</td></tr></tfoot></table>`;
     }
-    tableHTML += `<tfoot><tr><td>Total Cost: </td><td>${totalCost}</td></tr></tfoot></table>`;
     const order = {
         name: request.body.name,
         email: request.body.email,
