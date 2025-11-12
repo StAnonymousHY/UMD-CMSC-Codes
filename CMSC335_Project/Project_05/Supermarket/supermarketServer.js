@@ -11,8 +11,38 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve(__dirname, "templates"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
+class Body{
+    #name;
+    #email;
+    #delivery;
+    #info;
+
+    constructor(name, email, delivery, info){
+        this.#name = name;
+        this.#email = email;
+        this.#delivery = delivery;
+        this.#info = info;
+    }
+
+    get name(){
+        return this.#name;
+    }
+
+    get email(){
+        return this.#email;
+    }
+
+    get delivery(){
+        return this.#delivery;
+    }
+
+    get info(){
+        return this.#info;
+    }
+}
+
 if (process.argv.length != 3) {
-  process.stdout.write("Usage supermarketServer.js jsonFile");
+  process.stdout.write("Usage supermarketServer.js jsonFile\n");
   process.exit(1);
 }
 
@@ -60,12 +90,14 @@ app.post("/order", (request, response) => {
         }
         tableHTML += `<tfoot><tr><td>Total Cost: </td><td>${totalCost}</td></tr></tfoot></table>`;
     }
+
+    const body = new Body(request.body.name, request.body.email, request.body.delivery, request.body.orderInformation);
     const order = {
-        name: request.body.name,
-        email: request.body.email,
-        delivery: request.body.delivery,
+        name: body.name,
+        email: body.email,
+        delivery: body.delivery,
         orderTable: tableHTML,
-        orderInformation: request.body.orderInformation
+        orderInformation: body.info
     }
     response.render("orderConfirmation", order);
 });
