@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mouse Drawing</title>
+</head>
+
+<body>
+<div>
+    <canvas id="canvas" width="400" height="400"></canvas>
+</div>
+<strong>Press d to draw (red color)<br>
+        e to erase<br>
+        c to clear canvas<br>
+        esc to stop drawing<br>
+        g to draw (green color)
+
+</strong>
+
+<script>
+    "use strict";
+
+    let color = "red", sideLength = 5, stopDrawing = false;
+    const ESCKEYCODE = 27, CANVASDIMENSION = 400;
+    const CCHARACTERCODE = 67, DCHARACTERCODE = 68, ECHARACTERCODE = 69;
+	const GCHARACTERCODE = 71;
+
+   
+    document.onmousemove = (evt) => drawRectangle(evt.offsetX, evt.offsetY, sideLength, color);
+    document.onkeydown = (evt) => { 
+		if (evt.keyCode == DCHARACTERCODE) {
+            color = "red";  // Drawing
+            sideLength = 5;
+            stopDrawing = false;
+        } else if (evt.keyCode == ECHARACTERCODE) {
+            color = "white"; // Erasing
+            sideLength = CANVASDIMENSION / 10;
+            stopDrawing = false;
+        } else if (evt.keyCode == CCHARACTERCODE) {
+            drawRectangle(0, 0, CANVASDIMENSION, "white"); // clearing canvas
+            stopDrawing = false;
+        } else if (evt.keyCode == ESCKEYCODE) {
+            stopDrawing = true;
+        } else if (evt.keyCode === GCHARACTERCODE) {
+			color = "green";  // Drawing
+            sideLength = 5;
+            stopDrawing = false;
+		} else {
+            alert("Invalid key: " + evt.keyCode);
+        }
+    }
+
+    function drawRectangle(xPos, yPos, sideLength, color) {
+        if (!stopDrawing) {
+            const context = document.querySelector("canvas").getContext("2d");
+            context.fillStyle = color;
+            context.fillRect(xPos, yPos, sideLength, sideLength);
+        }
+    }
+</script>
+</body>
+</html>

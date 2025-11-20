@@ -76,7 +76,7 @@
             washCar(car);
          }
 
-         function task2() {
+         async function task2() {
             const car = new Car();
 
             let washedCarPromise = washCar(car);
@@ -84,7 +84,13 @@
             let thenPromise = washedCarPromise.then(washedCar => console.log(washedCar.getLog()));
             // let thenPromise = washedCarPromise.then(washedCar => 20);
             // let thenPromise = washedCarPromise.then((washedCar, message) => "Hello");
+            console.log("Print out washedCarPromise", washedCarPromise)
+            console.log("Directly print out .then()", (washedCarPromise.then(washedCar => washedCar)));
+            
+            console.log("Print out await .then()", (await washedCarPromise.then(washedCar => washedCar)));
+            washedCarPromise.then(washedCar => console.log("Print out inside .then()", washedCar));
 
+            console.log(washedCarPromise);
             console.log("***** thenPromise");
             console.log(thenPromise);
          }
@@ -125,8 +131,8 @@
        
          /* Try each task below individually */
          console.log("***** Task *****");
-         task1();
-         // task2();
+         //task1();
+          task2();
          // task3();
          // task4();
          // task5();

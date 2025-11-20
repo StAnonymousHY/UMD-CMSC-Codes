@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Example</title>
+  <meta charset="utf-8">
+  <style>
+    #OuterElement {border: 0.25em solid red;}
+    #InnerElement {border: 0.25em solid blue;}
+    #WayInnerElement {border: 0.25em solid green;}
+  </style>
+</head>
+
+<body>
+  <div id="OuterElement">
+    This text is part of the outer element.<br><br><br>
+    <div id="InnerElement">
+      &nbsp;&nbsp;This text is part of the inner element.<br><br><br>
+      <div id="WayInnerElement">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This text is part of the way inner
+        element<br><br><br>
+      </div>
+    </div>
+  </div>
+  <h3>Information</h3>
+  <div id="display"></div>
+
+  <script>
+    function display(str) { document.querySelector("#display").innerHTML += `${str}<br>`;}
+  
+    const outerElement = document.getElementById("OuterElement");
+    const innerElement = document.getElementById("InnerElement");
+    const  wayInnerElement = document.getElementById("WayInnerElement");
+
+    outerElement.addEventListener("click", function (event) {
+      let message;
+      if (this == outerElement) {
+        message = `"this" is referring to outerElement`;
+      } else if (this == innerElement) {
+        message = `"this" is referring to innerElement`;
+      } else if (this == wayInnerElement) {
+        message = `"this" is referring to wayInnerElement`;
+      } else {
+        message = `"this" is referring to other element (check console)`;
+      }
+      display(message);
+      console.log(`other`, this);
+
+      /* Checking event.target */
+      if (event.target == outerElement) {
+        message = `outerElement was the target`;
+      } else if (event.target == innerElement) {
+        message = `innerElement was the target`;
+      } else if (event.target == wayInnerElement) {
+        message = `wayInnerElement was the target`;
+      } else {
+        message = `other (target)`;
+      }
+
+      display(message);
+    });
+  </script>
+</body>
+
+</html>

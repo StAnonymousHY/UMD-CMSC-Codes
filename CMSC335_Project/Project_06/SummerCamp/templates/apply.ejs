@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Application</title>
+</head>
+
+<body>
+	<h1>Application</h1>
+	<form action="/processApplication" method = "POST">
+        <fieldset>
+            <label for="Name"><strong>Name: </strong></label><input id="Name" type="text" name="name" required>
+            <label for="Email"><strong>Email Address: </strong></label><input id="Email" type="email" name="email" required>
+            <br><br>
+            <label for="GPA"><strong>GPA: </strong></label><input id="GPA" type="text" name="gpa" required>
+            <br><br>
+            <label for="Info"><strong>Background Information: </strong></label><br>
+            <textarea id="Info" rows="8" cols="80" name="info"></textarea>
+        </fieldset>
+        <br>
+        <input type="reset">
+        <input type="submit" value="Submit Application">
+    </form>
+    <hr>
+    <a href="/">HOME</a>
+</body>
+
+</html>
+
+<script>
+    window.onsubmit = () => {
+        let prompt = "Are you sure you want to submit your application?\n";
+        prompt += "You will not be able to change your information once submitted. "
+        return window.confirm(prompt);
+    }
+</script>

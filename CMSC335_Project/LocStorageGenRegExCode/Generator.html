@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>Example</title>
+   </head>
+
+   <body>
+      <h1>Open the console for results</h1>
+      <script>
+         "use strict";
+
+         function* getUmcpMottoGenerator() {
+            yield "Fear";
+            yield "The";
+            yield "Turtle";
+         }
+         function* getOddValuesGenerator() {
+            let value = 1;
+
+            while (true) {
+               yield value;
+
+               value += 2;
+            }
+         }
+
+         console.log("First Motto Example");
+         const umcpMottonGenerator = getUmcpMottoGenerator();
+         console.log(umcpMottonGenerator.next().value);
+         console.log(umcpMottonGenerator.next().value);
+         console.log(umcpMottonGenerator.next().value);
+         
+         console.log("Second Motto Example");
+         const umcpMottonGeneratorTwo = getUmcpMottoGenerator();
+         console.log("**** UMCP Motto Generator");
+         let valueObject = umcpMottonGeneratorTwo.next();
+         while (!valueObject.done) {
+            console.log(valueObject.value);
+
+            valueObject = umcpMottonGeneratorTwo.next();
+         }
+
+         console.log("**** Odd Values Generator");
+         const oddValuesGenerator = getOddValuesGenerator();
+         console.log(oddValuesGenerator.next().value);
+         console.log(oddValuesGenerator.next().value);
+         console.log(oddValuesGenerator.next().value);
+
+         console.log("**** Creating array with odd values");
+         const secondOddValuesGenerator = getOddValuesGenerator();
+         const data = new Array(10).fill(0).map(() => secondOddValuesGenerator.next().value);
+         console.log(data);
+
+         console.log("**** Using spread operator with generator");
+         const words = [...getUmcpMottoGenerator()];
+         console.log(words);
+      </script>
+   </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Example</title>
+    <meta charset="utf-8" />
+  </head>
+
+  <body>
+    <h2>Open console for results</h2>
+    <script>
+      const url = "https://jsonplaceholder.typicode.com/todos/1"; 
+      const invalidURL = "https://jsonplaceholder.typicode.com/todos/INVALID"; 
+
+      function task1() {
+        console.log("** Valid url");
+        fetch(url)
+          .then(response => response.json())
+          .then(json => console.log(json))
+          .catch(error => console.log(`Reporting error: ${error}`));
+      }
+
+      /* catch() clause will not be executed for an invalid URL 
+         (HTTP 404); it is executed if there is a network failure 
+         (e.g., we disconnect from the internet) 
+        */
+      function task2() {
+        console.log("** Invalid url (HTTP 404)");
+        fetch(invalidURL)
+          .then(response => response.json())
+          .then(json => console.log(json))
+          .catch(error => console.log(`Reporting error: ${error}`));
+      }
+
+      /* catch() clause will be executed */
+      function task3() {
+        console.log("** Invalid url (HTTP 404), Checking response.ok");
+        fetch(invalidURL)
+          .then(response => { 
+            if (!response.ok) {
+              throw "Problem downloading";
+            } else {
+              return response.json();
+            }     
+          })
+        .then(json => console.log(json))
+        .catch(error => console.log(`Reporting error: ${error}`));
+      } 
+      
+      /* Try each task individually */
+      task1();
+      // task2();
+      // task3();
+    </script>
+  </body>
+</html>

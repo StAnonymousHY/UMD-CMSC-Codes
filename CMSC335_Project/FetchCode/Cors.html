@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TAs Info</title>
+  </head>
+
+  <body>
+    <h3>CORS</h3>
+    <p>
+      Try running this example by first opening this file using Live Server and
+      then by right-clicking on the file and selecting the Chrome browser.
+    </p>
+    <div id="display"></div>
+    <script>
+      async function readTAsInfo() {
+        const filename = "./tas.json";
+        const response = await fetch(filename);
+        const data = await response.json();
+        let table = "";
+        data.forEach((entry) => {
+          table += `<tr><td>${entry.name}</td><td>${entry.course}</td></tr>`;
+        });
+        const tableHeadSection = `<table border='1'><tr><th>Name</th><th>Course</th></tr>`;
+        table = `${tableHeadSection}${table}</table>`;
+        document.querySelector("#display").innerHTML = table;
+      }
+
+      readTAsInfo();
+    </script>
+  </body>
+</html>

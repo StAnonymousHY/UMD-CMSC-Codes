@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Example</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <h2>Open console for results</h2>
+    <script>
+        const url = "https://jsonplaceholder.typicode.com/todos/1"; // Notice the 1 at the end
+        console.log(`Retrieving data from ${url}`);
+        
+        const promise = fetch(url);
+        console.log("** Promise Object");
+        console.log(promise);
+        console.log("**");
+        promise
+            .then(response => {
+                console.log("** Response"); 
+                console.log(response); 
+                console.log("**"); 
+                return response.json()
+            })
+            .then(json => {
+                console.log("** JSON");
+                console.log(json);
+                console.log("**");         
+            });  // Process json object by displaying on the console
+        console.log("***** END OF SCRIPT *****"); // Check WHERE this message appears in the console
+    </script>
+</body>
+
+</html>

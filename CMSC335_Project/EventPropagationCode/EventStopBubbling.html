@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Example</title>
+    <meta charset="utf-8">
+    <style>
+      #OuterElement {border: 0.25em solid red;}
+      #InnerElement {border: 0.25em solid blue;}
+      #WayInnerElement {border: 0.25em solid green;}
+    </style>
+  </head>
+
+  <body>
+    <div id="OuterElement">
+      This text is part of the outer element.<br><br><br>
+      <div id="InnerElement">
+        &nbsp;&nbsp;This text is part of the inner element.<br><br><br>
+        <div id="WayInnerElement">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This text is part of the way inner
+          element :)<br><br><br>
+        </div>
+      </div>
+    </div>
+    <h3>Information</h3>
+    <div id="display"></div>
+    <script>
+      function display(str) { document.querySelector("#display").innerHTML += `${str}<br>`;}
+
+      const stopPropagation = true; // update to see effect    
+      document.getElementById("OuterElement").addEventListener("click", () => display("OuterElement"));
+      document.getElementById("InnerElement").addEventListener("click", (event) => {
+        display("InnerElement");
+        if (stopPropagation) {
+          event.stopPropagation(); 
+        }
+      });
+      document.getElementById("WayInnerElement").addEventListener("click", () => display("WayInnerElement"));
+    </script>
+  </body>
+</html>

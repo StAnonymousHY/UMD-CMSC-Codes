@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Calculator</title>
+  <style>
+    div {
+      border-style: double;
+      border-width: 0.5em;
+      width: 8em;
+      padding-left: 1em;
+      padding-top: 1em;
+      background-color: antiquewhite;
+    }
+
+    button {
+      font-size: 1.5em;
+      margin: .125em;
+      border-style: solid;
+    }
+
+    button:hover {
+      margin: .125em;
+      background-color: red;
+    }
+
+    input[type=text] {
+      font-size: 1.05em;
+      border-width: .25em;
+      border-style: double;
+    }
+
+    #clearButton {
+      font-size: 1em;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    "use strict";
+    let calculator = `<div><input id="calcDisplay" value="" type="text" size="7" readonly><br>`;
+    let buttons = "";
+    for (let value = 0; value <= 9; value++) {
+      buttons += `<button onclick="enter('${value}')">${value}</button>`;
+      if ((value + 1) % 3 == 0) {
+        buttons += "<br>";
+      }
+    }
+    calculator += buttons;
+    calculator += `
+		<button onclick="enter('+')">+</button>
+		<button onclick="enter('-')">-</button>
+		<button onclick="enter('*')">*</button>
+		<button onclick="enter('/')">/</button>
+    <button onclick="enter('.')">.</button>
+		<button id="clearButton" onclick="clearCalc()">Clear</button>
+    <button onclick="computeResult()">=</button>
+		</div>`;
+
+    document.writeln(calculator);
+
+    function enter(value) {
+      if (document.getElementById("calcDisplay").value === "0") {
+        document.getElementById("calcDisplay").value = value;
+      } else {
+        document.getElementById("calcDisplay").value += value;
+      }
+    }
+
+    function computeResult() {
+      const expression = document.getElementById("calcDisplay").value;
+      document.getElementById("calcDisplay").value = eval(expression);
+    }
+
+    function clearCalc() {
+      document.getElementById("calcDisplay").value = "0";
+    }
+  </script>
+</body>
+
+</html>

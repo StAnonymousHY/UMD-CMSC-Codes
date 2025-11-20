@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Regular Expression</title>
+</head>
+
+<body>
+	<script>
+		"use strict";
+		const minimumLength = 4;
+		const password = prompt("Enter password", "sure");
+		const specialCharacters = /[$%#]/;
+		const digits = /[0123456789]/;
+
+		let message;
+
+		if (password.length < minimumLength) {
+			message = "error: invalid length";
+		} else if (!specialCharacters.test(password)) {
+			message = "error: no special chars";
+		} else if (!digits.test(password)) {
+			message = "error: no digit";
+		} else {
+			message = "Yes!!!";
+		}
+		document.writeln(message);
+		
+		document.writeln("<br><br>Checking Phone<br>");
+		const validPhone = /^\d{3}-\d{4}$/; /* ^ and $ force the exact match */
+		const phone = prompt("Enter phone", "123-4567");
+		if (!validPhone.test(phone)) {
+			document.writeln("Invalid phone");
+		} else {
+			document.writeln("Valid phone");
+		}
+	</script>
+</body>
+
+</html>

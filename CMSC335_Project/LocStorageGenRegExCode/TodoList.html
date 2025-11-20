@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Todo List</title>
+</head>
+
+<body>
+    <h1>Todo List</h1>
+
+    <!-- Notice the contenteditable attribute -->
+    <ol id="todoList" contenteditable>
+        <li>Add Tasks</li>
+    </ol>
+    <button id="saveButton">Save</button>
+    <button id="clearButton">Clear</button>
+    <br><br>
+    <div id="display" style="color:red"></div>
+
+    <script>
+        const emptyList = "<li>Add Tasks</li>";
+        let todoList = localStorage.getItem("todoList");
+        if (todoList === null) {
+            todoList = emptyList;
+        }
+        document.querySelector("#todoList").innerHTML = todoList;
+        document.querySelector("#saveButton").onclick = () => {
+            localStorage.setItem("todoList", document.querySelector("#todoList").innerHTML);
+            document.querySelector("#display").innerHTML = "Data saved";
+        };
+        document.querySelector("#clearButton").onclick = () => {
+            window.localStorage.clear();
+            document.querySelector("#todoList").innerHTML = emptyList;
+        };
+    </script>
+
+</body>
+
+</html>

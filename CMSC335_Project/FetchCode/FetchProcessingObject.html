@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Fetch</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <h2>Open console for results</h2>
+    <script>
+        const url = "https://jsonplaceholder.typicode.com/todos/2"; 
+        console.log(`Retrieving data from ${url} (check console for results)`);
+        
+        fetch(url).then(response => response.json()).then(json => processObject(json)); 
+        function processObject({userId, id, title}) { // Notice destructoring
+            console.log("** Data Retrieved\n");
+            console.log(`userId: ${userId}\nid: ${id}\ntitle: ${title}`);
+        }
+    </script>
+</body>
+
+</html>

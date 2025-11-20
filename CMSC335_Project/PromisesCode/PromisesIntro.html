@@ -26,6 +26,7 @@
             console.log("************");
             try {
                const gift = await giftPromise;
+               // giftPromise.then(gift => console.log(`Gift: ${gift}`));
                console.log(`Gift: ${gift}`);
             } catch(error) {
                console.log(error);

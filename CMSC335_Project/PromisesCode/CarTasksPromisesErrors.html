@@ -118,16 +118,22 @@
                   console.log(results[0].getLog());
                   console.log(results[1].getLog());
                   console.log(results[2].getLog());
+                  return Promise.all([dryCar(results[0]), dryCar(results[1]), dryCar(results[2])]);
+               }).then(results => {
+                  console.log("All cars have been dried");
+                  console.log(results[0].getLog());
+                  console.log(results[1].getLog());
+                  console.log(results[2].getLog());
                })
                .catch(error => console.log("Could not wash all cars"))
          }
 
          /* Try each task below individually */
-         task1();
+         // task1();
          // task2();
          // task3();
          // task4();
-         // task5();
+         task5();
       </script>
    </body>
 </html>
