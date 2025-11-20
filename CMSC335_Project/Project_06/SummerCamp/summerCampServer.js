@@ -86,7 +86,7 @@ app.post("/processAdminGFA", (request, response) => {
    const body = request.body;
    const now = new Date();
    const result = applicantGPA(body.gpa);
-   // Because reviewApplicant is wrapped in async, use .then to extract from Promise
+   // Because applicantGPA is wrapped in async, use .then to extract from Promise
    result.then(body => {
       let tableHTML = "<table border='1'><tr><th>Name</th><th>GPA</th></tr>";
       if(body.length > 0){
@@ -106,7 +106,7 @@ app.get("/adminRemove", (request, response) => { response.render("remove"); })
 
 app.post("/processAdminRemove", (request, response) => {
    const result = adminRemove();
-   // Because reviewApplicant is wrapped in async, use .then to extract from Promise
+   // Because adminRemove is wrapped in async, use .then to extract from Promise
    result.then(body => {
       const variables = {
          remCnt: body
