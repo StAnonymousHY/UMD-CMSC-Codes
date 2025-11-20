@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Admin Remove</title>
+</head>
+
+<body>
+	<h1>Removing All Applicants</h1>
+	<form action="/processAdminRemove" method="POST">
+        <input type="submit" value="Remove all applicants">
+    </form>
+    <hr>
+    <a href="/">HOME</a>
+</body>
+
+</html>
+
+<script>
+    window.onsubmit = () => {
+        let prompt = "Are you sure you want to remove all applications? ";
+        return window.confirm(prompt);
+    }
+</script>

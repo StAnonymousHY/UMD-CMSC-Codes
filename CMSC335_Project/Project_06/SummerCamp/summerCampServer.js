@@ -11,6 +11,7 @@ require("dotenv").config({
    path: path.resolve(__dirname, "credentials/.env"),
 });
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const { request } = require("http");
 
 // Code for server
 if (process.argv.length != 3) {
@@ -87,7 +88,30 @@ app.post("/processAdminGFA", (request, response) => {
    const result = applicantGPA(body.gpa);
    // Because reviewApplicant is wrapped in async, use .then to extract from Promise
    result.then(body => {
-      console.log(body);
+      let tableHTML = "<table border='1'><tr><th>Name</th><th>GPA</th></tr>";
+      if(body.length > 0){
+         for (let applicant of body){
+            tableHTML += `<tr><td>${applicant.Name}</td><td>${applicant.GPA}</td></tr>`
+         }
+      }
+      tableHTML += "</table>"
+      const variables = {
+         table: tableHTML
+      }
+      response.render("processGPA", variables);
+   });
+});
+
+app.get("/adminRemove", (request, response) => { response.render("remove"); })
+
+app.post("/processAdminRemove", (request, response) => {
+   const result = adminRemove();
+   // Because reviewApplicant is wrapped in async, use .then to extract from Promise
+   result.then(body => {
+      const variables = {
+         remCnt: body
+      }
+      response.render("processRemove", variables);
    });
 });
 
@@ -119,7 +143,7 @@ async function reviewApplicant(email){
       const database = client.db("CMSC335DB");
       const collection = database.collection("campApplicants");
 
-      let filter = { Email: email };
+      const filter = { Email: email };
       const result = await collection.findOne(filter);
       return result;
    } catch (e) {
@@ -137,10 +161,30 @@ async function applicantGPA(gpa){
       const database = client.db("CMSC335DB");
       const collection = database.collection("campApplicants");
 
-      let filter = { GPA: { $gte: gpa } };
+      const filter = { GPA: { $gte: gpa } };
       const cursor = collection.find(filter);
       result = await cursor.toArray();
       return result;
+   } catch (e) {
+      console.error(e);
+   } finally {
+      await client.close();
+   }
+}
+
+async function adminRemove(){
+   const uri = process.env.MONGO_CONNECTION_STRING;
+   const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
+   try {
+      await client.connect();
+      const database = client.db("CMSC335DB");
+      const collection = database.collection("campApplicants");
+
+      const filter = {};
+      const cursor = collection.find(filter);
+      const result = await cursor.toArray();
+      await collection.drop();
+      return result.length;
    } catch (e) {
       console.error(e);
    } finally {
