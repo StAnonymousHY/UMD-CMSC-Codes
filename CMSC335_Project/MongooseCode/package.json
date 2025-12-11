@@ -1,0 +1,16 @@
+{
+  "name": "mongodbcode",
+  "version": "1.0.0",
+  "description": "1. Execute \"npm i\"",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "clearCollection.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "mongoose": "^8.14.1"
+  }
+}

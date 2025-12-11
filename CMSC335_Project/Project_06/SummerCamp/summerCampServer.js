@@ -80,9 +80,9 @@ app.post("/processReviewApplication", (request, response) => {
    });
 });
 
-app.get("/adminGFA", (request, response) => { response.render("GPA"); });
+app.get("/adminGPA", (request, response) => { response.render("GPA"); });
 
-app.post("/processAdminGFA", (request, response) => {
+app.post("/processAdminGPA", (request, response) => {
    const body = request.body;
    const now = new Date();
    const result = applicantGPA(body.gpa);

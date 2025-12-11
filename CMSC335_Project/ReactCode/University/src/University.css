@@ -1,0 +1,10 @@
+body {
+  background-color: rgba(126, 154, 149, 0.589);
+}
+th, td {
+  text-align: center;
+}
+
+h1, h2 {
+  text-decoration: underline;
+}
