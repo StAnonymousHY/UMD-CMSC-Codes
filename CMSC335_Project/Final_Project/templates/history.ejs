@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>History</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<h1>Search History</h1>
+    <table border="1">
+        <%- tableContent %>
+    </table>
+    <form action="/history" method="POST">
+        <input class="bottom" type="submit" value="Clear History">
+    </form>
+    <a href="/search">Back to Search</a>
+    
+</body>
+
+</html>
+
+<script>
+    window.onsubmit = () => {
+        let prompt = "Are you sure you want to clear your search history? ";
+        return window.confirm(prompt);
+    }
+</script>

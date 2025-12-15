@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Log in</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<h1>Search for Movies that You are Interested in!</h1>
+    <form action="/" method="POST" class="center">
+        <fieldset>
+            <legend>
+                Log in
+            </legend>
+            User Email: <br>
+            <input class="inputbox" type="email" required name="email"><br>
+            <br>
+            Password: <br>
+            <input class="inputbox" type="password" required name="password"><br>
+            <div class="err">
+                <%- errMsg %>
+            </div>
+            <br>
+            <input class="bottom" type="submit" value="Login"> <input class="bottom" type="reset" value="Clear">
+        </fieldset>
+    </form>
+    <a href="/signup">Sign up</a>
+</body>
+
+</html>

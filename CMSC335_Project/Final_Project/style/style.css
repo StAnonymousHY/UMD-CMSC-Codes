@@ -1,0 +1,84 @@
+html{
+    font-family: "Pacifico", cursive;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    background-color: antiquewhite;
+}
+
+table{
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.err{
+    font-size: 0.8rem;
+    color: red
+}
+
+legend{
+    font-size: 2rem;
+}
+
+.center{
+    margin-left: 30%;
+    margin-right: 30%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+fieldset{
+    color: black;
+    border: solid;
+    border-radius: 2rem;
+    border-color: black;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 3rem;
+}
+
+.inputbox{
+    font-family: "Josefin Sans", sans-serif;
+    border-radius: 1rem;
+    width: 15rem;
+}
+
+.bottom{
+    border-radius: 2rem;
+    background-color: antiquewhite;
+    color: black;
+    font-family: "Pacifico", cursive;
+    width: 40%;
+    height: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+.bottom1{
+    border-radius: 2rem;
+    background-color: antiquewhite;
+    color: black;
+    font-family: "Pacifico", cursive;
+    width: 40%;
+    height: 2rem;
+}
+
+.search{
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+a{
+    color: black;
+}
+
+.regularFont{
+    font-family: "Josefin Sans", sans-serif;
+}

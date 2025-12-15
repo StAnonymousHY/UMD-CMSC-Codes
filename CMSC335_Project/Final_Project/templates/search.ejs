@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Search</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<h1>Search for Movies that You are Interested in!</h1>
+    <form action="/search" method="POST" class="center">
+        <fieldset class="search">
+            Movie Keyword: <br>
+            <input class="inputbox" type="text" required name="movie" placeholder="e.g. batman"><br>
+            <br>
+            <input class="bottom1" type="submit" value="Search">
+        </fieldset>
+    </form>
+    <div>
+        <%- tableContent %>
+    </div>
+    <a href="/history">Search History</a><br>
+    <a href="/">Log out</a>
+</body>
+
+</html>
