@@ -1,15 +1,28 @@
 import sys, numpy as np
 from search import Problem, astar_search
 
+def findMin(nodes, inT, best):
+    currMin = float('inf')
+    result = nodes[0]
+    for x in nodes: 
+        if x not in inT and best[x] < currMin:
+            currMin = best[x]
+            result = x
+    return result
+
+
 def prim_mst(d, nodes):
     if len(nodes) <= 1: return 0.0
     nodes = list(nodes)
     s = nodes[0]
     inT = {s}
-    best = {v: d[s, v] for v in nodes if v != s}
+    best = {}
+    for v in nodes:
+        if v != s:
+            best[v] = d[s, v]
     cost = 0.0
     while len(inT) < len(nodes):
-        v = min((x for x in nodes if x not in inT), key=lambda x: best[x])
+        v = findMin(nodes, inT, best)
         cost += best[v]
         inT.add(v)
         for w in nodes:
@@ -24,9 +37,18 @@ class TSP(Problem):
 
     def actions(self, st):
         cur, mask = st
-        allm = (1 << self.n) - 1
-        if mask == allm: return [self.s] if cur != self.s else []
-        return [j for j in range(self.n) if ((mask >> j) & 1) == 0]
+        allVisited = (1 << self.n) - 1
+        if mask == allVisited: 
+            if cur != self.s: 
+                return [self.s]
+            else:
+                return []
+        result = []
+        for i in range(self.n):
+            if (mask & 1) == 0:
+                result.append(i)
+            mask = mask >> 1
+        return result
 
     def result(self, st, a):
         cur, mask = st
@@ -37,13 +59,17 @@ class TSP(Problem):
         return mask == (1 << self.n) - 1 and cur == self.s
 
     def path_cost(self, c, s1, a, s2):
-        cur, _ = s1
+        cur, mask = s1
         return c + self.d[cur, a]
 
     def h(self, node):
         cur, mask = node.state
-        unvis = [j for j in range(self.n) if ((mask >> j) & 1) == 0]
-        return prim_mst(self.d, unvis)
+        result = []
+        for i in range(self.n):
+            if (mask & 1) == 0:
+                result.append(i)
+            mask = mask >> 1
+        return prim_mst(self.d, result)
 
 d = np.loadtxt(sys.argv[1])
 start = int(sys.argv[2]) if len(sys.argv) > 2 else 0
