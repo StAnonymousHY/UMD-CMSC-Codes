@@ -1,6 +1,16 @@
 import sys, numpy as np
 from search import Problem, astar_search
 
+def findMin(nodes, inT, best):
+    currMin = float('inf')
+    result = nodes[0]
+    for x in nodes: 
+        if x not in inT and best[x] < currMin:
+            currMin = best[x]
+            result = x
+    return result
+
+
 def prim_mst(d, nodes):
     if len(nodes) <= 1: return 0.0
     nodes = list(nodes)
@@ -12,7 +22,7 @@ def prim_mst(d, nodes):
             best[v] = d[s, v]
     cost = 0.0
     while len(inT) < len(nodes):
-        v = min((x for x in nodes if x not in inT), key=lambda x: best[x])
+        v = findMin(nodes, inT, best)
         cost += best[v]
         inT.add(v)
         for w in nodes:
