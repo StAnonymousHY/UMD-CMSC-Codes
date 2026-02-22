@@ -37,18 +37,9 @@ class TSP(Problem):
 
     def actions(self, st):
         cur, mask = st
-        allVisited = (1 << self.n) - 1
-        if mask == allVisited: 
-            if cur != self.s: 
-                return [self.s]
-            else:
-                return []
-        result = []
-        for i in range(self.n):
-            if (mask & 1) == 0:
-                result.append(i)
-            mask = mask >> 1
-        return result
+        allm = (1 << self.n) - 1
+        if mask == allm: return [self.s] if cur != self.s else []
+        return [j for j in range(self.n) if ((mask >> j) & 1) == 0]
 
     def result(self, st, a):
         cur, mask = st
@@ -59,17 +50,13 @@ class TSP(Problem):
         return mask == (1 << self.n) - 1 and cur == self.s
 
     def path_cost(self, c, s1, a, s2):
-        cur, mask = s1
+        cur, _ = s1
         return c + self.d[cur, a]
 
     def h(self, node):
         cur, mask = node.state
-        result = []
-        for i in range(self.n):
-            if (mask & 1) == 0:
-                result.append(i)
-            mask = mask >> 1
-        return prim_mst(self.d, result)
+        unvis = [j for j in range(self.n) if ((mask >> j) & 1) == 0]
+        return prim_mst(self.d, unvis)
 
 d = np.loadtxt(sys.argv[1])
 start = int(sys.argv[2]) if len(sys.argv) > 2 else 0
