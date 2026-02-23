@@ -1,5 +1,6 @@
 import sys, numpy as np
 from search import Problem, astar_search
+import time
 
 def findMin(nodes, inT, best):
     currMin = float('inf')
@@ -33,6 +34,7 @@ def prim_mst(d, nodes):
 class TSP(Problem):
     def __init__(self, d, start=0):
         self.d, self.n, self.s = d, d.shape[0], start
+        self.expanded = 0
         super().__init__((start, 1 << start), None)
 
     def actions(self, st):
@@ -54,14 +56,48 @@ class TSP(Problem):
         return c + self.d[cur, a]
 
     def h(self, node):
+        self.expanded += 1
         cur, mask = node.state
         unvis = [j for j in range(self.n) if ((mask >> j) & 1) == 0]
         return prim_mst(self.d, unvis)
 
 d = np.loadtxt(sys.argv[1])
 start = int(sys.argv[2]) if len(sys.argv) > 2 else 0
-goal = astar_search(TSP(d, start))
+
+prob = TSP(d, start)
+t0r = time.time_ns()
+t0c = time.process_time_ns()
+goal = astar_search(prob)
+t1c = time.process_time_ns()
+t1r = time.time_ns()
+
 tour = [start] + goal.solution()
-cost = sum(d[tour[i], tour[i+1]] for i in range(len(tour)-1))
-print(tour)
-print(cost)
+if tour[-1] != start:
+    tour.append(start)
+
+cost = sum(d[tour[i], tour[i+1]] for i in range(len(tour) - 1))
+real_ns = t1r - t0r
+cpu_ns  = t1c - t0c
+expanded = prob.expanded
+
+if cpu_ns == 0:
+    t0c = time.process_time_ns()
+    R = 500
+    for _ in range(R):
+        astar_search(TSP(d, start))
+    t1c = time.process_time_ns()
+    cpu_ns  = (t1c - t0c) // R
+
+if real_ns == 0:
+    t0r = time.time_ns()
+    R = 500
+    for _ in range(R):
+        astar_search(TSP(d, start))
+    t1r = time.time_ns()
+    real_ns = (t1r - t0r) // R
+
+print("Tour: ", tour)
+print("Tour cost: ", cost)
+print("Real time: ", real_ns)
+print("CPU time", cpu_ns)
+print("Nodes expanded: ", expanded)

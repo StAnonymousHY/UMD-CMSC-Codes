@@ -1,6 +1,7 @@
 import sys
 import random
 import numpy as np
+import time
 
 def tour_cost(dist, tour):
     total = 0.0
@@ -48,8 +49,8 @@ def genetic_algorithm_tsp(dist,mutation_chance, population_size, num_generations
     for _ in range(num_generations):
         children: list[list[int]] = []
         while len(children) < population_size:
-            p1 = tournament_select(population, dist, k=tournament_k)
-            p2 = tournament_select(population, dist, k=tournament_k)
+            p1 = tournament_select(population, dist, tournament_k)
+            p2 = tournament_select(population, dist, tournament_k)
             if p1 is p2 and population_size > 2:
                 continue
             c1 = order_crossover_OX(p1, p2)
@@ -75,6 +76,32 @@ population_size = int(sys.argv[3]) if (len(sys.argv) > 3) else 100
 num_generations = int(sys.argv[4]) if (len(sys.argv) > 4) else 500
 tournament_k = int(sys.argv[5]) if (len(sys.argv) > 5) else 3
 dist = np.loadtxt(matrix_file)
+t0r = time.time_ns()
+t0c = time.process_time_ns()
 tour, cost = genetic_algorithm_tsp(dist, mutation_chance, population_size, num_generations, tournament_k)
-print(tour + [tour[0]])
-print(cost)
+t1c = time.process_time_ns()
+t1r = time.time_ns()
+
+real_ns = t1r - t0r
+cpu_ns  = t1c - t0c
+
+if cpu_ns == 0:
+    R = 500
+    t0c = time.process_time_ns()
+    for _ in range(R):
+        t, c = genetic_algorithm_tsp(dist, mutation_chance, population_size, num_generations, tournament_k)
+    t1c = time.process_time_ns()
+    cpu_ns  = (t1c - t0c) // R
+
+if real_ns == 0:
+    R = 500
+    t0r = time.time_ns()
+    for _ in range(R):
+        t, c = genetic_algorithm_tsp(dist, mutation_chance, population_size, num_generations, tournament_k)
+    t1r = time.time_ns()
+    real_ns = (t1r - t0r) // R
+
+print("Tour: ", tour + [tour[0]])
+print("Tour cost: ", cost)
+print("Real time: ", real_ns)
+print("CPU time: ", cpu_ns)

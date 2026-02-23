@@ -1,6 +1,7 @@
 import sys
 import numpy as np
 import random
+import time
 
 
 def tour_cost(dist, tour):
@@ -95,6 +96,9 @@ fname = sys.argv[1]
 alg = sys.argv[2]
 dist = np.loadtxt(fname)
 
+t0_real = time.time_ns()
+t0_cpu = time.process_time_ns()
+
 if alg == "nn":
     tour = nearest_neighbor(dist)
 elif alg == "nn2":
@@ -102,5 +106,39 @@ elif alg == "nn2":
 elif alg == "rrnn":
     tour = rrnn(dist, (int(sys.argv[3]) if len(sys.argv) > 3 else 2), (int(sys.argv[4]) if len(sys.argv) > 4 else 800))
 
-print(tour)
-print(tour_cost(dist, tour))
+t1_cpu = time.process_time_ns()
+t1_real = time.time_ns()
+
+real_ns = t1_real - t0_real
+cpu_ns = t1_cpu - t0_cpu
+
+if cpu_ns == 0:
+    R = 50000
+    t0_cpu = time.process_time_ns()
+    for _ in range(R):
+        if alg == "nn":
+            tour = nearest_neighbor(dist)
+        elif alg == "nn2":
+            tour = nn2(dist)
+        elif alg == "rrnn":
+            tour = rrnn(dist, (int(sys.argv[3]) if len(sys.argv) > 3 else 2), (int(sys.argv[4]) if len(sys.argv) > 4 else 800))
+    t1_cpu = time.process_time_ns()
+    cpu_ns = (t1_cpu - t0_cpu) // R
+
+if real_ns == 0: 
+    R = 50000
+    t0_real = time.time_ns()
+    for _ in range(R):
+        if alg == "nn":
+            tour = nearest_neighbor(dist)
+        elif alg == "nn2":
+            tour = nn2(dist)
+        elif alg == "rrnn":
+            tour = rrnn(dist, (int(sys.argv[3]) if len(sys.argv) > 3 else 2), (int(sys.argv[4]) if len(sys.argv) > 4 else 800))
+    t1_real = time.time_ns()
+    real_ns = (t1_real - t0_real) // R
+
+print("Tour: ", tour)
+print("Tour cost: ", tour_cost(dist, tour))
+print("Real time: ", real_ns)
+print("CPU time: ", cpu_ns)

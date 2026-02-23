@@ -1,6 +1,7 @@
 import sys
 import random
 import numpy as np
+import time
 
 
 def tour_cost(dist, tour):
@@ -62,7 +63,32 @@ num_restarts = int(sys.argv[2]) if len(sys.argv) >= 3 else 200
 
 dist = np.loadtxt(matrix_file)
 
+t0r = time.time_ns()
+t0c = time.process_time_ns()
 tour, cost = random_restart_hill_climbing(dist, num_restarts)
+t1c = time.process_time_ns()
+t1r = time.time_ns()
 
-print(tour + [tour[0]])
-print(cost)
+real_ns = t1r - t0r
+cpu_ns  = t1c - t0c
+
+if cpu_ns == 0:
+    R = 500
+    t0c = time.process_time_ns()
+    for _ in range(R):
+        random_restart_hill_climbing(dist, num_restarts)
+    t1c = time.process_time_ns()
+    cpu_ns  = (t1c - t0c) // R
+
+if real_ns == 0:
+    R = 500
+    t0r = time.time_ns()
+    for _ in range(R):
+        random_restart_hill_climbing(dist, num_restarts)
+    t1r = time.time_ns()
+    real_ns = (t1r - t0r) // R
+
+print("Tour: ", tour + [tour[0]])
+print("Tour cost: ", cost)
+print("Real time: ", real_ns)
+print("CPU time: ", cpu_ns)

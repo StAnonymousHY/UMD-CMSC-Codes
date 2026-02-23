@@ -1,8 +1,8 @@
 import sys
 import random
 import numpy as np
-
 from search import Problem, simulated_annealing, exp_schedule
+import time
 
 
 def tour_cost(dist, tour):
@@ -56,9 +56,33 @@ dist = np.loadtxt(matrix_file)
 problem = TSPProblem(dist)
 
 schedule = exp_schedule(k, alpha, limit)
+t0r = time.time_ns()
+t0c = time.process_time_ns()
 best_tour = simulated_annealing(problem, schedule)
+t1c = time.process_time_ns()
+t1r = time.time_ns()
+
 best_cost = tour_cost(dist, best_tour)
+real_ns = t1r - t0r
+cpu_ns  = t1c - t0c
 
-print(list(best_tour) + [best_tour[0]])
-print(best_cost)
+if cpu_ns == 0:
+    R = 500
+    t0c = time.process_time_ns()
+    for _ in range(R):
+        simulated_annealing(problem, schedule)
+    t1c = time.process_time_ns()
+    cpu_ns  = (t1c - t0c) // R
 
+if real_ns == 0:
+    R = 500
+    t0r = time.time_ns()
+    for _ in range(R):
+        simulated_annealing(problem, schedule)
+    t1r = time.time_ns()
+    real_ns = (t1r - t0r) // R
+
+print("Tour: ", list(best_tour) + [best_tour[0]])
+print("Tour cost: ", best_cost)
+print("Real time: ", real_ns)
+print("CPU timeL ", cpu_ns)
