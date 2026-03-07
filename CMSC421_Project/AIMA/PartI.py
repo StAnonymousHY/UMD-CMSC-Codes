@@ -113,7 +113,7 @@ real_ns = t1_real - t0_real
 cpu_ns = t1_cpu - t0_cpu
 
 if cpu_ns == 0:
-    R = 50000
+    R = 500
     t0_cpu = time.process_time_ns()
     for _ in range(R):
         if alg == "nn":
@@ -126,7 +126,7 @@ if cpu_ns == 0:
     cpu_ns = (t1_cpu - t0_cpu) // R
 
 if real_ns == 0: 
-    R = 50000
+    R = 500
     t0_real = time.time_ns()
     for _ in range(R):
         if alg == "nn":

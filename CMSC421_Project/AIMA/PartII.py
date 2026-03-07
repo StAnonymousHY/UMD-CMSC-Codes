@@ -96,8 +96,8 @@ if real_ns == 0:
     t1r = time.time_ns()
     real_ns = (t1r - t0r) // R
 
-print("Tour: ", tour)
-print("Tour cost: ", cost)
-print("Real time: ", real_ns)
-print("CPU time", cpu_ns)
-print("Nodes expanded: ", expanded)
+print(tour)
+print(cost)
+print(real_ns)
+print(cpu_ns)
+print(expanded)
