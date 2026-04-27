@@ -1,0 +1,864 @@
+WineDataSmall labels:
+0 Sauvignon-Blanc
+1 Cabernet-Sauvignon
+2 Pinot-Noir
+3 Pinot-Gris
+4 Pinot-Grigio
+
+WineData labels:
+0 Sauvignon-Blanc
+1 Cabernet-Sauvignon
+2 Pinot-Noir
+3 Pinot-Gris
+4 Pinot-Grigio
+5 Chardonnay
+6 Brut
+7 Merlot
+8 Shiraz
+9 Malbec
+10 Zinfandel
+11 Cuvee
+12 Riesling
+13 Chianti
+14 Syrah
+15 Blend
+16 Rhone
+17 Viognier
+18 Carmenere
+19 Moscato
+
+
+=== WU1: OAA on WineDataSmall ===
+conf acc = 0.6039387308533917
+0/1 acc  = 0.6017505470459519
+
+WineDataSmall labels:
+0 Sauvignon-Blanc
+1 Cabernet-Sauvignon
+2 Pinot-Noir
+3 Pinot-Gris
+4 Pinot-Grigio
+
+============================================================
+OAA classifier for class 0 (Sauvignon-Blanc)
+============================================================
+Top indicative words:
+citrus                importance=0.414139  feature_index=351
+lime                  importance=0.313734  feature_index=130
+gooseberry            importance=0.108124  feature_index=128
+grapefruit            importance=0.047689  feature_index=745
+hint                  importance=0.045130  feature_index=465
+flavors               importance=0.044227  feature_index=9
+wet                   importance=0.026958  feature_index=625
+
+Decision tree rules:
+|--- citrus <= 0.50
+|   |--- lime <= 0.50
+|   |   |--- gooseberry <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- gooseberry >  0.50
+|   |   |   |--- class: 1
+|   |--- lime >  0.50
+|   |   |--- hint <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- hint >  0.50
+|   |   |   |--- class: -1
+|--- citrus >  0.50
+|   |--- grapefruit <= 0.50
+|   |   |--- flavors <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- flavors >  0.50
+|   |   |   |--- class: -1
+|   |--- grapefruit >  0.50
+|   |   |--- wet <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- wet >  0.50
+|   |   |   |--- class: -1
+
+
+============================================================
+OAA classifier for class 2 (Pinot-Noir)
+============================================================
+Top indicative words:
+cherry                importance=0.257901  feature_index=88
+raspberries           importance=0.233037  feature_index=301
+cassis                importance=0.193532  feature_index=64
+verdot                importance=0.119036  feature_index=376
+strawberry            importance=0.093450  feature_index=467
+allspice              importance=0.068445  feature_index=671
+full                  importance=0.034599  feature_index=97
+
+Decision tree rules:
+|--- cherry <= 0.50
+|   |--- raspberries <= 0.50
+|   |   |--- strawberry <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- strawberry >  0.50
+|   |   |   |--- class: 1
+|   |--- raspberries >  0.50
+|   |   |--- full <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- full >  0.50
+|   |   |   |--- class: -1
+|--- cherry >  0.50
+|   |--- cassis <= 0.50
+|   |   |--- verdot <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- verdot >  0.50
+|   |   |   |--- class: -1
+|   |--- cassis >  0.50
+|   |   |--- allspice <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- allspice >  0.50
+|   |   |   |--- class: 1
+
+
+
+=== WU1: AVA on WineDataSmall ===
+conf acc = 0.5492341356673961
+0/1 acc  = 0.5229759299781181
+
+WineDataSmall labels:
+0 Sauvignon-Blanc
+1 Cabernet-Sauvignon
+2 Pinot-Noir
+3 Pinot-Gris
+4 Pinot-Grigio
+
+Inspecting AVA pairwise classifiers involving Sauvignon-Blanc:
+
+============================================================
+AVA classifier: class 1 (Cabernet-Sauvignon) vs class 0 (Sauvignon-Blanc)
+============================================================
+Top indicative words:
+citrus                importance=0.551561  feature_index=351
+lime                  importance=0.327963  feature_index=130
+melon                 importance=0.120476  feature_index=83
+
+Decision tree rules:
+|--- citrus <= 0.50
+|   |--- lime <= 0.50
+|   |   |--- melon <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- melon >  0.50
+|   |   |   |--- class: 1
+|   |--- lime >  0.50
+|   |   |--- class: 1
+|--- citrus >  0.50
+|   |--- class: 1
+
+
+============================================================
+AVA classifier: class 2 (Pinot-Noir) vs class 0 (Sauvignon-Blanc)
+============================================================
+Top indicative words:
+crisp                 importance=0.463533  feature_index=135
+lime                  importance=0.255746  feature_index=130
+lemon                 importance=0.198002  feature_index=506
+red                   importance=0.055321  feature_index=59
+cheeses               importance=0.027397  feature_index=312
+
+Decision tree rules:
+|--- crisp <= 0.50
+|   |--- lime <= 0.50
+|   |   |--- lemon <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- lemon >  0.50
+|   |   |   |--- class: 1
+|   |--- lime >  0.50
+|   |   |--- cheeses <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- cheeses >  0.50
+|   |   |   |--- class: -1
+|--- crisp >  0.50
+|   |--- red <= 0.50
+|   |   |--- class: 1
+|   |--- red >  0.50
+|   |   |--- class: -1
+
+
+============================================================
+AVA classifier: class 3 (Pinot-Gris) vs class 0 (Sauvignon-Blanc)
+============================================================
+Top indicative words:
+thai                  importance=0.459184  feature_index=331
+very                  importance=0.235586  feature_index=262
+ripe                  importance=0.190476  feature_index=109
+produce               importance=0.114754  feature_index=260
+
+Decision tree rules:
+|--- thai <= 0.50
+|   |--- very <= 0.50
+|   |   |--- produce <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- produce >  0.50
+|   |   |   |--- class: -1
+|   |--- very >  0.50
+|   |   |--- ripe <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- ripe >  0.50
+|   |   |   |--- class: -1
+|--- thai >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 4 (Pinot-Grigio) vs class 0 (Sauvignon-Blanc)
+============================================================
+Top indicative words:
+apple                 importance=0.289248  feature_index=44
+pasta                 importance=0.233826  feature_index=102
+bright                importance=0.205989  feature_index=43
+warm                  importance=0.193691  feature_index=364
+offers                importance=0.077246  feature_index=350
+
+Decision tree rules:
+|--- apple <= 0.50
+|   |--- pasta <= 0.50
+|   |   |--- warm <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- warm >  0.50
+|   |   |   |--- class: -1
+|   |--- pasta >  0.50
+|   |   |--- class: -1
+|--- apple >  0.50
+|   |--- bright <= 0.50
+|   |   |--- class: -1
+|   |--- bright >  0.50
+|   |   |--- offers <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- offers >  0.50
+|   |   |   |--- class: -1
+
+
+Inspecting AVA pairwise classifiers involving Pinot-Noir:
+
+============================================================
+AVA classifier: class 2 (Pinot-Noir) vs class 0 (Sauvignon-Blanc)
+============================================================
+Top indicative words:
+crisp                 importance=0.463533  feature_index=135
+lime                  importance=0.255746  feature_index=130
+lemon                 importance=0.198002  feature_index=506
+red                   importance=0.055321  feature_index=59
+cheeses               importance=0.027397  feature_index=312
+
+Decision tree rules:
+|--- crisp <= 0.50
+|   |--- lime <= 0.50
+|   |   |--- lemon <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- lemon >  0.50
+|   |   |   |--- class: 1
+|   |--- lime >  0.50
+|   |   |--- cheeses <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- cheeses >  0.50
+|   |   |   |--- class: -1
+|--- crisp >  0.50
+|   |--- red <= 0.50
+|   |   |--- class: 1
+|   |--- red >  0.50
+|   |   |--- class: -1
+
+
+============================================================
+AVA classifier: class 2 (Pinot-Noir) vs class 1 (Cabernet-Sauvignon)
+============================================================
+Top indicative words:
+cassis                importance=0.377197  feature_index=64
+acidity               importance=0.209048  feature_index=84
+duck                  importance=0.175640  feature_index=310
+tannins               importance=0.104936  feature_index=21
+tea                   importance=0.086974  feature_index=638
+100                   importance=0.046205  feature_index=230
+
+Decision tree rules:
+|--- cassis <= 0.50
+|   |--- acidity <= 0.50
+|   |   |--- duck <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- duck >  0.50
+|   |   |   |--- class: -1
+|   |--- acidity >  0.50
+|   |   |--- tannins <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- tannins >  0.50
+|   |   |   |--- class: -1
+|--- cassis >  0.50
+|   |--- tea <= 0.50
+|   |   |--- 100 <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- 100 >  0.50
+|   |   |   |--- class: -1
+|   |--- tea >  0.50
+|   |   |--- class: -1
+
+
+============================================================
+AVA classifier: class 3 (Pinot-Gris) vs class 2 (Pinot-Noir)
+============================================================
+Top indicative words:
+crisp                 importance=0.418524  feature_index=135
+peach                 importance=0.257670  feature_index=79
+pear                  importance=0.177703  feature_index=54
+red                   importance=0.146103  feature_index=59
+
+Decision tree rules:
+|--- crisp <= 0.50
+|   |--- peach <= 0.50
+|   |   |--- pear <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- pear >  0.50
+|   |   |   |--- class: -1
+|   |--- peach >  0.50
+|   |   |--- class: -1
+|--- crisp >  0.50
+|   |--- red <= 0.50
+|   |   |--- class: -1
+|   |--- red >  0.50
+|   |   |--- class: 1
+
+
+============================================================
+AVA classifier: class 4 (Pinot-Grigio) vs class 2 (Pinot-Noir)
+============================================================
+Top indicative words:
+straw                 importance=0.539303  feature_index=132
+crisp                 importance=0.260018  feature_index=135
+example               importance=0.106775  feature_index=574
+red                   importance=0.093904  feature_index=59
+
+Decision tree rules:
+|--- straw <= 0.50
+|   |--- crisp <= 0.50
+|   |   |--- example <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- example >  0.50
+|   |   |   |--- class: -1
+|   |--- crisp >  0.50
+|   |   |--- red <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- red >  0.50
+|   |   |   |--- class: 1
+|--- straw >  0.50
+|   |--- class: -1
+
+
+
+=== WU1: OAA on WineData ===
+conf acc = 0.37012987012987014
+0/1 acc  = 0.24118738404452691
+time     = 1.4524097442626953
+diff     = 0.12894248608534323
+
+WineData labels:
+0 Sauvignon-Blanc
+1 Cabernet-Sauvignon
+2 Pinot-Noir
+3 Pinot-Gris
+4 Pinot-Grigio
+5 Chardonnay
+6 Brut
+7 Merlot
+8 Shiraz
+9 Malbec
+10 Zinfandel
+11 Cuvee
+12 Riesling
+13 Chianti
+14 Syrah
+15 Blend
+16 Rhone
+17 Viognier
+18 Carmenere
+19 Moscato
+
+============================================================
+OAA classifier for class 17 (Viognier)
+============================================================
+Top indicative words:
+milk                  importance=0.422392  feature_index=649
+d                     importance=0.181025  feature_index=423
+peaches               importance=0.163809  feature_index=728
+linger                importance=0.156088  feature_index=720
+nectarine             importance=0.049534  feature_index=750
+chilled               importance=0.027152  feature_index=721
+
+Decision tree rules:
+|--- peaches <= 0.50
+|   |--- nectarine <= 0.50
+|   |   |--- chilled <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- chilled >  0.50
+|   |   |   |--- class: -1
+|   |--- nectarine >  0.50
+|   |   |--- linger <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- linger >  0.50
+|   |   |   |--- class: 1
+|--- peaches >  0.50
+|   |--- milk <= 0.50
+|   |   |--- d <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- d >  0.50
+|   |   |   |--- class: 1
+|   |--- milk >  0.50
+|   |   |--- class: 1
+
+
+
+=== WU1: AVA on WineData ===
+conf acc = 0.26437847866419295
+0/1 acc  = 0.26437847866419295
+time     = 11.138742685317993
+diff     = 0.0
+
+WineData labels:
+0 Sauvignon-Blanc
+1 Cabernet-Sauvignon
+2 Pinot-Noir
+3 Pinot-Gris
+4 Pinot-Grigio
+5 Chardonnay
+6 Brut
+7 Merlot
+8 Shiraz
+9 Malbec
+10 Zinfandel
+11 Cuvee
+12 Riesling
+13 Chianti
+14 Syrah
+15 Blend
+16 Rhone
+17 Viognier
+18 Carmenere
+19 Moscato
+
+Inspecting AVA pairwise classifiers involving Viognier:
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 0 (Sauvignon-Blanc)
+============================================================
+Top indicative words:
+floral                importance=0.490359  feature_index=45
+grenache              importance=0.179614  feature_index=700
+mild                  importance=0.173912  feature_index=730
+lemon                 importance=0.156116  feature_index=506
+
+Decision tree rules:
+|--- floral <= 0.50
+|   |--- mild <= 0.50
+|   |   |--- grenache <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- grenache >  0.50
+|   |   |   |--- class: -1
+|   |--- mild >  0.50
+|   |   |--- class: -1
+|--- floral >  0.50
+|   |--- lemon <= 0.50
+|   |   |--- class: -1
+|   |--- lemon >  0.50
+|   |   |--- class: 1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 1 (Cabernet-Sauvignon)
+============================================================
+Top indicative words:
+peach                 importance=0.489529  feature_index=79
+peaches               importance=0.380817  feature_index=728
+pear                  importance=0.129654  feature_index=54
+
+Decision tree rules:
+|--- peach <= 0.50
+|   |--- peaches <= 0.50
+|   |   |--- pear <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- pear >  0.50
+|   |   |   |--- class: -1
+|   |--- peaches >  0.50
+|   |   |--- class: -1
+|--- peach >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 2 (Pinot-Noir)
+============================================================
+Top indicative words:
+peaches               importance=0.486486  feature_index=728
+peach                 importance=0.382479  feature_index=79
+apple                 importance=0.131034  feature_index=44
+
+Decision tree rules:
+|--- peaches <= 0.50
+|   |--- peach <= 0.50
+|   |   |--- apple <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- apple >  0.50
+|   |   |   |--- class: -1
+|   |--- peach >  0.50
+|   |   |--- class: -1
+|--- peaches >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 3 (Pinot-Gris)
+============================================================
+Top indicative words:
+peaches               importance=0.481203  feature_index=728
+nectarine             importance=0.325520  feature_index=750
+perfumed              importance=0.193277  feature_index=438
+
+Decision tree rules:
+|--- peaches <= 0.50
+|   |--- nectarine <= 0.50
+|   |   |--- perfumed <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- perfumed >  0.50
+|   |   |   |--- class: -1
+|   |--- nectarine >  0.50
+|   |   |--- class: -1
+|--- peaches >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 4 (Pinot-Grigio)
+============================================================
+Top indicative words:
+peaches               importance=0.519481  feature_index=728
+lovely                importance=0.310013  feature_index=530
+cuisine               importance=0.170507  feature_index=332
+
+Decision tree rules:
+|--- peaches <= 0.50
+|   |--- lovely <= 0.50
+|   |   |--- cuisine <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- cuisine >  0.50
+|   |   |   |--- class: -1
+|   |--- lovely >  0.50
+|   |   |--- class: -1
+|--- peaches >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 5 (Chardonnay)
+============================================================
+Top indicative words:
+milk                  importance=0.592105  feature_index=649
+tannin                importance=0.205298  feature_index=640
+lychee                importance=0.202597  feature_index=767
+
+Decision tree rules:
+|--- milk <= 0.50
+|   |--- lychee <= 0.50
+|   |   |--- tannin <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- tannin >  0.50
+|   |   |   |--- class: -1
+|   |--- lychee >  0.50
+|   |   |--- class: -1
+|--- milk >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 6 (Brut)
+============================================================
+Top indicative words:
+peaches               importance=0.545055  feature_index=728
+apricot               importance=0.298482  feature_index=408
+5                     importance=0.156463  feature_index=366
+
+Decision tree rules:
+|--- peaches <= 0.50
+|   |--- apricot <= 0.50
+|   |   |--- 5 <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- 5 >  0.50
+|   |   |   |--- class: -1
+|   |--- apricot >  0.50
+|   |   |--- class: -1
+|--- peaches >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 7 (Merlot)
+============================================================
+Top indicative words:
+floral                importance=0.467213  feature_index=45
+pear                  importance=0.275424  feature_index=54
+straw                 importance=0.257363  feature_index=132
+
+Decision tree rules:
+|--- floral <= 0.50
+|   |--- straw <= 0.50
+|   |   |--- pear <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- pear >  0.50
+|   |   |   |--- class: -1
+|   |--- straw >  0.50
+|   |   |--- class: -1
+|--- floral >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 8 (Shiraz)
+============================================================
+Top indicative words:
+peaches               importance=0.460784  feature_index=728
+peach                 importance=0.395987  feature_index=79
+apple                 importance=0.143229  feature_index=44
+
+Decision tree rules:
+|--- peaches <= 0.50
+|   |--- peach <= 0.50
+|   |   |--- apple <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- apple >  0.50
+|   |   |   |--- class: -1
+|   |--- peach >  0.50
+|   |   |--- class: -1
+|--- peaches >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 9 (Malbec)
+============================================================
+Top indicative words:
+peach                 importance=0.462264  feature_index=79
+peaches               importance=0.395236  feature_index=728
+pear                  importance=0.142500  feature_index=54
+
+Decision tree rules:
+|--- peach <= 0.50
+|   |--- peaches <= 0.50
+|   |   |--- pear <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- pear >  0.50
+|   |   |   |--- class: -1
+|   |--- peaches >  0.50
+|   |   |--- class: -1
+|--- peach >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 10 (Zinfandel)
+============================================================
+Top indicative words:
+peach                 importance=0.461538  feature_index=79
+fruits                importance=0.395604  feature_index=4
+apple                 importance=0.142857  feature_index=44
+
+Decision tree rules:
+|--- peach <= 0.50
+|   |--- fruits <= 0.50
+|   |   |--- apple <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- apple >  0.50
+|   |   |   |--- class: -1
+|   |--- fruits >  0.50
+|   |   |--- class: -1
+|--- peach >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 11 (Cuvee)
+============================================================
+Top indicative words:
+fruits                importance=0.442857  feature_index=4
+peach                 importance=0.404799  feature_index=79
+pear                  importance=0.152344  feature_index=54
+
+Decision tree rules:
+|--- fruits <= 0.50
+|   |--- peach <= 0.50
+|   |   |--- pear <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- pear >  0.50
+|   |   |   |--- class: -1
+|   |--- peach >  0.50
+|   |   |--- class: -1
+|--- fruits >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 12 (Riesling)
+============================================================
+Top indicative words:
+milk                  importance=0.462200  feature_index=649
+straw                 importance=0.205847  feature_index=132
+chilled               importance=0.187739  feature_index=721
+mineral               importance=0.144215  feature_index=213
+
+Decision tree rules:
+|--- milk <= 0.50
+|   |--- straw <= 0.50
+|   |   |--- chilled <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- chilled >  0.50
+|   |   |   |--- class: -1
+|   |--- straw >  0.50
+|   |   |--- mineral <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- mineral >  0.50
+|   |   |   |--- class: 1
+|--- milk >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 13 (Chianti)
+============================================================
+Top indicative words:
+peaches               importance=0.459184  feature_index=728
+white                 importance=0.396795  feature_index=76
+apricot               importance=0.144022  feature_index=408
+
+Decision tree rules:
+|--- peaches <= 0.50
+|   |--- white <= 0.50
+|   |   |--- apricot <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- apricot >  0.50
+|   |   |   |--- class: -1
+|   |--- white >  0.50
+|   |   |--- class: -1
+|--- peaches >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 14 (Syrah)
+============================================================
+Top indicative words:
+peach                 importance=0.448718  feature_index=79
+freshness             importance=0.401976  feature_index=449
+pear                  importance=0.149306  feature_index=54
+
+Decision tree rules:
+|--- peach <= 0.50
+|   |--- freshness <= 0.50
+|   |   |--- pear <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- pear >  0.50
+|   |   |   |--- class: -1
+|   |--- freshness >  0.50
+|   |   |--- class: -1
+|--- peach >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 15 (Blend)
+============================================================
+Top indicative words:
+freshness             importance=0.382173  feature_index=449
+apricot               importance=0.312182  feature_index=408
+lovely                importance=0.167556  feature_index=530
+7                     importance=0.138090  feature_index=372
+
+Decision tree rules:
+|--- freshness <= 0.50
+|   |--- apricot <= 0.50
+|   |   |--- lovely <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- lovely >  0.50
+|   |   |   |--- class: -1
+|   |--- apricot >  0.50
+|   |   |--- 7 <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- 7 >  0.50
+|   |   |   |--- class: 1
+|--- freshness >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 17 (Viognier) vs class 16 (Rhone)
+============================================================
+Top indicative words:
+floral                importance=0.485714  feature_index=45
+light                 importance=0.323810  feature_index=48
+accented              importance=0.190476  feature_index=757
+
+Decision tree rules:
+|--- floral <= 0.50
+|   |--- light <= 0.50
+|   |   |--- accented <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- accented >  0.50
+|   |   |   |--- class: -1
+|   |--- light >  0.50
+|   |   |--- class: -1
+|--- floral >  0.50
+|   |--- class: -1
+
+
+============================================================
+AVA classifier: class 18 (Carmenere) vs class 17 (Viognier)
+============================================================
+Top indicative words:
+floral                importance=0.481203  feature_index=45
+peach                 importance=0.325520  feature_index=79
+peaches               importance=0.193277  feature_index=728
+
+Decision tree rules:
+|--- floral <= 0.50
+|   |--- peach <= 0.50
+|   |   |--- peaches <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- peaches >  0.50
+|   |   |   |--- class: 1
+|   |--- peach >  0.50
+|   |   |--- class: 1
+|--- floral >  0.50
+|   |--- class: 1
+
+
+============================================================
+AVA classifier: class 19 (Moscato) vs class 17 (Viognier)
+============================================================
+Top indicative words:
+fruits                importance=0.400000  feature_index=4
+white                 importance=0.283594  feature_index=76
+rich                  importance=0.175781  feature_index=138
+acidity               importance=0.140625  feature_index=84
+
+Decision tree rules:
+|--- fruits <= 0.50
+|   |--- white <= 0.50
+|   |   |--- rich <= 0.50
+|   |   |   |--- class: -1
+|   |   |--- rich >  0.50
+|   |   |   |--- class: 1
+|   |--- white >  0.50
+|   |   |--- acidity <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- acidity >  0.50
+|   |   |   |--- class: -1
+|--- fruits >  0.50
+|   |--- class: 1
+
+
+
+=== WU2: MCTree on WineDataSmall ===
+acc = 0.5601750547045952
+tree = [[0 1] [2 [3 4]]]
+
+
+=== WU2: MCTree on WineData ===
+acc = 0.30890538033395176
+tree = [[[[0 1] [2 [3 4]]] [[5 6] [7 [8 9]]]] [[[10 11] [12 [13 14]]] [[15 16] [17 [18 19]]]]]

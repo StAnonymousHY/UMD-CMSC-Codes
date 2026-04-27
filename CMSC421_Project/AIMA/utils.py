@@ -618,6 +618,17 @@ class Expr:
         else:  # (x - y)
             opp = (' ' + op + ' ')
             return '(' + opp.join(args) + ')'
+        
+    def predicate_negate(self):
+            """
+            Return the logical negation of an Expr.
+            Assumes we are using "Not" as our negation operator. Avoids double "Not" as prefix
+            """
+            if self.op.startswith("Not"):
+                # strip the Not prefix
+                return Expr(self.op[3:], *self.args)
+            else:
+                return Expr("Not" + self.op, *self.args)
 
 
 # An 'Expression' is either an Expr or a Number.

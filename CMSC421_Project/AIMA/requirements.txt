@@ -11,8 +11,9 @@ numpy
 opencv-python
 pandas
 pillow
-pytest-cov
 qpsolvers
 scipy
 sortedcontainers
 tensorflow
+pytest
+pytest-cov

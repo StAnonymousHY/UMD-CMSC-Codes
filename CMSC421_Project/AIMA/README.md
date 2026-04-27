@@ -58,9 +58,7 @@ git submodule init
 git submodule update
 ```
 
-Wait for the datasets to download, it may take a while. Once they are downloaded, you need to install `pytest`, so that you can run the test suite:
-
-`pip install pytest`
+Wait for the datasets to download, it may take a while. 
 
 Then to run the tests:
 
