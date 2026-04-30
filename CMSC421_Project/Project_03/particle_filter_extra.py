@@ -28,6 +28,8 @@ import copy
 from utils import add_noise as utils_add_noise
 from particle_filter import ParticleFilter, normalize_weights, Particle, WeightedDistribution
 
+raise RuntimeError("Disable ParticleFilterExtra for baseline particle filter plots")
+
 # ── KLD-sampling hyper-parameters ────────────────────────────────────────────
 KLD_EPSILON        = 0.05    # allowed KL error
 KLD_DELTA          = 0.01    # failure probability
@@ -161,10 +163,34 @@ class ParticleFilterExtra(ParticleFilter):
         #     if stopping condition is met:   # hint: involves n_required and the hard caps
         #       break 
         # ─────────────────────────────────────────────────────────────────────
+        new_particles = []
+        occupied_bins = set()
+        n_required = KLD_MIN_PARTICLES
+        distribution = WeightedDistribution(particles)
+        if len(particles) == 0:
+            return new_particles
+        while len(new_particles) < KLD_MAX_PARTICLES:
+            selected_particle = distribution.random_select()
+            if selected_particle is None:
+                selected_particle = copy.deepcopy(random.choice(particles))
 
-        raise NotImplementedError
+                selected_particle.pos = np.array([random.uniform(self.minx, self.maxx),random.uniform(self.miny, self.maxy)])
+                angle = random.uniform(-np.pi, np.pi)
+                selected_particle.orient = np.array([np.cos(angle),np.sin(angle)])
+            else:
+                selected_particle = copy.deepcopy(selected_particle)
+            new_particles.append(selected_particle)
+            current_bin = particle_bin(selected_particle)
+            if current_bin not in occupied_bins:
+                occupied_bins.add(current_bin)
+                n_required = kld_required_n(len(occupied_bins))
 
+            if len(new_particles) >= KLD_MIN_PARTICLES and len(new_particles) >= n_required:
+                break
 
-
+        if len(new_particles) > 0:
+            uniform_weight = 1.0 / len(new_particles)
+            for particle in new_particles:
+                particle.weight = uniform_weight
         # END_YOUR_CODE ########################################################
         return new_particles

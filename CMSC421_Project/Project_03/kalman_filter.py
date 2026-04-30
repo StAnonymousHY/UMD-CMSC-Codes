@@ -19,7 +19,12 @@ class KalmanFilter:
         self.car = car
 
         # BEGIN_YOUR_CODE ######################################################
-        raise NotImplementedError
+        self.kf.F = np.array([[1, 0, 1, 0], [0, 1, 0, 1], [0, 0, 1, 0], [0, 0, 0, 1]], dtype=float)
+        self.kf.H = np.array([[1, 0, 0, 0], [0, 1, 0, 0]], dtype=float)
+        self.kf.R = np.array([[self.variance, 0], [0, self.variance]])
+        self.kf.Q = np.eye(4) * 0.1
+        self.kf.x = np.array([[self.car.pos[0]], [self.car.pos[1]], [self.car.vel[0]], [self.car.vel[1]]])
+        self.kf.P = np.eye(4)
 
         # END_YOUR_CODE ########################################################
 
@@ -33,7 +38,19 @@ class KalmanFilter:
         # Prediction step
         
         # BEGIN_YOUR_CODE ######################################################
-        raise NotImplementedError
+        self.check_collision(other_car)
+
+        self.kf.x[2][0] = self.car.vel[0]
+        self.kf.x[3][0] = self.car.vel[1]
+
+        self.kf.predict()
+
+        variance = self.variance if which == "gaussian" else (self.width ** 2 / 12)
+        self.kf.R = np.array([[variance, 0], [0, variance]])
+        self.kf.update(measurement)
+
+        self.car.pos = np.array([self.kf.x[0][0], self.kf.x[1][0]])
+        self.car.vel = np.array([self.kf.x[2][0], self.kf.x[3][0]])
         
         # END_YOUR_CODE ########################################################
 

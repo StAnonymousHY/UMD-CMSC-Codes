@@ -159,7 +159,8 @@ class ParticleFilter:
         weight = None
         # BEGIN_YOUR_CODE ######################################################
         #Hint: use the weight_gaussian_kernel method
-        weight = weight_gaussian_kernel(sensor(particle.pos[0], particle.pos[1], max_sensor_range, False, sensor_std), evidence)
+        predicted = sensor(particle.pos[0], particle.pos[1], max_sensor_range, noisy=False)
+        weight = weight_gaussian_kernel(predicted, evidence, std=100)
         # END_YOUR_CODE ########################################################
         return weight
 
@@ -181,7 +182,7 @@ class ParticleFilter:
 
         new_particle = Particle(new_pos, new_orient, 1)
 
-        new_particle.add_noise(1, 1, self.noise_type)
+        new_particle.add_noise(0.5, 0.05, self.noise_type)
         # END_YOUR_CODE ########################################################
         return new_particle
     

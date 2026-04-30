@@ -19,6 +19,19 @@ class DataPoint:
         self.crash = crash
         self.win = win
 
+def get_prob_true(target_attr, data, parent_attrs=[], parent_values=()):
+    matching_data = []
+    for d in data:
+        match = True
+        for attr, value in zip(parent_attrs, parent_values):
+            if getattr(d, attr) != value:
+                match = False
+                break
+        if match:
+            matching_data.append(d)
+    true_count = sum(1 for d in matching_data if getattr(d, target_attr))
+    return true_count / len(matching_data)
+
 def generate_bayesnet():
     """
     Generates a BayesNet object representing the Bayesian network in Part 2
@@ -28,7 +41,29 @@ def generate_bayesnet():
     # load the dataset, a list of DataPoint objects
     data = pickle.load(open("data/bn_data.p","rb"))
     # BEGIN_YOUR_CODE ######################################################
-    raise NotImplementedError
+    bayes_net = BayesNet()
+    # load the dataset, a list of DataPoint objects
+    data = pickle.load(open("data/bn_data.p","rb"))
+    
+
+    p_muchfaster = get_prob_true("muchfaster", data)
+    p_early = get_prob_true("early", data)
+    overtake_cpt = {}
+    for muchfaster in [T, F]:
+        for early in [T, F]:
+            overtake_cpt[(muchfaster, early)] = get_prob_true("overtake", data, ["muchfaster", "early"], (muchfaster, early))
+    crash_cpt = {}
+    for overtake in [T, F]:
+        crash_cpt[(overtake,)] = get_prob_true("crash", data, ["overtake"], (overtake,))
+    win_cpt = {}
+    for overtake in [T, F]:
+        for crash in [T, F]:
+            win_cpt[(overtake, crash)] = get_prob_true("win", data, ["overtake", "crash"], (overtake, crash))
+    bayes_net.add(("MuchFaster", "", p_muchfaster))
+    bayes_net.add(("Early", "", p_early))
+    bayes_net.add(("Overtake", "MuchFaster Early", overtake_cpt))
+    bayes_net.add(("Crash", "Overtake", crash_cpt))
+    bayes_net.add(("Win", "Overtake Crash", win_cpt))
     
     # END_YOUR_CODE ########################################################
     return bayes_net
@@ -39,8 +74,17 @@ def find_best_overtake_condition(bayes_net):
     Returns the optimal values for (MuchFaster,Early)
     """
     # BEGIN_YOUR_CODE ######################################################
-    raise NotImplementedError
-    
+    best_condition = None
+    best_prob = -1
+    for muchfaster in [T, F]:
+        for early in [T, F]:
+            result = enumeration_ask("Win", {"MuchFaster": muchfaster, "Early": early, "Overtake": T}, bayes_net)
+            win_prob = result[T]
+            if win_prob > best_prob:
+                best_prob = win_prob
+                best_condition = (muchfaster, early)
+                
+    return best_condition
     # END_YOUR_CODE ########################################################
 
 def main():
