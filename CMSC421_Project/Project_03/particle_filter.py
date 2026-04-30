@@ -160,7 +160,14 @@ class ParticleFilter:
         # BEGIN_YOUR_CODE ######################################################
         #Hint: use the weight_gaussian_kernel method
         predicted = sensor(particle.pos[0], particle.pos[1], max_sensor_range, noisy=False)
-        weight = weight_gaussian_kernel(predicted, evidence, std=100)
+        if self.noise_type == "gaussian":
+            weight = weight_gaussian_kernel(predicted, evidence, std=100)
+        elif self.noise_type == "laplace":
+            weight = weight_laplace_kernel(predicted, evidence, scale=100)
+        elif self.noise_type == "cauchy":
+            weight = weight_cauchy_kernel(predicted, evidence, scale=100)
+        else:
+            weight = weight_gaussian_kernel(predicted, evidence, std=100)
         # END_YOUR_CODE ########################################################
         return weight
 

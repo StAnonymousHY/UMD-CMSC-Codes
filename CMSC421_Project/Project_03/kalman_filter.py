@@ -45,16 +45,17 @@ class KalmanFilter:
 
         self.kf.predict()
 
-        variance = self.variance if which == "gaussian" else (self.width ** 2 / 12)
+        variance = (self.width ** 2 / 12) if which == "uniform" else (self.variance)
         self.kf.R = np.array([[variance, 0], [0, variance]])
         self.kf.update(measurement)
 
+        '''
         self.car.pos = np.array([self.kf.x[0][0], self.kf.x[1][0]])
-        self.car.vel = np.array([self.kf.x[2][0], self.kf.x[3][0]])
-        
+        self.car.vel = np.array([self.kf.x[2][0], self.kf.x[3][0]])     
+        '''
         # END_YOUR_CODE ########################################################
 
-        return self.kf.x
+        return self.kf.x.flatten()
     
     def check_collision(self, car):
         car1_corners = self.get_car_corners(self.car)
