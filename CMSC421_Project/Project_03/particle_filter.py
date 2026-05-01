@@ -46,8 +46,8 @@ class Particle:
         elif noise_type == "cauchy":
             # Cauchy has no variance, use smaller scale due to heavy tails
             noise_func = add_noise_cauchy
-            param_pos = std_pos * 0.5
-            param_orient = std_orient * 0.5
+            param_pos = std_pos * 0.1
+            param_orient = std_orient * 0.1
         else:
             raise ValueError(f"Unknown noise type: {noise_type}")
         

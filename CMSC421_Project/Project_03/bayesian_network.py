@@ -44,8 +44,6 @@ def generate_bayesnet():
     bayes_net = BayesNet()
     # load the dataset, a list of DataPoint objects
     data = pickle.load(open("data/bn_data.p","rb"))
-    
-
     p_muchfaster = get_prob_true("muchfaster", data)
     p_early = get_prob_true("early", data)
     overtake_cpt = {}
@@ -53,8 +51,9 @@ def generate_bayesnet():
         for early in [T, F]:
             overtake_cpt[(muchfaster, early)] = get_prob_true("overtake", data, ["muchfaster", "early"], (muchfaster, early))
     crash_cpt = {}
-    for overtake in [T, F]:
-        crash_cpt[(overtake,)] = get_prob_true("crash", data, ["overtake"], (overtake,))
+    for muchfaster in [T, F]:
+        for early in [T, F]:
+            crash_cpt[(muchfaster, early)] = get_prob_true("crash", data, ["muchfaster", "early"], (muchfaster, early))
     win_cpt = {}
     for overtake in [T, F]:
         for crash in [T, F]:
@@ -62,7 +61,7 @@ def generate_bayesnet():
     bayes_net.add(("MuchFaster", "", p_muchfaster))
     bayes_net.add(("Early", "", p_early))
     bayes_net.add(("Overtake", "MuchFaster Early", overtake_cpt))
-    bayes_net.add(("Crash", "Overtake", crash_cpt))
+    bayes_net.add(("Crash", "MuchFaster Early", crash_cpt))
     bayes_net.add(("Win", "Overtake Crash", win_cpt))
     
     # END_YOUR_CODE ########################################################
@@ -78,12 +77,14 @@ def find_best_overtake_condition(bayes_net):
     best_prob = -1
     for muchfaster in [T, F]:
         for early in [T, F]:
-            result = enumeration_ask("Win", {"MuchFaster": muchfaster, "Early": early, "Overtake": T}, bayes_net)
-            win_prob = result[T]
-            if win_prob > best_prob:
-                best_prob = win_prob
+            evidence = {"MuchFaster": muchfaster, "Early": early}
+            p_no_crash = enumeration_ask("Crash", evidence, bayes_net)[F]
+            p_win_given_no_crash = enumeration_ask("Win", {"MuchFaster": muchfaster, "Early": early, "Crash": F}, bayes_net)[T]
+            prob = p_no_crash * p_win_given_no_crash
+            if prob > best_prob:
+                best_prob = prob
                 best_condition = (muchfaster, early)
-                
+
     return best_condition
     # END_YOUR_CODE ########################################################
 

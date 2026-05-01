@@ -28,8 +28,6 @@ import copy
 from utils import add_noise as utils_add_noise
 from particle_filter import ParticleFilter, normalize_weights, Particle, WeightedDistribution
 
-raise RuntimeError("Disable ParticleFilterExtra for baseline particle filter plots")
-
 # ── KLD-sampling hyper-parameters ────────────────────────────────────────────
 KLD_EPSILON        = 0.05    # allowed KL error
 KLD_DELTA          = 0.01    # failure probability
