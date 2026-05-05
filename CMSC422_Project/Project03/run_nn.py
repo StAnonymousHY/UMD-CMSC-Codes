@@ -2,18 +2,27 @@ import numpy as np
 from nn import NN
 from nn import Relu, Linear, SquaredLoss, CELoss
 from utils import data_loader, acc, save_plot, loadMNIST, onehot
+import time
+import matplotlib.pyplot as plt
+from extraCredit import NN as MomentumNN
 
 # Several passes of the training data
 def train(model, training_data, dev_data, learning_rate, batch_size, max_epoch):
     X_train, Y_train = training_data['X'], training_data['Y']
     X_dev, Y_dev = dev_data['X'], dev_data['Y']
+
+    losses = []
+    accuracies = []
+
     for i in range(max_epoch):
         for X,Y in data_loader(X_train, Y_train, batch_size=batch_size, shuffle=True):
             training_loss, grad_Ws, grad_bs = model.compute_gradients(X, Y)
             model.update(grad_Ws, grad_bs, learning_rate)
         dev_acc = acc(model.predict(X_dev), Y_dev)
         print("Epoch {: >3d}/{}\tloss:{:.5f}\tdev_acc:{:.5f}".format(i+1,max_epoch,training_loss, dev_acc))
-    return model
+        losses.append(training_loss)
+        accuracies.append(dev_acc)
+    return model, losses, accuracies
 
 # One pass of the training data
 def train_1pass(model, training_data, dev_data, learning_rate, batch_size, print_every=100, plot_every=10):
@@ -53,6 +62,8 @@ if __name__ == "__main__":
     y_test = onehot(label_test)
 
     model = NN(Relu(), SquaredLoss(), hidden_layers=[256, 256], input_d=784, output_d=10)
+    model_momentum = MomentumNN(Relu(), SquaredLoss(), hidden_layers=[256, 256], input_d=784, output_d=10, momentum=0.9)
+    model_momentum.print_model()
     model.print_model()
 
     lr = 1e-2
@@ -64,4 +75,27 @@ if __name__ == "__main__":
     #model, plot_dict = train_1pass(model, training_data, dev_data, lr, batch_size)
     #save_plot(plot_dict["num_samples"], plot_dict["losses"]) 
 
-    model = train(model, training_data, dev_data, lr, batch_size, max_epoch)
+    model, losses, accs = train(model, training_data, dev_data, lr, batch_size, max_epoch)
+    model_momentum, losses_momentum, accs_momentum = train(model_momentum, training_data, dev_data, lr, batch_size, max_epoch)
+
+    epochs = np.arange(1, max_epoch + 1)
+
+    plt.figure()
+    plt.plot(epochs, losses, label="Original")
+    plt.plot(epochs, losses_momentum, label="Momentum SGD")
+    plt.xlabel("Epoch")
+    plt.ylabel("Training Loss")
+    plt.title("Loss Comparison")
+    plt.legend()
+    plt.savefig("qnn2_loss_comparison.png")
+    plt.show()
+
+    plt.figure()
+    plt.plot(epochs, accs, label="Original")
+    plt.plot(epochs, accs_momentum, label="Momentum SGD")
+    plt.xlabel("Epoch")
+    plt.ylabel("Dev Accuracy")
+    plt.title("Accuracy Comparison")
+    plt.legend()
+    plt.savefig("qnn2_accuracy_comparison.png")
+    plt.show()

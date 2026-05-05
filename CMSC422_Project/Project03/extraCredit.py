@@ -1,19 +1,22 @@
 import numpy as np
 
 class NN:
-    def __init__(self, activation_function, loss_function, hidden_layers=[1024], input_d=784, output_d=10):
+    def __init__(self, activation_function, loss_function, hidden_layers=[1024], input_d=784, output_d=10, momentum=0.9):
         self.weights = []
         self.biases = []
         self.activation_function = activation_function
         self.loss_function = loss_function
-
-        # Initialization of weights and biases
         d1 = input_d
         hidden_layers.append(output_d)
+        # decides how much you want the past gradients to influence the update
+        self.momentum = momentum
         for d2 in hidden_layers:
             self.weights.append(np.random.randn(d2, d1)*np.sqrt(2.0/d1))
             self.biases.append(np.zeros((d2,1)))
             d1 = d2
+        # memory of past weight / bias updates
+        self.v_Ws = [np.zeros_like(w) for w in self.weights]
+        self.v_bs = [np.zeros_like(b) for b in self.biases]
 
     def print_model(self):
         """
@@ -30,7 +33,6 @@ class NN:
         bs = self.biases
         for w,b in zip(ws[:-1], bs[:-1]):
             D = self.activation_function.activate(np.matmul(w,D)+b) 
-            # Be careful of the broadcasting here: (d,N) + (d,1) -> (d,N).
         Yhat = np.matmul(ws[-1], D)+bs[-1]
         return np.argmax(Yhat, axis=0)
 
@@ -43,11 +45,8 @@ class NN:
         D_stack.append(D)
         num_layers = len(ws)
         for idx in range(num_layers-1):
-            # TODO 2: Calculate D for forward pass (which is similar to self.predict). 
-            # This intermediate results too will then be stored to D_stack.
             A = np.matmul(ws[idx], D) + bs[idx]
             D = self.activation_function.activate(A)
-            ### YOUR CODE HERE ###
             D_stack.append(D)
 
         Yhat = np.matmul(ws[-1], D) + bs[-1]
@@ -63,39 +62,28 @@ class NN:
         grad_bs.append(grad_b)
         grad_Ws.append(grad_W)
         for idx in range(num_layers-2, -1, -1):
-            # TODO 3: Calculate grad_bs and grad_Ws, which are lists of gradients for b's and w's of each layer. 
-            # Take a look at the update step if you are not sure about the format. Notice that we first store the
-            # gradients for each layer in a reversed order. The two lists are reversed before returned.
-
-            #1. Update grad for the current layer 
-
-            ### YOUR CODE HERE ###
             grad = np.matmul(ws[idx + 1].transpose(), grad) * self.activation_function.backprop_grad(D_stack[idx + 1])
-
-            #2. Calculate grad_b (gradient with respect to b of the current layer)
-
-            ### YOUR CODE HERE ###
-            grad_b = np.sum(grad, axis=1, keepdims=True)
-            #3. Calculate grad_W (gradient with respect to W of the current layer)
-
-            ### YOUR CODE HERE ###
+            grad_b = np.zeros((grad.shape[0], 1))
+            for i in range(grad.shape[0]):
+                grad_b[i, 0] = np.sum(grad[i])
             grad_W = np.matmul(grad, D_stack[idx].transpose())
             grad_bs.append(grad_b)
             grad_Ws.append(grad_W)
 
-        grad_bs, grad_Ws = grad_bs[::-1], grad_Ws[::-1] # Reverse the gradient lists
+        grad_bs, grad_Ws = grad_bs[::-1], grad_Ws[::-1]
         return training_loss, grad_Ws, grad_bs
 
     def update(self, grad_Ws, grad_bs, learning_rate):
-        # Update the weights and biases
         num_layers = len(grad_Ws)
-        ws = self.weights
-        bs = self.biases
         for idx in range(num_layers):
-            ws[idx] -= (grad_Ws[idx] * learning_rate)
-            bs[idx] -= (grad_bs[idx] * learning_rate)
-        self.weights = ws
-        self.biases = bs
+            # update using previous updates and current gradient
+            # v = momentum * v - learning rate * gradient
+            self.v_Ws[idx] = self.momentum * self.v_Ws[idx] - learning_rate * grad_Ws[idx]
+            self.v_bs[idx] = self.momentum * self.v_bs[idx] - learning_rate * grad_bs[idx]
+            # apply the updates
+            # parameter = parameter + v
+            self.weights[idx] += self.v_Ws[idx]
+            self.biases[idx] += self.v_bs[idx]
         return 
 
 class activationFunction:
@@ -157,9 +145,7 @@ class SquaredLoss(LossFunction):
         The true values are in the vector Y; the predicted values are
         in Yhat; compute the loss associated with these predictions.
         """
-        # TODO 0: loss function for squared loss.
         return np.sum((Yhat - Y) ** 2) / (2 * len(Y[0]))
-        ### YOUR CODE HERE ###
         raise NotImplementedError("Implement SquaredLoss.")
 
     def lossGradient(self, Y, Yhat):
@@ -167,9 +153,7 @@ class SquaredLoss(LossFunction):
         The true values are in the vector Y; the predicted values are in 
         Yhat; compute the gradient of the loss with respect to Yhat
         """
-        #TODO 1: gradient for squared loss.
         return (Yhat - Y) / len(Y[0])
-        ### YOUR CODE HERE ###
         raise NotImplementedError("Implement SquaredLoss.")
 
 
@@ -179,9 +163,6 @@ class CELoss(LossFunction):
         The true values are in the vector Y; the predicted values are
         in Yhat; compute the loss associated with these predictions.
         """
-        #TODO 4: loss function for cross-entropy loss.
-
-        ### NOT REQUIRED FOR THIS PROJ, YOU CAN DO IT FOR FUN ###
         raise NotImplementedError("Implement CELoss.")
 
     def lossGradient(self, Y, Yhat):
@@ -190,8 +171,5 @@ class CELoss(LossFunction):
         Yhat; compute the gradient of the loss with respect to Yhat, which
         has the same shape of Yhat and Y.
         """
-        #TODO 5: gradient for cross-entropy loss.
-
-        ### NOT REQUIRED FOR THIS PROJ, YOU CAN DO IT FOR FUN ###
         raise NotImplementedError("Implement CELoss")
 

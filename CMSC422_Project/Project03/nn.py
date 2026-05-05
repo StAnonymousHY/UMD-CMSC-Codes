@@ -75,7 +75,10 @@ class NN:
             #2. Calculate grad_b (gradient with respect to b of the current layer)
 
             ### YOUR CODE HERE ###
-            grad_b = np.sum(grad, axis=1, keepdims=True)
+            grad_b = np.zeros((grad.shape[0], 1))
+
+            for i in range(grad.shape[0]):
+                grad_b[i, 0] = np.sum(grad[i])
             #3. Calculate grad_W (gradient with respect to W of the current layer)
 
             ### YOUR CODE HERE ###
