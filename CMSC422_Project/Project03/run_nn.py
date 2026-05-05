@@ -2,7 +2,6 @@ import numpy as np
 from nn import NN
 from nn import Relu, Linear, SquaredLoss, CELoss
 from utils import data_loader, acc, save_plot, loadMNIST, onehot
-import time
 import matplotlib.pyplot as plt
 from extraCredit import NN as MomentumNN
 

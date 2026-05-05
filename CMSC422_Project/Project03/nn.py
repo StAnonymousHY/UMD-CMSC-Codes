@@ -45,9 +45,9 @@ class NN:
         for idx in range(num_layers-1):
             # TODO 2: Calculate D for forward pass (which is similar to self.predict). 
             # This intermediate results too will then be stored to D_stack.
+            ### YOUR CODE HERE ###
             A = np.matmul(ws[idx], D) + bs[idx]
             D = self.activation_function.activate(A)
-            ### YOUR CODE HERE ###
             D_stack.append(D)
 
         Yhat = np.matmul(ws[-1], D) + bs[-1]
@@ -68,19 +68,16 @@ class NN:
             # gradients for each layer in a reversed order. The two lists are reversed before returned.
 
             #1. Update grad for the current layer 
-
             ### YOUR CODE HERE ###
             grad = np.matmul(ws[idx + 1].transpose(), grad) * self.activation_function.backprop_grad(D_stack[idx + 1])
 
             #2. Calculate grad_b (gradient with respect to b of the current layer)
-
             ### YOUR CODE HERE ###
             grad_b = np.zeros((grad.shape[0], 1))
 
             for i in range(grad.shape[0]):
                 grad_b[i, 0] = np.sum(grad[i])
             #3. Calculate grad_W (gradient with respect to W of the current layer)
-
             ### YOUR CODE HERE ###
             grad_W = np.matmul(grad, D_stack[idx].transpose())
             grad_bs.append(grad_b)
@@ -161,9 +158,8 @@ class SquaredLoss(LossFunction):
         in Yhat; compute the loss associated with these predictions.
         """
         # TODO 0: loss function for squared loss.
-        return np.sum((Yhat - Y) ** 2) / (2 * len(Y[0]))
         ### YOUR CODE HERE ###
-        raise NotImplementedError("Implement SquaredLoss.")
+        return np.sum((Yhat - Y) ** 2) / (2 * len(Y[0]))
 
     def lossGradient(self, Y, Yhat):
         """
@@ -171,9 +167,8 @@ class SquaredLoss(LossFunction):
         Yhat; compute the gradient of the loss with respect to Yhat
         """
         #TODO 1: gradient for squared loss.
-        return (Yhat - Y) / len(Y[0])
         ### YOUR CODE HERE ###
-        raise NotImplementedError("Implement SquaredLoss.")
+        return (Yhat - Y) / len(Y[0])
 
 
 class CELoss(LossFunction):
